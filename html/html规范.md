@@ -1,8 +1,8 @@
 1、浏览器禁用js 
-< html  class ="no-js"  >
-2、浏览器文档语言
+< html  class ="no-js"  > 
+2、浏览器文档语言 
 < html  lang="en" >
-3、文档编码
+3、文档编码 
 <meta charset="utf-8">
 应该放到<title>之前
 4、文档简短描述
