@@ -25,6 +25,6 @@ favicon.ico
 
 参考地址：
 规范
-https://github.com/h5bp/html5-boilerplate/blob/v7.2.0/dist/doc/html.md
+https://github.com/h5bp/html5-boilerplate/blob/v7.2.0/dist/doc/html.md  
 pwas
 https://developer.mozilla.org/en-US/docs/Web/Manifest
