@@ -1,4 +1,4 @@
-1、浏览器禁用js
+1、浏览器禁用js 
 < html  class ="no-js"  >
 2、浏览器文档语言
 < html  lang="en" >
