@@ -190,6 +190,7 @@ ul.agenda1-head li { font-size: 16px; line-height: 24px; color: #000; }
 .solution3-b h4{font-size:20px;line-height:26px;font-weight:400;padding:15px 0 10px}
 .solution3-b p{font-size:14px;line-height:22px;color:#666}
 .solution3-block{margin-bottom:20px;}
+.solution3-block>a{display: block}
 .solution3-block:hover .solution3-t img{transform:scale(1.1,1.1);-webkit-transform:scale(1.1,1.1);-moz-transform:scale(1.1,1.1)}
 @media (max-width:1024px){.solution3-block:hover .solution3-t img{transform:scale(1,1);-webkit-transform:scale(1,1);-moz-transform:scale(1,1)}
     .solution3-block:active .active-dask{display:block}

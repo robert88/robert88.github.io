@@ -357,34 +357,44 @@
 <script src="../js/main.js?ver=20180503"></script>
 <script src="../js/height.js?ver=20180503"></script>
 <script src="../js/common.js?ver=20180503"></script>
-
+<script>
+  $(window).on("load",function(){
+    baseLib.v3SetHeight(".solution3",".solution3-block",">a")
+  })
+    
+</script>
   <script src="/topic/minisiteStatic/lib/video_plug/js/video.js?ver=20190610"></script>
-
-<!-- S-= 华为跟踪代码，不要删我 -->
-<script type="text/javascript">
-    $(function(){
-        $('a').each(function(){
-            var href = $(this).attr('href');
-            if (href != 'javascript:;' && href != 'javascript:void(0)' && href != undefined && href != '#flash_player' ) {
-                $(this).attr('href',$(this).attr('href') + window.location.search);
-            };
+    <!-- S-= 华为跟踪代码，不要删我 -->
+    <script type="text/javascript">
+        $(function () {
+            $('a').each(function () {
+                var href = $(this).attr('href');
+                if (href != 'javascript:;' && href != 'javascript:void(0)' && href != undefined &&
+                    href != '#flash_player') {
+                    $(this).attr('href', $(this).attr('href') + window.location.search);
+                };
+            })
         })
-    })
-</script>
-<script type="text/javascript">
-    var utag_data = {
-        site_name : "2019 MIE Partner Summit", // name of the campaign 
-        site_type : "minisite" // type of the site
-    }
-</script>
-<!-- Loading script asynchronously -->
-<script type="text/javascript">
-    (function(a,b,c,d){
-        a='//tags.tiqcdn.com/utag/huawei/main/prod/utag.js';
-        b=document;c='script';d=b.createElement(c);d.src=a;d.type='text/java'+c;d.async=true;
-        a=b.getElementsByTagName(c)[0];a.parentNode.insertBefore(d,a);
-    })();
-</script>
-<!-- E-= 华为跟踪代码，不要删我 -->
+    </script>
+    <script type="text/javascript">
+        var utag_data = {
+            site_name: "me-partner-summit2020", // name of the campaign 
+            site_type: "minisite" // type of the site
+        }
+    </script>
+    <!-- Loading script asynchronously -->
+    <script type="text/javascript">
+        (function (a, b, c, d) {
+            a = '//tags.tiqcdn.com/utag/huawei/main/prod/utag.js';
+            b = document;
+            c = 'script';
+            d = b.createElement(c);
+            d.src = a;
+            d.type = 'text/java' + c;
+            d.async = true;
+            a = b.getElementsByTagName(c)[0];
+            a.parentNode.insertBefore(d, a);
+        })();
+    </script>
 </body>
 </html>

@@ -121,6 +121,46 @@
             }
         }
     }
+    Base.prototype.v3SetHeight = function (obj, obj2, obj3) {
 
+        var This = $(obj);
+        var args = arguments;
+        This.each(function () {
+          var _this = $(this),
+            oList = _this.find(obj2),
+            oList_len = oList.length,
+            oBox_w = _this.width() + 10,
+            oList_w = oList.width(),
+            oColumn_len = Math.floor(oBox_w / oList_w),
+            oRow_len = Math.ceil(oList_len / oColumn_len),
+            oList_H = 0,
+            oList_obj = null;
+          if (args.length == 2) {
+            oList.height('auto');
+          } else {
+            oList.find(obj3).height('auto');
+          }
+          for (var i = 0; i < oRow_len; i++) {
+            for (var j = i * oColumn_len; j < oColumn_len * (i + 1); j++) {
+              oList.eq(j).addClass('oList_obj');
+              if (args.length == 2) {
+                var H = oList.eq(j).height();
+              } else {
+                var H = oList.eq(j).find(obj3).height();
+              }
+              H > oList_H ? oList_H = H : oList_H;
+              oList_obj = $('.oList_obj');
+            }
+            if (args.length == 2) {
+              oList_obj.height(oList_H);
+            } else {
+              oList_obj.find(obj3).height(oList_H);
+            }
+            oList_obj.removeClass('oList_obj');
+            oList_H = 0;
+          }
+        });
+      }
+      
     var baseLib = new Base();
 //E-= 获取高度一致，并且可以获取隐藏元素
