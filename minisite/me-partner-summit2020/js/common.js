@@ -26,7 +26,21 @@ $(function(){
             $(".banner-box img.bannerData").attr("src",wapimgsrc);
         }
     }
-
+    $(".switchImg").each(function(){
+        if(win_w > 768){
+           this.src = $(this).attr("data-pcsrc");
+        }else{
+            this.src = $(this).attr("data-wapsrc");
+        }
+    }) 
+    var perwidthStyle = win_w > 768?"pc":"wap"
+    $(window).on("resize.refresh",function(){
+        if($(this).width()>768&&perwidthStyle=="wap"){
+            location.reload();
+        }else if($(this).width()<=768&&perwidthStyle=="pc"){
+            location.reload();
+        }
+    })
 
     //日程切换
     if($('.agenda1').length > 0){
