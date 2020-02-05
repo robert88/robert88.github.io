@@ -1,0 +1,51 @@
+.carousel-wrap { position: relative; height: 100%; }
+.carousel-wrap .carousel-ul-wrap { position: relative; overflow: hidden; height: 100%; }
+.carousel-wrap .carousel-ul { position: relative;}
+.carousel-wrap .carousel-ul:after {display: table;clear: both;content: " ";}
+.carousel-wrap .carousel-ul .carousel-li { position: relative; float: left; }
+.carousel-prev,
+.carousel-next { position: absolute; top: 50%; width: 45px; height: 45px; margin-top: -22px; cursor: pointer; }
+.carousel-prev .iconfont,
+.carousel-next .iconfont { font-size: 50px; line-height: 1; color: #999; }
+.carousel-prev:hover .iconfont,
+.carousel-next:hover .iconfont { color: #666; }
+.carousel-prev,
+.carousel-prev:hover { left: -55px; }
+.carousel-next,
+.carousel-next:hover { right: -55px; }
+
+
+.carousel-prev.notClick,
+.carousel-next.notClick { cursor: auto; color: #ccc; }
+.carousel-prev.notClick .iconfont,
+.carousel-next.notClick .iconfont { pointer-events: none; color: #ccc; }
+.carousel-point { position: absolute; bottom: -32px; width: 100%; text-align: center; }
+.carousel-stop-event { pointer-events: none; }
+.carousel-point > span { display: inline-block; width: 10px; height: 10px; margin: 0 5px; cursor: pointer; transition: all .6s; border-radius: 50%; background: #d2d2d2; }
+.carousel-point > span.hover { background: #b3b3b3; }
+@media (max-width:1600px) {
+	.carousel-wrap .carousel-ul { margin: 0; }
+	.carousel-ul-wrap { margin-right: 50px; margin-left: 50px; }
+	.carousel-prev,
+	.carousel-prev:hover { left: 0; }
+	.carousel-next,
+	.carousel-next:hover { right: 0; }
+
+}
+@media(max-width:750px) {
+	.carousel-ul-wrap { margin-right: 0; margin-left: 0; }
+	.carousel-next,
+	.carousel-prev { position: static; display: none; }
+	.carousel-wrap .carousel-ul { margin: 0; }
+}
+.carousel-max3.carousel-wrap-1 { margin-right: auto; margin-left: auto; }
+.carousel-max3.carousel-wrap-2 { margin-right: auto; margin-left: auto; }
+.carousel-max4.carousel-wrap-1 { margin-right: auto; margin-left: auto; }
+.carousel-max4.carousel-wrap-2 { margin-right: auto; margin-left: auto; }
+.carousel-max4.carousel-wrap-3 { margin-right: auto; margin-left: auto; }
+@media(min-width:920px) {
+	.carousel-wrap.carousel-wrap-vertical { height: 100%; }
+	.carousel-wrap.carousel-wrap-vertical .carousel-ul-wrap { margin-left: 0; }
+	.carousel-wrap.carousel-wrap-vertical .carousel-ul { margin: 0; }
+	.carousel-wrap.carousel-wrap-vertical .carousel-ul .carousel-li{ float: none; width: 100%; }
+}
