@@ -1,7 +1,7 @@
 {
   "option": [
-    "By Time",
-    "By Region"
+    "By Region",
+    "By Time"
   ],
   "month": [
     "Jan",
@@ -18,9 +18,10 @@
     "Dec"
   ],
   "country": {
-    "Sweden": {
+     "Sweden": {
       "name": "Sweden",
       "className": "sweden",
+      "link": "javascript:void(0);",
       "region": "Europe",
       "time": [
         {
@@ -29,9 +30,10 @@
         }
       ]
     },
-    "Germany": {
+   "Germany": {
       "name": "Germany",
       "className": "germany",
+      "link": "javascript:void(0);",
       "region": "Europe",
       "time": [
         {
@@ -40,43 +42,66 @@
         }
       ]
     },
-    "Hong Kong": {
-      "name": "Hong Kong",
-      "className": "hong-kong",
+    "HK": {
+      "name": "HK",
+      "className": "hk",
       "region": "Asia Pacific",
       "time": [
         {
-          "date": "2020/4",
+          "date": "2020/3/27",
           "link": "javascript:void(0);"
         }
       ]
     },
+     
     "India": {
       "name": "India",
       "className": "india",
+      "link": "javascript:void(0);",
       "region": "Asia Pacific",
       "time": [
         {
+          "date": "2020/2/28",
+          "link": "javascript:void(0);"
+        },
+ {
+          "date": "2020/3/6",
+          "link": "javascript:void(0);"
+        },
+ {
+          "date": "2020/3/13",
+          "link": "javascript:void(0);"
+        },
+ {
           "date": "2020/3/20",
           "link": "javascript:void(0);"
         }
       ]
     },
-    "Philippines": {
-      "name": "Philippines",
-      "className": "Asia Pacific",
+    "Singapore": {
+      "name": "Singapore",
+      "className": "singapore",
+      "link": "javascript:void(0);",
       "region": "Asia Pacific",
       "time": [
         {
-          "date": "2020/2",
-          "link": "javascript:void(0);"
-        },
-  {
           "date": "2020/3",
           "link": "javascript:void(0);"
+        }
+      ]
+    },
+     "Philippines": {
+      "name": "Philippines",
+      "className": "philippines",
+      "link": "javascript:void(0);",
+      "region": "Asia Pacific",
+      "time": [
+        {
+          "date": "2020/4",
+          "link": "javascript:void(0);"
         },
   {
-          "date": "2020/6",
+          "date": "2020/9",
           "link": "javascript:void(0);"
         },
   {
@@ -85,28 +110,18 @@
         }
       ]
     },
-    "Singapore": {
-      "name": "Singapore",
-      "className": "singapore",
-      "region": "Asia Pacific",
-      "time": [
-        {
-          "date": "2020/3",
-          "link": "javascript:void(0);"
-        }
-      ]
-    },
-     "Indonesia": {
+    "Indonesia": {
       "name": "Indonesia",
       "className": "indonesia",
+      "link": "javascript:void(0);",
       "region": "Asia Pacific",
       "time": [
         {
-          "date": "2020/3",
+          "date": "2020/6",
           "link": "javascript:void(0);"
         },
-{
-          "date": "2020/9",
+        {
+          "date": "2020/11",
           "link": "javascript:void(0);"
         }
       ]
@@ -114,19 +129,20 @@
     "Malaysia": {
       "name": "Malaysia",
       "className": "malaysia",
+      "link": "javascript:void(0);",
       "region": "Asia Pacific",
       "time": [
         {
-          "date": "2020/4",
+          "date": "2020/6",
           "link": "javascript:void(0);"
         }
       ]
     },
-   
-    "Brazil": {
+     "Brazil": {
       "name": "Brazil",
       "className": "brazil",
-      "region": "North America",
+      "link": "javascript:void(0);",
+      "region": "Latin America",
       "time": [
         {
           "date": "2020/4/16",
@@ -138,19 +154,9 @@
         }
       ]
     }
+ 
   },
   "By Time": {
-    "Jan": {},
-    "Feb": {},
-    "Mar": {},
-    "Apr": {},
-    "May": {},
-    "Jun": {},
-    "Jul": {},
-    "Aug": {}
-  },
-  "By Region": {},
-  "timer": {
     "Jan": {},
     "Feb": {},
     "Mar": {},
@@ -163,5 +169,6 @@
     "Oct": {},
     "Nov": {},
     "Dec": {}
-  }
+  },
+  "By Region": {}
 }
