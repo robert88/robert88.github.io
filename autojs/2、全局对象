@@ -15,3 +15,15 @@
 // 除此之外，Auto.js内置了对Promise。
 
 //接下来我们将按这个顺序来学习
+
+
+//sleep(5000)
+//延时，时间为毫秒，即sleep后面的代码都延时5000毫秒
+
+//setClip,getClip对全局的剪切，复制操作，跨app有效
+
+
+for(var i = 0; i < 100; i++){
+  toast(i);
+  sleep(2000);
+}
