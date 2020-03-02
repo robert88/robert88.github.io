@@ -39,6 +39,7 @@ currentPackage()
 currentActivity()
 waitForActivity()
 waitForPackage()
+//https://blog.csdn.net/fjnu_se/article/details/80703815
 
 这个需要了解一下andriod的activity
 //random(min, max)//这个有bug，尽量取整
@@ -58,7 +59,25 @@ waitForPackage()
 //"3.0.0 Beta", "3.1.0 Alpha4", "3.2.0"
 都是对环境的检查
 
-//runtime.requestPermissions("access_fine_location")
+//runtime.requestPermissions(["access_fine_location"]);
 //https://developer.android.com/guide/topics/permissions/overview
-//access_fine_location GPS权限
+//access_fine_location GPS权限,读取位置信息
 //record_audio 录音权限
+
+//尽管安卓有很多权限，但必须写入Manifest才能动态申请，为了防止权限的滥用，目前Auto.js只能额外申请两个权限：
+//您可以通过APK编辑器来增加Auto.js以及Auto.js打包的应用的权限。
+
+runtime.loadJar(path)
+runtime.loadDex(path)
+
+// 加载jsoup.jar
+//runtime.loadJar("./jsoup.jar");
+// 使用jsoup解析html
+//importClass(org.jsoup.Jsoup);
+//log(Jsoup.parse(files.read("./test.html")));
+//https://jsoup.org/download
+
+//因为加载jar实际上是把jar转换为dex再加载的，因此加载dex文件会比jar文件快得多。可以使用Android SDK的build tools的dx工具把jar转换为dex。
+
+//context
+//全局变量。一个android.content.Context对象。
