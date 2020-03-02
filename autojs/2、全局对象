@@ -22,8 +22,43 @@
 
 //setClip,getClip对全局的剪切，复制操作，跨app有效
 
-
+//toast(message)
+//这个是可以停止的，toast是异步的，执行了toast就不能中途停止显示
 for(var i = 0; i < 100; i++){
   toast(i);
   sleep(2000);
 }
+
+//toastLog(message)
+会执行toast和console.log
+
+//exit()
+在我的手机上并没有立即停止
+
+currentPackage()
+currentActivity()
+waitForActivity()
+waitForPackage()
+
+这个需要了解一下andriod的activity
+//random(min, max)//这个有bug，尽量取整
+//random() [0,1)
+
+
+//requiresApi(19)
+//Android 7.0： 24
+//Android 6.0： 23
+//Android 5.1： 22
+//Android 5.0： 21
+//Android 4.4W： 20
+//Android 4.4： 19
+//Android 4.3： 18
+
+//requiresAutojsVersion("3.2.0")
+//"3.0.0 Beta", "3.1.0 Alpha4", "3.2.0"
+都是对环境的检查
+
+//runtime.requestPermissions("access_fine_location")
+//https://developer.android.com/guide/topics/permissions/overview
+//access_fine_location GPS权限
+//record_audio 录音权限
