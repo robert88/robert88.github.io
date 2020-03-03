@@ -22,6 +22,15 @@
 
 files文件系统
 
+sd卡路径
+"/sdcard"
+
+内部存储
+"/storage"
+
+执行的脚本将放到
+"/storage/emulated/0/脚本/"
+
 files.isFile(path)//如果文件不存在也是返回false
 files.isDir(path)
 files.isEmptyDir(path)
