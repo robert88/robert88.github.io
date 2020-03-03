@@ -32,6 +32,147 @@ scrollDown([i])
 
 setText([i, ]text)
 找到第几个文本框输入文字
-和之前的text不一样的是这个会寻找输入控件，并且是完全覆盖的方式
+和之前keys的text不一样的是这个会寻找输入控件，并且是完全覆盖的方式
 input([i, ]text)
 这个是追加
+
+
+UiSelector选择器
+ 通过属性来查找
+ 控件有各种属性，包括文本(text), 描述(desc), 类名(className), id
+ 注意text是小写开头
+ .findOne();得到一个uiObject对象
+ 
+ //属性名称
+ className 类名。类名表示一个控件的类型，例如文本控件为"android.widget.TextView", 图片控件为"android.widget.ImageView"等。
+packageName 包名。包名表示控件所在的应用包名，例如QQ界面的控件的包名为"com.tencent.mobileqq"。
+bounds 控件在屏幕上的范围。
+drawingOrder 控件在父控件的绘制顺序。
+indexInParent 控件在父控件的位置。
+clickable 控件是否可点击。
+longClickable 控件是否可长按。
+checkable 控件是否可勾选。
+checked 控件是否可已勾选。
+scrollable 控件是否可滑动。
+selected 控件是否已选择。
+editable 控件是否可编辑。
+visibleToUser 控件是否可见。
+enabled 控件是否已启用。
+depth 控件的布局深度。
+
+//可以组合使用
+
+className("ImageView").depth(10).findOne().click()，通过链式调用来组合条件
+
+//可以操作的方法
+
+exits() 判断控件是否存在
+waitFor() 等待控件出现，在满足该条件的控件出现之前，该函数会一直保持阻塞。
+findOne()
+需要注意的是，如果屏幕上一直没有出现所描述的控件，则该函数会阻塞，直至所描述的控件出现为止。因此此函数不会返回null
+findOne()采用深度优先搜索(DFS)
+.findOne(timeout)
+如果在timeout毫秒的时间内没有找到符合条件的控件，则终止搜索并返回null。
+
+.findOnce()，如果找到符合条件的控件则返回该控件；否则返回null。,不会等待
+UiSelector.findOnce(i)
+.find()是找到一个集合而不是1个控件，找不到否则返回null。,不会等待
+.untilFind() 则该函数会阻塞，直至所描述的控件出现为止。因此此函数不会返回null
+.filter(f)
+var uc = className("TextView").filter(function(w){
+    return w.text().length == 10;
+});
+
+对文字筛选
+.textContains(str)//为当前选择器附加控件"text需要包含字符串str"的筛选条件
+.textStartsWith(prefix) //为当前选择器附加控件"text需要以prefix开头"的筛选条件。
+.textEndsWith(suffix)//为当前选择器附加控件"text需要以suffix结束"的筛选条件。
+.textMatches(reg) //为当前选择器附加控件"text需要满足正则表达式reg"的条件。
+
+同样desc，id，className，packageName也可以和Contains，StartsWith，EndsWith，Matches来组合成api
+
+如果一个控件的类名以"android.widget."开头，则可以省略这部分，例如文本控件可以直接用className("TextView")的选择器。
+
+常见控件的类名如下：
+
+android.widget.TextView 文本控件
+android.widget.ImageView 图片控件
+android.widget.Button 按钮控件
+android.widget.EditText 输入框控件
+android.widget.AbsListView 列表控件
+android.widget.LinearLayout 线性布局
+android.widget.FrameLayout 帧布局
+android.widget.RelativeLayout 相对布局
+android.widget.RelativeLayout 相对布局
+android.support.v7.widget.RecyclerView 通常也是列表控件
+
+精确定位
+UiSelector.bounds(left, top, right, buttom)//却无法兼容不同分辨率的设备
+UiSelector.boundsInside(left, top, right, buttom)
+这个条件用于限制选择器在某一个区域选择控件。例如要在屏幕上半部分寻找文本控件TextView，代码为:
+var w = className("TextView").boundsInside(0, 0, device.width, device.height / 2).findOne();
+
+二、UiOjbect
+这个类是对对象操作的类
+click() 点击。点击一个控件，前提是这个控件的clickable属性为true
+longClick() 长按。长按一个控件，前提是这个控件的longClickable属性为true
+setText() 设置文本，用于编辑框控件设置文本。
+.copy()对输入框文本的选中内容进行复制
+.cut()对输入框文本剪切
+.paste()对输入框文本粘贴操作
+.setSelection(start, end)，对输入框文本设置选择区域，从start到end开始区间的文字被选中
+scrollForward(), scrollBackward() 滑动。滑动一个控件(列表等), 前提是这个控件的scrollable属性为true
+.scrollUp()，.scrollDown()，.scrollLeft()，.scrollRight()确定方向的滑动
+.select()对控件执行"选中"操作，并返回是否操作成功
+.collapse()，.expand()对控件执行折叠操作
+.show()//对集合中所有控件执行显示操作
+
+//需要注意的是，由于布局捕捉的问题，该函数可能返回null，也就是可能获取不到某个子控件
+children()返回该控件的所有子控件组成的控件集合，
+childCount()返回子控件数目
+child(i)返回第i+1个子控件。
+parent()如果该控件没有父控件，返回null。
+
+bounds()
+返回 Rect
+返回控件在屏幕上的范围，其值是一个Rect对象。
+那么我们可以利用bounds()函数获取其坐标
+var b = desc("打开侧拉菜单").findOne().bounds();
+click(b.centerX(), b.centerY());
+
+boundsInParent()返回控件在父控件中的范围
+drawingOrder()返回控件在父控件中的绘制次序
+
+id()
+text()
+
+基于当前控件来查找子控件，孙控件，曾孙控件
+findByText(str)
+findOne(selector)
+find(selector)得到的数组，获取长度使用.size()
+
+
+//UiCollection
+.size()//长度使用
+.get(i)
+.each(func)
+.find(selector)
+
+//var names = id("name").find();
+//在集合
+//var clickableNames = names.find(clickable());
+
+.findOne(selector)
+
+//Rect
+.left，.right，.top,.bottom
+
+.centerX(),.centerY(),.width(),.height()
+
+.contains(r)//长方形r在该长方形的里面(包含边界重叠的情况)。
+.intersect(r)//返回是否和另一个长方形相交。
+
+
+
+
+ 
