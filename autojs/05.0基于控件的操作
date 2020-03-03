@@ -24,3 +24,14 @@
 auto.waitFor()和auto.setMode()代替该函数，因为auto()函数如果无障碍服务未启动会停止脚本；而auto.waitFor()则会在在无障碍服务启动后继续运行
 
 一般脚本开头就应该调用auto.waitFor()
+
+scrollUp([i])
+scrollDown([i])
+
+当前如果没有上下滚动条，是可以左右滑动
+
+setText([i, ]text)
+找到第几个文本框输入文字
+和之前的text不一样的是这个会寻找输入控件，并且是完全覆盖的方式
+input([i, ]text)
+这个是追加
