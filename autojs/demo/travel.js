@@ -1,8 +1,5 @@
 //test
-var auto = { waitFor: function() {} }
-var click = function() { console.log("click") }
-var swipe = function() { console.log("swipe") }
-var sleep = function(i) { console.log("sleep", i) }
+
 //无障碍服务
 auto.waitFor()
 
@@ -69,6 +66,11 @@ function topGlod() {
 
 //离线收益
 function offlineBtn() {
+  var offlineObj =  className("android.widget.TextView").text("离线收益").findOne()
+  if(offlineObj){
+    
+  }
+ 
   var double = [522, 1165]
   var share = [318, 1551]
   var onePerson = [756, 661];
