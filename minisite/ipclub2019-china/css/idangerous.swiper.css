@@ -1,0 +1,429 @@
+/*
+ * Swiper 2.7.6
+ * Mobile touch slider and framework with hardware accelerated transitions
+ *
+ * http://www.idangero.us/sliders/swiper/
+ *
+ * Copyright 2010-2015, Vladimir Kharlampidi
+ * The iDangero.us
+ * http://www.idangero.us/
+ *
+ * Licensed under GPL & MIT
+ *
+ * Released on: February 11, 2015
+*/
+/* ===============================================================
+Basic Swiper Styles 
+================================================================*/
+.swiper-container {
+	margin:0 auto;
+	position:relative;
+	overflow:hidden;
+	direction:ltr;
+	-webkit-backface-visibility:hidden;
+	-moz-backface-visibility:hidden;
+	-ms-backface-visibility:hidden;
+	-o-backface-visibility:hidden;
+	backface-visibility:hidden;
+	/* Fix of Webkit flickering */
+	z-index:1;
+}
+.swiper-wrapper {
+	position:relative;
+	width:100%;
+	-webkit-transition-property:-webkit-transform, left, top;
+	-webkit-transition-duration:0s;
+	-webkit-transform:translate3d(0px,0,0);
+	-webkit-transition-timing-function:ease;
+	
+	-moz-transition-property:-moz-transform, left, top;
+	-moz-transition-duration:0s;
+	-moz-transform:translate3d(0px,0,0);
+	-moz-transition-timing-function:ease;
+	
+	-o-transition-property:-o-transform, left, top;
+	-o-transition-duration:0s;
+	-o-transform:translate3d(0px,0,0);
+	-o-transition-timing-function:ease;
+	-o-transform:translate(0px,0px);
+	
+	-ms-transition-property:-ms-transform, left, top;
+	-ms-transition-duration:0s;
+	-ms-transform:translate3d(0px,0,0);
+	-ms-transition-timing-function:ease;
+	
+	transition-property:transform, left, top;
+	transition-duration:0s;
+	transform:translate3d(0px,0,0);
+	transition-timing-function:ease;
+
+	-webkit-box-sizing: content-box;
+	-moz-box-sizing: content-box;
+	box-sizing: content-box;
+}
+.swiper-free-mode > .swiper-wrapper {
+	-webkit-transition-timing-function: ease-out;
+	-moz-transition-timing-function: ease-out;
+	-ms-transition-timing-function: ease-out;
+	-o-transition-timing-function: ease-out;
+	transition-timing-function: ease-out;
+	margin: 0 auto;
+}
+.swiper-slide {
+	float: left;
+	-webkit-box-sizing: content-box;
+	-moz-box-sizing: content-box;
+	box-sizing: content-box;
+}
+
+/* IE10 Windows Phone 8 Fixes */
+.swiper-wp8-horizontal {
+	-ms-touch-action: pan-y;
+}
+.swiper-wp8-vertical {
+	-ms-touch-action: pan-x;
+}
+
+/* ===============================================================
+Your custom styles, here you need to specify container's and slide's
+sizes, pagination, etc.
+================================================================*/
+.swiper-container {
+	/* Specify Swiper's Size: */
+
+	/*width:200px;
+	height: 100px;*/
+}
+.swiper-slide {
+	/* Specify Slides's Size: */
+	
+	/*width: 100%;
+	height: 100%;*/
+}
+.swiper-slide-active {
+	/* Specific active slide styling: */
+	
+}
+.swiper-slide-visible {
+	/* Specific visible slide styling: */	
+
+}
+/* ===============================================================
+Pagination Styles
+================================================================*/
+.swiper-pagination-switch {
+	/* Stylize pagination button: */	
+
+}
+.swiper-active-switch {
+	/* Specific active button style: */	
+	
+}
+.swiper-visible-switch {
+	/* Specific visible button style: */	
+	
+}
+
+
+/* slider */
+
+.vertical-slider {
+    width: 100%;
+    height: 740px;
+    padding: 50px 0 80px;
+    margin: 5px auto;
+    position: relative;
+  }
+  .vertical-slider .arrow-left {
+    background: url(../images/arrow_left.png) 100% 100% / 100% 100% no-repeat;
+    position: absolute;
+    left: 0;
+    top: -20px;
+    right: 1200px;
+    bottom: 100px;
+    z-index: 99;
+    margin: auto;
+    width: 70px;
+    height: 70px;
+  }
+  .vertical-slider .arrow-left:hover{
+    background-image: url(../images/arrow_left_hover.png);
+    
+  }
+  .vertical-slider .arrow-right {
+    background: url(../images/arrow_right.png) 100% 100% / 100% 100% no-repeat;
+    position: absolute;
+    left: 1200px;
+    top: -20px;
+    right: 0;
+    bottom: 100px;
+    z-index: 99;
+    margin: auto;
+    width: 70px;
+    height: 70px;
+  }
+  .vertical-slider .arrow-right:hover {
+      background-image: url(../images/arrow_right_hover.png)
+  }
+  .swiper-container {
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    text-align: center;
+  }
+  .swiper-slide {
+    position: relative;
+    width: 1280px;
+    /* margin:0 20px; */
+    height: 100%;
+    opacity: 0.4;
+    -webkit-transition: 300ms;
+    -moz-transition: 300ms;
+    -ms-transition: 300ms;
+    -o-transition: 300ms;
+    transition: 300ms;
+  }
+  .swiper-slide-active {
+    opacity: 1;
+  }
+  .swiper-slide img {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 100px;
+    left: 0;
+    margin: auto;
+    width: 1200px;
+    height: 460px;
+  }
+  .slider-con {
+    position: absolute;
+    background: #744696;
+    background: linear-gradient(to left top,#744696,#5b4195);
+    left: 200px;
+    top: 280px;
+    min-height: 280px;
+    text-align: left;
+    padding: 40px;
+    color: #fff;
+    /* border: 1px solid #fff; */
+    opacity: 0;
+    box-shadow: 6px 8px 20px 0px rgba(0, 0, 0, 0.1);
+    -webkit-transition:  all .3s .2s linear;
+    -moz-transition:  all .3s .2s linear;
+    transition:  all .3s .2s linear;
+}
+    .slider-con div {
+        margin-top: 50px;
+    }
+    .slider-con div .icon-arrow {
+        position: absolute;
+        -webkit-transition:  all .2s linear;
+        -moz-transition:  all .2s linear;
+        transition:  all .2s linear;
+        -webkit-transform: translate(0,0);
+        transform: translate(0,0);
+    }
+    .slider-con div:hover .icon-arrow {
+        -webkit-transform: translate(10px,0);
+        transform: translate(10px,0);
+    }
+    .swiper-slide-active .slider-con {
+        left: 140px;
+        opacity: 1;
+    }
+    .slider-con span {
+        font-size: 16px;
+        color: #fff;
+    }
+    .slider-con p {
+        font-size: 26px;
+        color: #fff;
+        width: 300px;
+        line-height: 1.54;
+    }
+    .slider-con a {
+        color: #fff;
+        display: block;
+    }
+    .slider-con a .icon-arrow {
+        color: #fff;
+        display: inline-block;
+        vertical-align: middle;
+        font-size: 24px;
+        margin-left: 10px;
+    }
+  .swiper-slide .title {
+    font-style: italic;
+    font-size: 42px;
+    margin-top: 80px;
+    margin-bottom: 0;
+    line-height: 45px;
+  }
+  .pagination {
+    position: absolute;
+    z-index: 20;
+    left: 0;
+    /* bottom: 10px; */
+    right: 0;
+    margin: auto;
+    text-align: center;
+  }
+  .swiper-pagination-switch {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #fff;
+    margin-right: 8px;
+    opacity: 0.8;
+    /* border: 1px solid #fff; */
+    cursor: pointer;
+  }
+  /* .swiper-visible-switch {
+    background: #aaa;
+  } */
+  .swiper-active-switch {
+    width: 34px;
+    border-radius: 50px;
+    background: #744696;
+    background: linear-gradient(to  left top, #744696,#5b4195);
+    opacity: 1;
+  }
+ 
+  @media screen and (max-width: 1367px) {
+    .vertical-slider {
+        height: 570px;
+    }
+    .vertical-slider .arrow-left {
+        right: 900px;
+        bottom: 125px;
+    }
+    .vertical-slider .arrow-right {
+        left: 900px;
+        bottom: 125px;
+    }
+    .swiper-slide {
+        width: 960px;
+    }
+    .swiper-slide img {
+        width: 900px;
+        height: 346px;
+    }
+    .slider-con {
+        min-height: 250px;
+        left: 110px;
+        top: 150px;
+        padding: 20px;
+    }
+    .slider-con div {
+        margin-top: 25px;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    /* swiper */
+    .vertical-slider {
+        height: 66.8vw;
+    }
+    .swiper-slide {    
+        width: 100vw;
+    }
+    .swiper-slide img {
+        width: 100%;
+        height: 38.47vw;
+    }
+    .swiper-slide  .slider-con {
+        left: 8%;
+        top: 33%;
+        padding: 10px;
+        
+        opacity: 1;
+        box-shadow: 6px 8px 20px 0px rgba(0, 0, 0, 0.1);
+        -webkit-transition:  all 0s linear;
+        -moz-transition:  all 0s linear;
+        transition:  all 0s linear;
+    }
+    .pagination {
+        bottom: -10px;
+    }
+    .swiper-slide img {
+        width: 100%;
+        bottom: auto;
+        right: auto;
+    }
+    .swiper-pagination-switch {
+        width: 8px;
+        height:8px;
+    }
+    .swiper-active-switch {
+        width: 20px;
+    }
+    
+    .arr-box a {
+        display: none;
+    }
+    
+}
+@media screen and (max-width: 768px) {
+
+    .vertical {
+        width: 100vw;
+        padding-top: 40px;
+    }
+    .vertical-slider {
+        padding-top: 20px;
+        min-height: 87.8vw;
+        height: 90vw;
+        padding-bottom: 0;
+    }
+    .swiper-slide .slider-con {
+        left: 0;
+        top: 38.47vw;
+        min-height: 39.73vw;
+        padding: 10px;
+        width: 100%;
+        bottom: auto;
+    }
+    .slider-con p { 
+        width: 100%;
+    }
+    .slider-con div { 
+        margin-top:20px;
+        font-size: 14px;
+    }
+    .slider-con p {
+        font-size: 20px;
+    }
+}
+
+@media screen and (width:375px) {
+    .vertical {
+        /* margin-top: 50px; */
+    }
+    .vertical-slider {
+        min-height: 90.8vw; 
+    }
+    .swiper-slide .slider-con {
+        padding: 15px;
+        box-shadow: 1px 2px 10px 0px rgba(0, 0, 0, 0.1);
+    }
+    /* .swiper-slide .slider-con {
+        min-height: 130px;
+    } */
+    .slider-con span {
+        font-size: 14px;
+    }
+    .slider-con p {
+        font-size: 18px;
+    }
+}
+
+@media screen and (width:320px) {
+    .vertical-slider {
+        min-height: 115.8vw;
+    }
+    .swiper-slide .slider-con {
+        min-height: 180px;
+    }
+}
