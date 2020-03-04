@@ -52,25 +52,92 @@ function s(t1, t2, n) {
 }
 
 
-function topGlod() {
-  //点击1小时领取金币
-  var topGlodEnter = [306, 126];
 
-  var topGlodOk = [481, 1226];
-
-  k(topGlodEnter, 20);
-
-  k(topGlodOk, 20);
-
-}
-
-//离线收益
-function offlineBtn() {
-  var offlineObj =  className("android.widget.TextView").text("离线收益").findOne()
-  if(offlineObj){
-    
+//启动app
+function launchApp(){
+  app.launch("org.autojs.autojs");
+  sleep(5000);
+  var skip = id("tt_splash_skip_btn").findOne();
+  if(skip){
+    skip.click();
+    sleep(5000);
   }
+}
+//看广告
+var looktimer;
+function lookAD(flow){
+  lookend =false;
+  var countdown = id("tt_reward_ad_countdown").findOne();
+  var close = id("tt_video_ad_close_layout").clickable().findOne();
+  //系统弹出的信息
+  var sysCancel = id("button2").clickable().findOne()
+  if(sysCancel){
+    sysCancel.click();
+    sleep(2000);
+  }
+
+  if(countdown&&!close){
+    clearTimeout(looktimer);
+    looktimer= setTimeout(function(){
+      lookAD(flow)
+    },1000)
+    
+  }else if(!countdown&&close){
+    close.click();
+    flow();
+    sleep(2000);
+  }
+}
+//离线收益
+function offlineBtn(flow,left,top,right,bottom) {
+  var offlineObj =  className("android.widget.TextView").text("离线收益").findOne()
+  var lookadflag = className("android.widget.TextView").text("看广告翻倍").findOne()
+  if(offlineObj){
+    if(lookadflag){
+      id("btn_share").findOne().click();
+      sleep(2000);
+      lookAD(flow)
+    }else{
+      id("btn_share").findOne().click();
+      sleep(2000);
+      id("iv_wx").findOne().click();
+      sleep(2000);
+      bounds(left,top,right,bottom).clickable().click();
+      sleep(2000);
+      flow()
+    }
+
+  }else{
+    flow()
+  }
+
+  function topGlod() {
+    //点击1小时领取金币
+     id("lyt_free_coin").findOne().click()
+  
+    var topGlodOk = id("btn").findOne()
+    var close = id("iv_close").findOne()
+
+    if(topGlodOk.text("确定")){
+      topGlodOk.click()
+      sleep(2000);
+    }else {
+      close.click()
+      sleep(2000);
+    }
+   
+    //每隔30分钟领取一次
+    setTimeout(function(){
+      topGlod()
+    },35*60*1000)
+  }
+  
+
+  launchApp()
+  offlineBtn(flow, 951, 67, 1080, 196)
  
+  topGlod()
+
   var double = [522, 1165]
   var share = [318, 1551]
   var onePerson = [756, 661];
