@@ -65,7 +65,7 @@ function swiperDog() {
 //是否有两只相同的狗
 function mergeDog(dogs, dog) {
     var mgdog = dogs[dog.level];
-    console.log("移动开始")
+    console.log("移动开始",mgdog.x, mgdog.y,"->",dog.x, dog.y)
     sleep(2000)
     swipe(mgdog.x, mgdog.y, dog.x, dog.y, 300);
     sleep(2000)
@@ -80,7 +80,37 @@ function mergeDog(dogs, dog) {
     }
 }
 
+function checkneedLookAD(){
+    var coin = className("android.widget.TextView").text("金币不足").findOne(1000)
+    if(coin){
+        var num = className("android.widget.TextView").textContains("剩余").findOne(1000)
+        num = num&&num.text()
 
+        if(num){
+            num = /剩余(\d+)/.exec(num)
+            if(num&&num[1]){
+                num = Math.floor(parseInt(num[1],0)||0)
+            }else{
+                num=0
+            }
+        }else{
+            num=0;
+        }
+        if(num){
+            //异步的
+            lookAD(flow);
+            return;
+        }else{
+           toast("没有金币了，游戏结束")
+           id("iv_close").findOne(1000).click()
+           return false;
+        }
+    }else{
+        toast("没有金币了，游戏结束")
+        id("iv_close").findOne(1000).click()
+        return false;
+    }
+}
 
 function buyDog(dogspace,flow) {
     for (var i = 0; i < dogspace.length; i++) {
@@ -90,37 +120,9 @@ function buyDog(dogspace,flow) {
         if (!dog) {
             if(add){
                 add.click();
-                sleep(2000)
+                sleep(2000);
             }else{
-                var coin = className("android.widget.TextView").text("金币不足").findOne(1000)
-                if(coin){
-                    var num = className("android.widget.TextView").textContains("剩余").findOne(1000)
-                    num = num&&num.text()
-
-                    if(num){
-                        num = /剩余(\d+)/.exec(num)
-                        if(num&&num[1]){
-                            num = Math.floor(parseInt(num[1],0)||0)
-                        }else{
-                            num=0
-                        }
-                    }else{
-                        num=0;
-                    }
-                    if(num){
-                        //异步的
-                        lookAD(flow);
-                        return;
-                    }else{
-                       toast("没有金币了，游戏结束")
-                       id("iv_close").findOne(1000).click()
-                       return false;
-                    }
-                }else{
-                    toast("没有金币了，游戏结束")
-                    id("iv_close").findOne(1000).click()
-                    return false;
-                }
+                return checkneedLookAD(flow)
             }
      
         }
