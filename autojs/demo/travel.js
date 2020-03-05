@@ -41,7 +41,9 @@ function swiperDog() {
     dogspace.forEach(function(dog){
         dog = getDogInfo(dog);
         if(dog){
+            console.log("找到"+dog.level)
             if(dogs[dog.level]){
+                 console.log("合并"+dog.level)
                 mergeDog(dogs, dog)
             }else{
                 dogs[dog.level] = Object.assign({},dog)
@@ -58,8 +60,11 @@ function mergeDog( dogs,dog) {
     dogs[dog.level] = null;
     var addLevel = Math.floor(parseInt(dog.level,10)+1)+1;
     if(dogs[addLevel]){
+         console.log("递归和并"+addLevel)
         mergeDog(dogs, dogs[addLevel])
     }else{
         dogs[addLevel] ={level:addLevel,x:dog.x,y:dog.y}
     }
   }
+
+swiperDog();
