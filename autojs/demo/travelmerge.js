@@ -10,9 +10,12 @@ console.show()
 
 //全部dog
 var rate = device.width / 1080
+
 var s = 35 * rate
 var w = 210 * rate
 var h = 210 * rate
+
+setScreenMetrics(1080, 1920);
 
 function findDogSpace() {
     var alldogs = []
