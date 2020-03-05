@@ -27,8 +27,8 @@ function findDogSpace() {
     return alldogs
 }
 
-function getDogInfo(dog) {
-    sleep(800)
+function getDogInfo(dog,time) {
+    sleep(time)
     var left = dog.x;
     var top = dog.y;
     var right = dog.x + (s + w) / 2
@@ -48,7 +48,7 @@ function swiperDog() {
     var dogspace = findDogSpace();
     var dogs = {}
     dogspace.forEach(function (dog) {
-        dog = getDogInfo(dog);
+        dog = getDogInfo(dog,400);
         if (dog) {
             if (dogs[dog.level]) {
                 mergeDog(dogs, dog)
@@ -77,25 +77,92 @@ function mergeDog(dogs, dog) {
 
 function buyDog(dogspace) {
     for (var i = 0; i < dogspace.length; i++) {
-        var dog = getDogInfo(dogspace[i]);
+        var dog = getDogInfo(dogspace[i],800);
+        var add = id("lyt_add").findOne(1000).clickable()
         if (!dog) {
-            id("lyt_add").findOne(1000).click()
+            if(add){
+                add.click();
+            }else{
+                var coin = className("android.widget.TextView").text("金币不足").findOne(1000)
+                if(coin){
+                    var num = className("android.widget.TextView").textContains()("剩余").findOne(1000)
+                    num = num&&num.text()
+
+                    if(num){
+                        num = /剩余(\d+)/.exec(num)
+                        if(num&&num[1]){
+                            num = Math.floor(parseInt(num[1],0)||0)
+                        }else{
+                            num=0
+                        }
+                    }else{
+                        num=0;
+                    }
+                    if(num){
+                        //异步的
+                        lookAD(flow);
+                        return;
+                    }else{
+                       toast("没有金币了，游戏结束")
+                       id("iv_close").findOne(1000).click()
+                       return false;
+                    }
+                }else{
+                    toast("没有金币了，游戏结束")
+                    id("iv_close").findOne(1000).click()
+                    return false;
+                }
+            }
+     
         }
     }
+    flow()
 }
 
-swiperDog();
+var lookADTime=0
+function lookAD(flow){
+    sleep(5000)
+    //有钱花
+    var ad1 = id("tt_click_upper_non_content_layout").findOne(10000)
+    if(ad1){
+        clearTimeout(lookADTime)
+        lookADTime = setTimeout(function(){
+            lookAD(flow)
+        },5000)
+    }else{
+       var addBtn = id("lyt_add").findOne(1000)
+       var close =id("tt_video_ad_close_layout").findOne(1000)
+      var close2 = id("iv_close").findOne(1000)
+        if(!close&&!addBtn&!close2){
+            clearTimeout(lookADTime)
+            lookADTime = setTimeout(function(){
+                lookAD(flow)
+            },5000)
+        }else{
+            close.click()
+        }
+    }
+    
+}
 
-toast("已合并全部狗")
-sleep(1000)
-toast("已合并全部狗")
+function initflow(){
+    swiperDog();
 
-buyDog(findDogSpace())
+    alert("已合并全部狗")
 
+    
+    var canBuy = buyDog(findDogSpace())
+    
+    if(canBuy===false){
+        toast("不会循环下去了")
+    }else{
+        alert("买完狗了")
+        initflow();
+    }
+    
 
-toast("买完狗了")
-sleep(1000)
-toast("买完狗了")
+}
+
 
 
 
