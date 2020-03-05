@@ -110,15 +110,11 @@ function checkneedLookAD(flow){
            if(closeb){
             closeb.click()
            }
-           return false;
+           flow(false)
         }
     }else{
-        toast("没有金币了，游戏结束")
-        var  closeb = id("iv_close").findOne(1000)
-        if(closeb){
-         closeb.click()
-        }
-        return false;
+        console.error("未知界面")
+        flow(false);
     }
 }
 
@@ -139,7 +135,7 @@ function buyDog(dogspace,flow) {
      
         }
     }
-    flow()
+    flow(true)
 }
 
 var lookADTime=0
@@ -157,11 +153,12 @@ if(ad1){
    var close =id("tt_video_ad_close_layout").findOne(1000)
     if(!close){
         console.error("广告结束但是没有找到结束按钮")
-        flow();
+        flow(false);
     }else{
         console.log("广告结束")
         close.click()
         sleep(5000)
+        flow(true);
     }
 }
 }
@@ -171,7 +168,7 @@ function lookAD(flow){
    var btn =  id("btn_see").findOne(1000)
    if(!btn){
     console.error("没有找到观看视频的按钮");
-    flow();
+    flow(false);
     return;
    }
    console.log("进入广告")
@@ -184,6 +181,7 @@ function lookAD(flow){
     
 }
 
+var initflowTimer=0
 function initflow(){
 
     console.log("脚本开始运行")
@@ -193,18 +191,19 @@ function initflow(){
     console.info("已合并全部狗")
 
     
-    var canBuy = buyDog(findDogSpace(),function(){
-        //initflow()
-        console.log("间接买完狗了")
+    var canBuy = buyDog(findDogSpace(),function(flag){
+        console.info("买完狗了");
+        if(!flag){
+            console.error("游戏没有走完正常流程" )
+        }else{
+            clearTimeout(initflowTimer)
+           initflowTimer =  setTimeout(function(){
+            initflow
+            },1000)
+        }
+        
     })
-    
-    if(canBuy===false){
-        toast("不会循环下去了")
-    }else{
-        console.info("买完狗了")
-      //  initflow();
-    }
-    
+ 
 
 }
 
