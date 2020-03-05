@@ -143,6 +143,29 @@ function buyDog(dogspace,flow) {
 }
 
 var lookADTime=0
+function checkAdEND(flow){
+    console.log("检查广告是否结束")
+//有钱花
+var ad1 = id("tt_click_upper_non_content_layout").findOne(10000)
+if(ad1){
+    console.log("广告进行中")
+    clearTimeout(lookADTime)
+    lookADTime = setTimeout(function(){
+        checkAdEND(flow)
+    },5000)
+}else{
+   var close =id("tt_video_ad_close_layout").findOne(1000)
+    if(!close){
+        console.error("广告结束但是没有找到结束按钮")
+        flow();
+    }else{
+        console.log("广告结束")
+        close.click()
+        sleep(5000)
+    }
+}
+}
+
 function lookAD(flow){
 
    var btn =  id("btn_see").findOne(1000)
@@ -155,25 +178,9 @@ function lookAD(flow){
    btn.click();
 
     sleep(5000)
-    //有钱花
-    var ad1 = id("tt_click_upper_non_content_layout").findOne(10000)
-    if(ad1){
-        console.log("广告定时器开始计时")
-        clearTimeout(lookADTime)
-        lookADTime = setTimeout(function(){
-            lookAD(flow)
-        },5000)
-    }else{
-       var close =id("tt_video_ad_close_layout").findOne(1000)
-        if(!close){
-            console.error("广告结束但是没有找到结束按钮")
-            flow();
-        }else{
-            console.log("广告结束")
-            close.click()
-            sleep(5000)
-        }
-    }
+
+    checkAdEND(flow);
+    
     
 }
 
@@ -188,6 +195,7 @@ function initflow(){
     
     var canBuy = buyDog(findDogSpace(),function(){
         //initflow()
+        console.log("间接买完狗了")
     })
     
     if(canBuy===false){
