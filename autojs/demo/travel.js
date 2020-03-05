@@ -61,7 +61,7 @@ function mergeDog( dogs,dog) {
     var addLevel = Math.floor(parseInt(dog.level,10)+1);
     if(dogs[addLevel]){
          console.log("递归和并"+addLevel)
-        mergeDog(dogs, dogs[addLevel])
+        mergeDog(dogs, {level:addLevel,x:dog.x,y:dog.y})
     }else{
         dogs[addLevel] ={level:addLevel,x:dog.x,y:dog.y}
     }
