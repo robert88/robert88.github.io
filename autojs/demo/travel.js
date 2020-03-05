@@ -13,6 +13,8 @@ function topGlod() {
     console.log("领取完毕")
     id("iv_close").findOne(1000).click()
     sleep(1000)
+  }else{
+        console.log("不能领")
   }
 
   var nextTime = 35 * 60 * 1000;
