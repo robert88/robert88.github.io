@@ -1,12 +1,12 @@
 console.show()
 
-setInterval(() => {
-    var button = id("button2").findOne(500)
-    if (button) {
-        toast("取消前往")
-        button.click()
-    }
-}, 1000);
+// setInterval(() => {
+//     var button = id("button2").findOne(500)
+//     if (button) {
+//         toast("取消前往")
+//         button.click()
+//     }
+// }, 1000);
 
 //全部dog
 var rate = device.width / 1080
@@ -28,17 +28,18 @@ function findDogSpace() {
 }
 
 function getDogInfo(dog) {
-
+    sleep(800)
     var left = dog.x;
     var top = dog.y;
     var right = dog.x + (s + w) / 2
-    var buttom = dog.y + (s + h) / 2
+    var buttom = dog.y + (s + h) / 2;
     var hasDog = boundsInside(left, top, right, buttom).find()
     if (hasDog.size() == 1) {
         return { level: hasDog.get(0).text(), x: dog.x, y: dog.y }
     } else {
         return null
     }
+   
 }
 
 
