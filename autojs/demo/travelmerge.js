@@ -48,10 +48,12 @@ function swiperDog() {
     var dogspace = findDogSpace();
     var dogs = {}
     dogspace.forEach(function (dog,idx) {
-        console.log("获取位置"+idx+"是否有狗")
-        dog = getDogInfo(dog,800);
+
+        dog = getDogInfo(dog,1000);
+        console.log("获取位置"+idx+((!!dog)?"有":"无")+"狗 等级:",dog&&dog.level)
         if (dog) {
             if (dogs[dog.level]) {
+                console.log("合并狗："+dog.level)
                 mergeDog(dogs, dog)
             } else {
                 dogs[dog.level] = Object.assign({}, dog)
@@ -68,6 +70,7 @@ function mergeDog(dogs, dog) {
     dogs[dog.level] = null;
     var addLevel = Math.floor(parseInt(dog.level, 10) + 1);
     if (dogs[addLevel]) {
+        console.log("递归合并狗"+dog.level)
         mergeDog(dogs, { level: addLevel, x: dog.x, y: dog.y })
     } else {
         dogs[addLevel] = { level: addLevel, x: dog.x, y: dog.y }
@@ -79,11 +82,12 @@ function mergeDog(dogs, dog) {
 function buyDog(dogspace,flow) {
     for (var i = 0; i < dogspace.length; i++) {
         var dog = getDogInfo(dogspace[i],800);
+        console.log("买狗-获取位置"+idx+((!!dog)?"有":"无")+"狗 等级:",dog&&dog.level)
         var add = id("lyt_add").findOne(1000)
         if (!dog) {
             if(add){
                 add.click();
-                sleep(1000)
+                sleep(2000)
             }else{
                 var coin = className("android.widget.TextView").text("金币不足").findOne(1000)
                 if(coin){
@@ -148,9 +152,12 @@ function lookAD(flow){
 }
 
 function initflow(){
+
+    console.log("脚本开始运行")
+
     swiperDog();
 
-    alert("已合并全部狗")
+    console.info("已合并全部狗")
 
     
     var canBuy = buyDog(findDogSpace(),function(){
@@ -160,7 +167,7 @@ function initflow(){
     if(canBuy===false){
         toast("不会循环下去了")
     }else{
-        alert("买完狗了")
+        console.info("买完狗了")
         initflow();
     }
     
@@ -171,3 +178,4 @@ function initflow(){
 
 
 
+initflow()
