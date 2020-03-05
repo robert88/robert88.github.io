@@ -84,6 +84,7 @@ function mergeDog(dogs, dog) {
 
 function checkneedLookAD(flow){
     var coin = className("android.widget.TextView").text("金币不足").findOne(1000)
+    console.log("是否金币不足",!!coin)
     if(coin){
         var num = className("android.widget.TextView").textContains("剩余").findOne(1000)
         num = num&&num.text()
@@ -98,12 +99,13 @@ function checkneedLookAD(flow){
         }else{
             num=0;
         }
+        console.log("可以观看视频的次数",num)
         if(num){
             //异步的
             lookAD(flow);
             return;
         }else{
-           toast("没有金币了，游戏结束")
+            console.log("视频次数已看完",num)
            var  closeb = id("iv_close").findOne(1000)
            if(closeb){
             closeb.click()
@@ -128,8 +130,10 @@ function buyDog(dogspace,flow) {
         if (!dog) {
             if(add){
                 add.click();
+                console.log("点击购买按钮")
                 sleep(2000);
             }else{
+                console.log("需要观看视频")
                 return checkneedLookAD(flow)
             }
      
@@ -140,25 +144,34 @@ function buyDog(dogspace,flow) {
 
 var lookADTime=0
 function lookAD(flow){
+
+   var btn =  id("btn_see").findOne(1000)
+   if(!btn){
+    console.error("没有找到观看视频的按钮");
+    flow();
+    return;
+   }
+   console.log("进入广告")
+   btn.click();
+
     sleep(5000)
     //有钱花
     var ad1 = id("tt_click_upper_non_content_layout").findOne(10000)
     if(ad1){
+        console.log("广告定时器开始计时")
         clearTimeout(lookADTime)
         lookADTime = setTimeout(function(){
             lookAD(flow)
         },5000)
     }else{
-       var addBtn = id("lyt_add").findOne(1000)
        var close =id("tt_video_ad_close_layout").findOne(1000)
-      var close2 = id("iv_close").findOne(1000)
-        if(!close&&!addBtn&!close2){
-            clearTimeout(lookADTime)
-            lookADTime = setTimeout(function(){
-                lookAD(flow)
-            },5000)
+        if(!close){
+            console.error("广告结束但是没有找到结束按钮")
+            flow();
         }else{
+            console.log("广告结束")
             close.click()
+            sleep(5000)
         }
     }
     
