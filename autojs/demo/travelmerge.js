@@ -65,8 +65,11 @@ function swiperDog() {
 //是否有两只相同的狗
 function mergeDog(dogs, dog) {
     var mgdog = dogs[dog.level];
+    console.log("移动开始")
+    sleep(2000)
     swipe(mgdog.x, mgdog.y, dog.x, dog.y, 300);
-    sleep(800)
+    sleep(2000)
+    console.log("移动结束")
     dogs[dog.level] = null;
     var addLevel = Math.floor(parseInt(dog.level, 10) + 1);
     if (dogs[addLevel]) {
@@ -82,7 +85,7 @@ function mergeDog(dogs, dog) {
 function buyDog(dogspace,flow) {
     for (var i = 0; i < dogspace.length; i++) {
         var dog = getDogInfo(dogspace[i],800);
-        console.log("买狗-获取位置"+idx+((!!dog)?"有":"无")+"狗 等级:",dog&&dog.level)
+        console.log("买狗-获取位置"+i+((!!dog)?"有":"无")+"狗 等级:",dog&&dog.level)
         var add = id("lyt_add").findOne(1000)
         if (!dog) {
             if(add){
