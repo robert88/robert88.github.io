@@ -19,7 +19,7 @@ function findDogSpace() {
     var x0 = 65 * rate;
     var y0 = 740 * rate
 
-    for (var j = 0; j < 4; j++) {
+    for (var j = 0; j < 3; j++) {
         for (var i = 0; i < 4; i++) {
             alldogs.push({ x: w / 2 + x0 + (s + w) * i, y: h / 2 + y0 + (s + h) * j })
         }
