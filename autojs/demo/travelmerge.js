@@ -60,6 +60,8 @@ function swiperDog() {
             }
         }
     })
+    dogs= null;
+    dogspace.length=0
 }
 
 //是否有两只相同的狗
@@ -80,7 +82,7 @@ function mergeDog(dogs, dog) {
     }
 }
 
-function checkneedLookAD(){
+function checkneedLookAD(flow){
     var coin = className("android.widget.TextView").text("金币不足").findOne(1000)
     if(coin){
         var num = className("android.widget.TextView").textContains("剩余").findOne(1000)
@@ -102,12 +104,18 @@ function checkneedLookAD(){
             return;
         }else{
            toast("没有金币了，游戏结束")
-           id("iv_close").findOne(1000).click()
+           var  closeb = id("iv_close").findOne(1000)
+           if(closeb){
+            closeb.click()
+           }
            return false;
         }
     }else{
         toast("没有金币了，游戏结束")
-        id("iv_close").findOne(1000).click()
+        var  closeb = id("iv_close").findOne(1000)
+        if(closeb){
+         closeb.click()
+        }
         return false;
     }
 }
@@ -166,14 +174,14 @@ function initflow(){
 
     
     var canBuy = buyDog(findDogSpace(),function(){
-        initflow()
+        //initflow()
     })
     
     if(canBuy===false){
         toast("不会循环下去了")
     }else{
         console.info("买完狗了")
-        initflow();
+      //  initflow();
     }
     
 
