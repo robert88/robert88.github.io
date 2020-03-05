@@ -17,8 +17,13 @@ function findDogSpace(){
 }
 findDogSpace()
 console.show()
-
+    var left,top,right,buttom;
     for(var k=0;k<12;k++){
-        click(alldogs[k].x,alldogs[k].y)
-        sleep(3000)
+       left=alldogs[k].x,top=alldogs[k].y,right=alldogs[k].x+115,buttom=alldogs[k].y+115;
+       swipe(left, top, right, buttom,1000)
+       var in =  boundsInside(left, top, right, buttom).find()
+       var con = boundsContains(left, top, right, buttom).find()
+       console.log(in.size())
+       console.log(con.size())
+       sleep(3000)
     }
