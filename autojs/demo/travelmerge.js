@@ -1,5 +1,6 @@
 console.show()
 
+setScreenMetrics(1080, 1920);
 // setInterval(() => {
 //     var button = id("button2").findOne(500)
 //     if (button) {
@@ -15,7 +16,6 @@ var s = 35 * rate
 var w = 210 * rate
 var h = 210 * rate
 
-setScreenMetrics(1080, 1920);
 
 function findDogSpace() {
     var alldogs = []
