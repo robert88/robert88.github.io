@@ -47,8 +47,9 @@ function getDogInfo(dog,time) {
 function swiperDog() {
     var dogspace = findDogSpace();
     var dogs = {}
-    dogspace.forEach(function (dog) {
-        dog = getDogInfo(dog,400);
+    dogspace.forEach(function (dog,idx) {
+        console.log("获取位置"+idx+"是否有狗")
+        dog = getDogInfo(dog,800);
         if (dog) {
             if (dogs[dog.level]) {
                 mergeDog(dogs, dog)
@@ -78,14 +79,15 @@ function mergeDog(dogs, dog) {
 function buyDog(dogspace) {
     for (var i = 0; i < dogspace.length; i++) {
         var dog = getDogInfo(dogspace[i],800);
-        var add = id("lyt_add").findOne(1000).clickable()
+        var add = id("lyt_add").findOne(1000)
         if (!dog) {
             if(add){
                 add.click();
+                sleep(1000)
             }else{
                 var coin = className("android.widget.TextView").text("金币不足").findOne(1000)
                 if(coin){
-                    var num = className("android.widget.TextView").textContains()("剩余").findOne(1000)
+                    var num = className("android.widget.TextView").textContains("剩余").findOne(1000)
                     num = num&&num.text()
 
                     if(num){
