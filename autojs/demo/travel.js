@@ -58,7 +58,7 @@ function mergeDog( dogs,dog) {
     swipe(mgdog.x,mgdog.y,dog.x,dog.y,1000);
     sleep(1000)
     dogs[dog.level] = null;
-    var addLevel = Math.floor(parseInt(dog.level,10)+1)+1;
+    var addLevel = Math.floor(parseInt(dog.level,10)+1);
     if(dogs[addLevel]){
          console.log("递归和并"+addLevel)
         mergeDog(dogs, dogs[addLevel])
