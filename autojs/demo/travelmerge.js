@@ -76,7 +76,7 @@ function mergeDog(dogs, dog) {
 
 
 
-function buyDog(dogspace) {
+function buyDog(dogspace,flow) {
     for (var i = 0; i < dogspace.length; i++) {
         var dog = getDogInfo(dogspace[i],800);
         var add = id("lyt_add").findOne(1000)
@@ -153,7 +153,9 @@ function initflow(){
     alert("已合并全部狗")
 
     
-    var canBuy = buyDog(findDogSpace())
+    var canBuy = buyDog(findDogSpace(),function(){
+        initflow()
+    })
     
     if(canBuy===false){
         toast("不会循环下去了")
