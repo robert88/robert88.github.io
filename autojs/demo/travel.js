@@ -1,7 +1,7 @@
 var alldogs = []
 
 function findDogSpace(){
-    var rate = divice.width/1080
+    var rate = device.width/1080
     var x0 = 65 * rate;
     var s = 35 * rate
     var y0 = 735 * rate
@@ -21,9 +21,9 @@ console.show()
     for(var k=0;k<12;k++){
        left=alldogs[k].x,top=alldogs[k].y,right=alldogs[k].x+115,buttom=alldogs[k].y+115;
        swipe(left, top, right, buttom,1000)
-       var in =  boundsInside(left, top, right, buttom).find()
+       var in1 =  boundsInside(left, top, right, buttom).find()
        var con = boundsContains(left, top, right, buttom).find()
-       console.log(in.size())
+       console.log(in1.size())
        console.log(con.size())
        sleep(3000)
     }
