@@ -17,4 +17,6 @@ function findDogSpace(){
     }
 
 }
-findDogSpace()
+//findDogSpace()
+
+console.log(111)
