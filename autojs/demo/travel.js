@@ -24,7 +24,7 @@ function getDogInfo(dog){
     var left = dog.x;
     var top = dog.y;
     var right = dog.x+(s+w)/2
-    var right = dog.y+(s+h)/2
+    var buttom = dog.y+(s+h)/2
    var hasDog = boundsInside(left, top, right, buttom).find()
    if(hasDog.size()==1){
     return {level:hasDog.get(0).text(),x:dog.x,y:dog.y}
@@ -41,30 +41,25 @@ function swiperDog() {
     dogspace.forEach(function(dog){
         dog = getDogInfo(dog);
         if(dog){
-            dogs[dog.level] = dogs[dog.level]||[]
-            dogs[dog.level].push(dog);
+            if(dogs[dog.level]){
+                mergeDog(dogs, dog)
+            }else{
+                dogs[dog.level] = Object.assign({},dog)
+            }
         }
     })
-
-    swiperingDog( dogs);
 }
-//是否有两只相同的狗
 
-function swiperingDog( dogs) {
-    var a,b,len,addLevel,j;
-    for(var level in dogs){
-         len = dogs[level].length;
-        if(len>1){
-             addLevel = Math.floor(parseInt(level,10)+1)+"";
-            dogs[addLevel] = dogs[addLevel] ||[];
-            for(var j=0;j<len/2;j++){
-                 a = dogs[level].shift();
-                 b = dogs[level].shift();
-                dogs[addLevel].push({level:addLevel,x:a.x,y:a.y}) 
-                swipe(b.x,b.y,a.x,a.y,1000);
-                sleep(2000)
-            }
-            return swiperingDog( dogs);
-        }
+//是否有两只相同的狗
+function mergeDog( dogs,dog) {
+    var mgdog = dogs[dog.level];
+    swipe(mgdog.x,mgdog.y,dog.x,dog.y,1000);
+    sleep(1000)
+    dogs[dog.level] = null;
+    var addLevel = Math.floor(parseInt(dog.level,10)+1)+1;
+    if(dogs[addLevel]){
+        mergeDog(dogs, dogs[addLevel])
+    }else{
+        dogs[addLevel] ={level:addLevel,x:dog.x,y:dog.y}
     }
   }
