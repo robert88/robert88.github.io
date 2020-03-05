@@ -1,4 +1,13 @@
 console.show()
+
+setInterval(() => {
+    var button = id("button2").findOne(500)
+    if (button) {
+        toast("取消前往")
+        button.click()
+    }
+}, 1000);
+
 //全部dog
 var rate = device.width / 1080
 var s = 35 * rate
@@ -87,11 +96,6 @@ toast("买完狗了")
 sleep(1000)
 toast("买完狗了")
 
-setInterval(() => {
-    var button = id("button2").findOne(500)
-    if (button) {
-        button.click()
-    }
-}, 1000);
+
 
 
