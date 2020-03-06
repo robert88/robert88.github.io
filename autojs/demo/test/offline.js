@@ -31,7 +31,7 @@ function offlineBtn(sharename, flow) {
 function wxshare(sharename) {
   console.log("生成海报，点击微信朋友按钮")
   //点击微信分享按钮
-  id("iv_wx").waitFor().findOne(1000).click();
+  id("iv_wx").findOne(1000).click();
   sleep(9000);
 
   console.log("跳到微信的分享页面,查找朋友", sharename)
@@ -60,6 +60,7 @@ function wxshare(sharename) {
 
 /**检查广告是否结束*/
 var lookADTime = 0
+
 function checkAdEND(flow) {
   console.log("检查广告是否结束")
   //有钱花
@@ -71,7 +72,7 @@ function checkAdEND(flow) {
       checkAdEND(flow)
     }, 3000)
   } else {
-     sleep(5000)
+    sleep(5000)
     var close = id("tt_video_ad_close_layout").findOne(5000)
     if (!close) {
       console.error("广告结束但是没有找到结束按钮")
@@ -103,8 +104,8 @@ function lookAD(flow) {
 
   sleep(5000)
 
-  checkAdEND(function(flag){
-    if(flag){
+  checkAdEND(function(flag) {
+    if (flag) {
       var btn = id("btn").findOne(1000);
       if (!btn) {
         console.error("观看之后确认收益按钮没找到");
@@ -115,7 +116,7 @@ function lookAD(flow) {
       btn.click()
       sleep(2000)
       flow(true)
-    }else{
+    } else {
       flow(flag)
     }
   });
@@ -123,6 +124,6 @@ function lookAD(flow) {
 
 }
 
-offlineBtn("rap",function(){
-console.log("离线收益结束")
+offlineBtn("rap", function() {
+  console.log("离线收益结束")
 })
