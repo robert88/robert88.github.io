@@ -1,5 +1,5 @@
 
-const lookAd = require("ad.js");
+var lookAd = require("ad.js");
 
 //坐标参数
 var rate = device.width / 1080
