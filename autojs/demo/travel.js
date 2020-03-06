@@ -1,3 +1,4 @@
+console.show()
 const merge = require("./merge");
 const glod = require("./glod");
 const offline = require("./offline");
