@@ -77,7 +77,7 @@ function mergeDog(dogs, dog) {
 }
 
 /**校验是否需要看广告*/
-function checkneedLookAD(flow) {
+function checkneedlookAd(flow) {
   var coin = className("android.widget.TextView").text("金币不足").findOne(1000)
   console.log("是否金币不足", !!coin)
   if (coin) {
@@ -97,7 +97,7 @@ function checkneedLookAD(flow) {
     console.log("可以观看视频的次数", num)
     if (num) {
       //异步的
-      lookAD(flow);
+      lookAd(flow);
       return;
     } else {
       console.log("视频次数已看完", num)
@@ -136,7 +136,7 @@ function buyDog(dogspace, flow) {
         sleep(2000);
       } else {
         console.log("需要观看视频")
-        return checkneedLookAD(flow)
+        return checkneedlookAd(flow)
       }
 
     }
