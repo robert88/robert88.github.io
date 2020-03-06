@@ -1,3 +1,5 @@
+console.show()
+
 /**检查广告是否结束*/
 var lookADTime = 0
 function checkAdEND(flow) {
@@ -55,3 +57,7 @@ function lookAD(flow) {
 
 
 }
+
+lookAD(function(){
+console.log("已经看完")
+})
