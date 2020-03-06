@@ -5,15 +5,16 @@ var lookADTime = 0
 function checkAdEND(flow) {
   console.log("检查广告是否结束")
   //有钱花
-  var ad1 = id("tt_click_upper_non_content_layout").findOne(10000)
-    var ad2 = id("tt_reward_ad_countdown").findOne(10000)
-    console.log(ad1,ad2)
+  var ad1 = id("tt_click_upper_non_content_layout").findOne(5000)
+   var ad2 = id("tt_reward_ad_countdown").findOne(5000)
+
   if (ad1) {
     console.log("广告进行中")
     clearTimeout(lookADTime)
     lookADTime = setTimeout(function() {
       checkAdEND(flow)
-    }, 5000)
+    }, 1000)
+    return;
   } else {
     var close = id("tt_video_ad_close_layout").findOne(10000)
     if (!close) {
