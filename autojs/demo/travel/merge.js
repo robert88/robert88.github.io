@@ -3,15 +3,17 @@ var lookAd = require("./ad.js");
 
 //坐标参数
 var rate = device.width / 1080
+var homeMap ={"HWI-AL00":1}
 var s = 35 * rate
 var w = 210 * rate
 var h = 210 * rate
+var hashome = homeMap[device.model]?120:0
 
 /**狗的位置信息*/
 function findDogSpace() {
   var alldogs = []
   var x0 = 65 * rate;
-  var y0 = 740 * rate + (device.height - device.width * 1920 / 1080)
+  var y0 = 740 * rate + (device.height - device.width * 1920 / 1080)+hashome
 
   for (var j = 0; j < 3; j++) {
     for (var i = 0; i < 4; i++) {
