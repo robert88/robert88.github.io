@@ -8,7 +8,7 @@ function r(name) {
   ajaxcount++;
   http.get("https://robert88.github.io//autojs/demo/" + name + ".js?ver=" + time, {}, function(res, err) {
     if (err) {
-      t("更新失败")
+      t("更新失败"+ name + ".js")
       return;
     }
     var content = res.body.string();
