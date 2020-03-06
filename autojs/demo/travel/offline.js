@@ -13,7 +13,7 @@ function offlineBtn(sharename, flow) {
       id("btn_share").findOne().click();
       sleep(3000);
       wxshare(sharename);
-      flow()
+      flow(true)
     } else if (doubleadd) {
       console.log("看广告翻倍，点击翻倍按钮")
       id("btn_share").findOne().click();
