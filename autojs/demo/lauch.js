@@ -20,3 +20,4 @@ function launchApp(name) {
     }
   }
 }
+module.exports = launchApp
