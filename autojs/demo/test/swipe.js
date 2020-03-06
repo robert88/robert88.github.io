@@ -3,16 +3,16 @@ console.log("设备",device.width,device.height);
 
 //全部dog
 var rate = device.width / 1080
-
+var hashome = homeMap[device.model]?120:0
 var s = 35 * rate
 var w = 210 * rate
 var h = 210 * rate
-   console.log("宽高", s,w,h);
+   console.log("宽高", s,w,h,"home高度",hashome);
 
 function findDogSpace() {
     var alldogs = []
     var x0 = 65 * rate;
-    var y0 = 740 * rate+(device.height-device.width*1920/1080)
+    var y0 = 740 * rate+(device.height-device.width*1920/1080)+hashome
     console.log("开始坐标", x0,y0);
     for (var j = 0; j < 3; j++) {
         for (var i = 0; i < 4; i++) {
