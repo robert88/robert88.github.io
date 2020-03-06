@@ -166,8 +166,15 @@ if(ad1){
 }
 }
 
-function lookAD(flow){
+//开启设置设备权限
 
+
+function lookAD(flow){
+    var currentVolume = device.getMusicVolume();
+    if(currentVolume){
+        alert("播放广告有声音")
+        return;
+    }
    var btn =  id("btn_see").findOne(1000)
    if(!btn){
     console.error("没有找到观看视频的按钮");
