@@ -17,6 +17,9 @@
 // 除此之外，Auto.js内置了对Promise。
 
 对设备的设置，需要设置系统权限
+WRITE_SETTINGS
+
+.requestPermissions(permissions)
 
 height，width设备屏幕分辨率宽度,高度
 
