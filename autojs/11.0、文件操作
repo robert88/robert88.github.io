@@ -36,6 +36,7 @@ files.ensureDir(path) //确保路径path所在的文件夹存在。如果该路�
 .readBytes(path)//用于读图片
 读取文件path的所有内容并返回一个字节数组。如果文件不存在，则抛出FileNotFoundException。
 
+//如果目录不存在会报错，所以可以使用ensureDir来创建目录
 files.write(path, text[, encoding = "utf-8"])
 把text写入到文件path中。如果文件存在则覆盖，不存在则创建。
 .writeBytes(path, bytes)
