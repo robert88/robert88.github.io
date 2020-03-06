@@ -5,9 +5,9 @@ function topGlod() {
 
   var countdonw = id("countdown_view").findOne(1000)
 
-  if (!countdonw) {
-    console.log("点击领金币")
-    id("lyt_free_coin").findOne(1000).click()
+  if (!countdonw){
+    console.log("点击领金币");
+    id("lyt_free_coin").findOne(1000).click();
     sleep(1000)
     console.log("确认领取金币")
     id("btn").findOne(1000).click()
