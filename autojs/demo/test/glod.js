@@ -1,6 +1,6 @@
 console.show()
 //领取金币
-var topGlodtimer
+var topGlodtimer=0
 
 function topGlod() {
 
