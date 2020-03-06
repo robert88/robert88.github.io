@@ -16,6 +16,8 @@
 // ui: UI界面。用于显示自定义的UI界面，和用户交互。
 // 除此之外，Auto.js内置了对Promise。
 
+对设备的设置，需要设置系统权限
+
 height，width设备屏幕分辨率宽度,高度
 
 .buildId 修订版本号
@@ -40,11 +42,15 @@ height，width设备屏幕分辨率宽度,高度
 .getAndroidId() 返回设备的Android ID。
 .getMacAddress() 返回设备的Mac地址。
 
+
 .getBrightnessMode() 返回当前亮度模式，0为手动亮度，1为自动亮度。
 .getBrightness() 返回当前的(手动)亮度。范围为0~255
 .setBrightnessMode(mode)
 .setBrightness(b) 设置当前手动亮度。如果当前是自动亮度模式，该函数不会影响屏幕的亮度。
 
+//按键条件音量
+VolumeDown()
+VolumeUp()
 .getMusicVolume()返回当前媒体音量。
 .getNotificationVolume() 返回当前通知音量
 .getAlarmVolume() 返回当前闹钟音量。
