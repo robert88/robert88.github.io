@@ -1,4 +1,5 @@
-const lookAD = require("ad.js")
+
+var lookAd = require("./ad.js");
 
 //离线按钮
 function offlineBtn(sharename, flow) {
