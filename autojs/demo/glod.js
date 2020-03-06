@@ -25,3 +25,4 @@ function topGlod() {
     topGlod();
   }, nextTime)
 }
+module.exports = topGlod
