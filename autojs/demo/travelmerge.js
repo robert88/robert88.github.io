@@ -20,7 +20,7 @@ var h = 210 * rate
 function findDogSpace() {
     var alldogs = []
     var x0 = 65 * rate;
-    var y0 = 740 * rate
+    var y0 = 740 * rate+(device.height-device.width*1920/1080)
 
     for (var j = 0; j < 3; j++) {
         for (var i = 0; i < 4; i++) {
