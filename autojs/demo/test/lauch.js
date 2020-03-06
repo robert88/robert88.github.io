@@ -1,7 +1,7 @@
 console.show()
 //启动服务
 function launchApp(name) {
-  if (currentPackage() != name) {
+  if (currentPackage() == name) {
     console.log("服务已启动")
     return
   }
