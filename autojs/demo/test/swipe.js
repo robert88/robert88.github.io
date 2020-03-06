@@ -2,6 +2,7 @@ console.show();
 console.log("设备",device.width,device.height);
 
 //全部dog
+var homeMap ={"HWI-AL00":1}
 var rate = device.width / 1080
 var hashome = homeMap[device.model]?120:0
 var s = 35 * rate
