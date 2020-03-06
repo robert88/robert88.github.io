@@ -5,7 +5,7 @@ function launchApp(name) {
     return
   }
   app.launch(name);
-  sleep(10000);
+  sleep(3000);
   if (currentPackage() != name) {
     console.error("服务启动慢或者未启动")
   } else {
