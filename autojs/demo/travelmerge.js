@@ -1,14 +1,5 @@
 console.show()
 
-setScreenMetrics(1080, 1920);
-// setInterval(() => {
-//     var button = id("button2").findOne(500)
-//     if (button) {
-//         toast("取消前往")
-//         button.click()
-//     }
-// }, 1000);
-
 //全部dog
 var rate = device.width / 1080
 
