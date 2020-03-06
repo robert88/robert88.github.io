@@ -1,13 +1,12 @@
 console.show()
 
-//全部dog
+//坐标参数
 var rate = device.width / 1080
-
 var s = 35 * rate
 var w = 210 * rate
 var h = 210 * rate
 
-
+/**狗的位置信息*/
 function findDogSpace() {
   var alldogs = []
   var x0 = 65 * rate;
@@ -21,6 +20,7 @@ function findDogSpace() {
   return alldogs
 }
 
+/**位置对应狗的信息*/
 function getDogInfo(dog, time) {
   sleep(time)
   var left = dog.x;
@@ -36,8 +36,7 @@ function getDogInfo(dog, time) {
 
 }
 
-
-
+/**查找合并狗*/
 function swiperDog() {
   var dogspace = findDogSpace();
   var dogs = {}
@@ -58,7 +57,7 @@ function swiperDog() {
   dogspace.length = 0
 }
 
-//是否有两只相同的狗
+/**合并狗*/
 function mergeDog(dogs, dog) {
   var mgdog = dogs[dog.level];
   console.log("移动开始", mgdog.x, mgdog.y, "->", dog.x, dog.y)
@@ -76,6 +75,7 @@ function mergeDog(dogs, dog) {
   }
 }
 
+/**校验是否需要看广告*/
 function checkneedLookAD(flow) {
   var coin = className("android.widget.TextView").text("金币不足").findOne(1000)
   console.log("是否金币不足", !!coin)
@@ -122,6 +122,7 @@ function checkneedLookAD(flow) {
   }
 }
 
+/**买狗*/
 function buyDog(dogspace, flow) {
   for (var i = 0; i < dogspace.length; i++) {
     var dog = getDogInfo(dogspace[i], 800);
@@ -142,8 +143,8 @@ function buyDog(dogspace, flow) {
   flow(true)
 }
 
+/**检查广告是否结束*/
 var lookADTime = 0
-
 function checkAdEND(flow) {
   console.log("检查广告是否结束")
   //有钱花
@@ -155,7 +156,7 @@ function checkAdEND(flow) {
       checkAdEND(flow)
     }, 5000)
   } else {
-    var close = id("tt_video_ad_close_layout").findOne(15000)
+    var close = id("tt_video_ad_close_layout").findOne(150000)
     if (!close) {
       console.error("广告结束但是没有找到结束按钮")
       flow(false);
@@ -177,9 +178,7 @@ function checkAdEND(flow) {
   }
 }
 
-//开启设置设备权限
-
-
+/**观看广告*/
 function lookAD(flow) {
   var currentVolume = device.getMusicVolume();
   if (currentVolume) {
@@ -202,6 +201,8 @@ function lookAD(flow) {
 
 }
 
+/**入口*/
+
 var initflowTimer = 0
 
 function initflow() {
@@ -213,7 +214,7 @@ function initflow() {
   console.info("已合并全部狗")
 
 
-  var canBuy = buyDog(findDogSpace(), function(flag) {
+ buyDog(findDogSpace(), function(flag) {
     console.info("买完狗了");
     if (!flag) {
       console.error("游戏没有走完正常流程")
