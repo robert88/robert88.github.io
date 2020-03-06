@@ -8,9 +8,9 @@ console.log("成功加载组件 offline")
 var launchApp = require("./launch.js");
 console.log("成功加载组件 launch")
 
-launchApp();
+launchApp("com.jiayouya.travel");
 console.info("-----launchApp -end --")
-offline();
+offline(function(){console.log("endoffline")});
 console.info("-----offline -end --")
 gold();
 console.info("-----glod -end --")
