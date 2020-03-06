@@ -1,4 +1,3 @@
-console.show()
 
 //坐标参数
 var rate = device.width / 1080
@@ -237,4 +236,4 @@ function initflow() {
 
 }
 
-initflow()
+module.exports = initflow
