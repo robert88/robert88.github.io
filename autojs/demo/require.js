@@ -28,7 +28,7 @@ function c(name,localname,res, err){
 }
 /* 消息队列*/
 
-function t(message) {
+function t(msg) {
   toast(msg)
   sleep(1000)
 }
@@ -47,6 +47,7 @@ function w(name,localname,res, err){
 
     files.remove("./" + localname + ".js")
   }
+  files.ensureDir("./" + localname + ".js")
   files.write("./" + localname + ".js", content);
   t("更新成功" + "./" + name + ".js")
 }
