@@ -158,7 +158,7 @@ if(ad1){
             flow(false);
             return;
         }
-        console.error("点击确认收益按钮");
+        console.log("点击确认收益按钮");
         btn.click()
         sleep(2000)
         flow(true);
@@ -201,7 +201,7 @@ function initflow(){
         }else{
             clearTimeout(initflowTimer)
            initflowTimer =  setTimeout(function(){
-            initflow
+            initflow()
             },1000)
         }
         
