@@ -1,7 +1,5 @@
 console.show();
 console.log("设备",device.width,device.height);
-setScreenMetrics(1080, 1920);
-
 
 //全部dog
 var rate = device.width / 1080
