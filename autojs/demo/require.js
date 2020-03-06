@@ -13,6 +13,8 @@ function r(name){
            files.remove("./"+name+".js")
         }
         files.write("./"+name+".js", content);
+        toast("更新成功"+"./"+name+".js")
+        sleep(1000)
     });
 }
 
