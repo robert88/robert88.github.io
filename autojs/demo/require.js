@@ -41,5 +41,8 @@ function t(message) {
 }
 
 r("travel")
-r("travelmerge")
-r("test")
+r("merge")
+r("ad")
+r("launch")
+r("glod")
+r("offline")
