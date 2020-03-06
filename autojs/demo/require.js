@@ -1,5 +1,5 @@
 //更新对象
-var time = new Date.getTime();
+var time = new Date().getTime();
 
 function r(name){
     http.get("https://robert88.github.io//autojs/demo/"+name+".js?ver="+time, {}, function(res, err){
