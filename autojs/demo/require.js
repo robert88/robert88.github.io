@@ -4,7 +4,8 @@ var ajaxcount = 0;
 var backMessage = [];
 
 /**ajax请求 */
-function r(name) {
+function r(name,localname) {
+  localname = localname ||name
   ajaxcount++;
   http.get("https://robert88.github.io//autojs/demo/" + name + ".js?ver=" + time, {}, function(res, err) {
     if (err) {
@@ -13,14 +14,14 @@ function r(name) {
     }
     var content = res.body.string();
 
-    if (files.exists("./" + name + ".js")) {
-      if (files.read("./" + name + ".js") == content) {
+    if (files.exists("./" + localname + ".js")) {
+      if (files.read("./" + localname + ".js") == content) {
         return t("服务器代码未变动" + "./" + name + ".js")
       }
 
-      files.remove("./" + name + ".js")
+      files.remove("./" + localname + ".js")
     }
-    files.write("./" + name + ".js", content);
+    files.write("./" + localname + ".js", content);
     t("更新成功" + "./" + name + ".js")
   });
 }
