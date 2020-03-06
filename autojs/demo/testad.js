@@ -6,6 +6,8 @@ function checkAdEND(flow) {
   console.log("检查广告是否结束")
   //有钱花
   var ad1 = id("tt_click_upper_non_content_layout").findOne(150000)
+    var ad2 = id("tt_reward_ad_countdown").findOne(150000)
+    console.log(ad1,ad2)
   if (ad1) {
     console.log("广告进行中")
     clearTimeout(lookADTime)
