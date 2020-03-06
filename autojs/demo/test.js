@@ -23,3 +23,10 @@ function findDogSpace() {
     }
     return alldogs
 }
+
+
+findDogSpace().forEach(function(d,i){
+       console.log("移动",i);
+   swipe(d.x,d.y,d.x+(w+s)/2,d.y+(h+s)/2,1000)
+   sleep(1000)
+})
