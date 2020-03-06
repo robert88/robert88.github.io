@@ -123,3 +123,6 @@ function lookAD(flow) {
 
 }
 
+offlineBtn("rap",function(){
+console.log("离线收益结束")
+})
