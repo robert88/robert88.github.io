@@ -1,5 +1,4 @@
-
-
+//文档开始
 
 app.launchApp(appName)
 app.launch(packageName)
