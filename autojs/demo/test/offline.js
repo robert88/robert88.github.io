@@ -16,7 +16,7 @@ function offlineBtn(sharename, flow) {
       console.log("看广告翻倍，点击翻倍按钮")
       id("btn_share").findOne().click();
       sleep(3000);
-      lookAd(flow)
+      lookAD(flow)
     } else {
       console.error("未知界面")
       flow(false)
