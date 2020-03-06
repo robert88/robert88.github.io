@@ -199,6 +199,7 @@ function lookAD(flow) {
       console.log("点击确认收益按钮");
       btn.click()
       sleep(2000)
+      flow(true)
     }else{
       flow(flag)
     }
