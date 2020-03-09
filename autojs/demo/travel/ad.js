@@ -30,7 +30,7 @@ var maxCount=0;
 function closeVolume(){
  maxCount++;
   if(maxCount<10){
-    var currentVolume =  device.getMusicVolume;
+    var currentVolume =  device.getMusicVolume();
     VolumeDown();
     if(currentVolume){
        closeVolume()
