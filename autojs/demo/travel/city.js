@@ -44,6 +44,8 @@
   }else{
     console.log("没有找到城市轨迹按钮")
   }
+
+  console.info("-----city -end --")
  }
 
 

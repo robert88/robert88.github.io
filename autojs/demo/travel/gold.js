@@ -30,6 +30,7 @@ function topGlod() {
   }else{
     console.log("还在计时")
   }
-
+  
+  console.info("-----glod -end --")
 }
 module.exports = topGlod

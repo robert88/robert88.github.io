@@ -116,18 +116,20 @@ function checkneedlookAd(flow) {
       return;
     } else {
       console.log("视频次数已看完", num)
-      var closeb = id("iv_close").findOne(1000)
+      var closeb = id("iv_close").findOne(1000);
+    
+      console.log("游戏结束")
+      device.cancelKeepingAwake()
+
       if (closeb) {
         closeb.click()
       }
-      flow(false)
     }
   } else {
     //升级界面，等等
     var btn = id("btn").findOne(1000);
     if (!btn) {
       console.error("未知界面")
-      flow(false);
       return;
     } else {
       btn.click();
@@ -145,7 +147,7 @@ function buyDog(dogspace, flow) {
   }
 
   for (var i = 0; i < dogspace.length; i++) {
-    var dog = getDogInfo(dogspace[i], 800);
+    var dog = getDogInfo(dogspace[i]);
     console.log("买狗-获取位置" + i + ((!!dog) ? "有" : "无") + "狗 等级:", dog && dog.level)
     var add = id("lyt_add").findOne(1000)
     if (!dog) {
@@ -177,18 +179,15 @@ function initflow() {
   console.info("已合并全部狗")
 
 
- buyDog(findDogSpace(), function(flag) {
-    console.info("买完狗了");
-    if (!flag) {
-      console.error("游戏没有走完正常流程")
-    } else {
-      clearTimeout(initflowTimer)
-      initflowTimer = setTimeout(function() {
-        initflow()
-      }, 1000)
-    }
+ var canbuyTimes = buyDog(findDogSpace())
 
-  })
+ console.info("买完狗了");
+
+ console.info("-----merge -end --")
+
+ if(canbuyTimes){
+  app.g(initflow,null,0)
+ }
 
 
 }
