@@ -29,7 +29,7 @@ function checkAdEND(flow) {
 var maxCount=0;
 function closeVolume(){
  maxCount++;
-  if(maxCount<10){
+  if(maxCount<20){
     var currentVolume =  device.getMusicVolume();
     VolumeDown();
     if(currentVolume){
