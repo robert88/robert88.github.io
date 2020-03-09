@@ -7,14 +7,15 @@ var homeMap ={"HWI-AL00":1}
 var s = 35 * rate
 var w = 210 * rate
 var h = 210 * rate
-var fristOne = id("tv").className("android.widget.TextView").text("旅行").findOne(5000);
 var hashome = homeMap[device.model]?120:0
 
 /**狗的位置信息*/
 function findDogSpace() {
+  var fristOne = id("tv").className("android.widget.TextView").text("旅行").findOne(3000);
   if(!hashome){
     if(!fristOne){
       console.error("未知页面");
+      return;
     }else{
       hashome = device.height - fristOne.bounds().bottom;
     }
@@ -34,8 +35,7 @@ function findDogSpace() {
 }
 
 /**位置对应狗的信息*/
-function getDogInfo(dog, time) {
-  sleep(time)
+function getDogInfo(dog) {
   var left = dog.x;
   var top = dog.y;
   var right = dog.x + (s + w) / 2
@@ -52,10 +52,13 @@ function getDogInfo(dog, time) {
 /**查找合并狗*/
 function swiperDog() {
   var dogspace = findDogSpace();
+  if(!dogspace){
+    return;
+  }
   var dogs = {}
   dogspace.forEach(function(dog, idx) {
 
-    dog = getDogInfo(dog, 1000);
+    dog = getDogInfo(dog);
     console.log("获取位置" + idx + ((!!dog) ? "有" : "无") + "狗 等级:", dog && dog.level)
     if (dog) {
       if (dogs[dog.level]) {
@@ -137,6 +140,10 @@ function checkneedlookAd(flow) {
 
 /**买狗*/
 function buyDog(dogspace, flow) {
+  if(!dogspace){
+    return;
+  }
+
   for (var i = 0; i < dogspace.length; i++) {
     var dog = getDogInfo(dogspace[i], 800);
     console.log("买狗-获取位置" + i + ((!!dog) ? "有" : "无") + "狗 等级:", dog && dog.level)

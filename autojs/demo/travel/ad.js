@@ -1,9 +1,12 @@
 
 /**检查广告是否结束*/
-var lookADTime = 0
+var lookADTime = 0;
+var checkTime = 0;
 
 function checkAdEND(flow) {
-  
+
+checkTime++;
+
  console.log("启动关闭声音")
   
  closeVolume();
@@ -13,7 +16,15 @@ function checkAdEND(flow) {
   var close = id("tt_video_ad_close_layout").findOne(5000)
   if (!close) {
     console.log("广告进行中")
-    clearTimeout(lookADTime)
+    
+    clearTimeout(lookADTime);
+
+    if(checkTime>20){
+      console.error("广告结束检测次数太多");
+      checkTime=0;
+      return;
+    }
+
     lookADTime = setTimeout(function() {
       checkAdEND(flow)
     }, 3000)
@@ -49,28 +60,26 @@ function lookAD(flow) {
   var btn = id("btn_see").findOne(1000)
   if (!btn) {
     console.error("没有找到观看视频的按钮");
-    flow(false);
     return;
   }
+
   console.log("进入广告")
   btn.click();
   sleep(5000)
 
-  checkAdEND(function(flag) {
-    if (flag) {
+  checkAdEND(function() {
+
       var btn = id("btn").findOne(1000);
       if (!btn) {
         console.error("观看之后确认收益按钮没找到");
-        flow(false);
         return;
       }
+
       console.log("点击确认收益按钮");
       btn.click()
       sleep(2000)
       flow(true)
-    } else {
-      flow(flag)
-    }
+
   });
 }
 

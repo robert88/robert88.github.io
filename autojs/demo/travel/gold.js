@@ -1,28 +1,46 @@
 //领取金币
-var topGlodtimer=0
+
+var nextTime,splitTime;
 
 function topGlod() {
-
+  var curTime = new Date();
+  if(curTime<nextTime){
+    console.log("等待topGlog的执行");
+    return;
+  }
+  nextTime = curTime+splitTime;
   var countdonw = id("countdown_view").findOne(1000)
 
   if (!countdonw){
-    console.log("点击领金币");
-    id("lyt_free_coin").findOne(1000).click();
-    sleep(1000)
-    console.log("确认领取金币")
-    id("btn").findOne(1000).click()
-    sleep(1000)
+    console.log("可以领金币了");
+
+    var freeIcon = id("lyt_free_coin").findOne(1000);
+
+    if(freeIcon){
+      console.log("点击领金币");
+      freeIcon.click();
+      sleep(1000)
+
+     var btn =  id("btn").findOne(1000)
+      if(btn){
+        console.log("确认领取金币")
+        btn.click();
+        sleep(1000)
+      }else{
+        console.info("没有找到获取金币的确认按钮")
+      }
+
+    }else{
+      console.info("没有找到获取金币的按钮")
+    }
+
   }else{
     console.log("还在计时")
   }
 
-  var nextTime = 600000;
-
-  clearTimeout(topGlodtimer)
-  //35分钟领取一次
- console.log("十分钟之后再来检查是否可以领取金币")
-  topGlodtimer = setTimeout(function() {
-    topGlod();
-  }, nextTime)
 }
-module.exports = topGlod
+module.exports = function(timeStack,time){
+  splitTime = time;
+  topGlod()
+  timeStack.push(topGlod);
+}
