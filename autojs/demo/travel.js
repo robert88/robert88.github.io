@@ -12,6 +12,9 @@ console.log("成功加载组件 offline")
 var launchApp = require("./travel/launch.js");
 console.log("成功加载组件 launch")
 
+var city = require("./travel/city.js");
+console.log("成功加载组件 city")
+
 var error = console.error;
 var app = "com.jiayouya.travel";
 var friendName = "rap";
@@ -72,14 +75,17 @@ function run(){
     console.info("-----launchApp -end --")
     
     offline(friendName,function(){console.log("endoffline")});
-    
-    
+
     gold();
     console.info("-----glod -end --")
     
+    city()
+    console.info("-----city -end --")
+
     merge();
     console.info("-----merge -end --")
-    
 
 }
+
+
 

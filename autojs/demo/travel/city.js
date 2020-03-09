@@ -34,6 +34,12 @@
    }else{
       console.log("没有找到城市轨迹礼物包")
    }
+   var backbtn = id("iv_back").findOne(1000);
+   if(backbtn){
+
+   }else{
+     console.error("城市轨迹不能返回")
+   }
 
   }else{
     console.log("没有找到城市轨迹按钮")
@@ -42,7 +48,4 @@
 
 
 
- module.exports = function(timeStack){
-  clickCity()
-  timeStack.push(clickCity)
- }
+ module.exports = clickCity

@@ -1,14 +1,7 @@
 //领取金币
 
-var nextTime,splitTime;
-
 function topGlod() {
-  var curTime = new Date();
-  if(curTime<nextTime){
-    console.log("等待topGlog的执行");
-    return;
-  }
-  nextTime = curTime+splitTime;
+
   var countdonw = id("countdown_view").findOne(1000)
 
   if (!countdonw){
@@ -39,8 +32,4 @@ function topGlod() {
   }
 
 }
-module.exports = function(timeStack,time){
-  splitTime = time;
-  topGlod()
-  timeStack.push(topGlod);
-}
+module.exports = topGlod
