@@ -57,7 +57,12 @@ VolumeUp()
 如果屏幕没有点亮，则唤醒设备。
 .keepScreenOn([timeout])
 timeout {number} 屏幕保持常亮的时间, 单位毫秒。如果不加此参数，则一直保持屏幕常亮。
+1、部分手机只能在autojs这个app上有效，
+2、用户可以手动关闭屏幕
+3、可以通过.cancelKeepingAwake()来取消常亮
+
 .cancelKeepingAwake()来取消屏幕常亮。
+
 .keepScreenDim([timeout])
 timeout {number} 屏幕保持常亮的时间, 单位毫秒。如果不加此参数，则一直保持屏幕常亮。，但是可以降低亮度来节省电量
 
