@@ -1,5 +1,13 @@
 console.show();
 
+var error = console.error;
+console.error = function(msg){
+  if(msg=="未知页面"){
+    
+  }
+  error.apply(console,arguments);
+}
+
 console.log("保持手机常亮")
 
 device.keepScreenOn();
