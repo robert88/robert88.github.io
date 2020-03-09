@@ -7,10 +7,20 @@ var homeMap ={"HWI-AL00":1}
 var s = 35 * rate
 var w = 210 * rate
 var h = 210 * rate
+var fristOne = id("tv").className("android.widget.TextView").text("旅行").findOne(5000);
 var hashome = homeMap[device.model]?120:0
 
 /**狗的位置信息*/
 function findDogSpace() {
+  if(!hashome){
+    if(!fristOne){
+      console.error("未知页面");
+    }else{
+      hashome = device.height - fristOne.bounds().bottom;
+    }
+  }else{
+     console.log("有home键");
+  }
   var alldogs = []
   var x0 = 65 * rate;
   var y0 = 740 * rate + (device.height - device.width * 1920 / 1080)+hashome
@@ -152,7 +162,7 @@ function buyDog(dogspace, flow) {
 var initflowTimer = 0
 
 function initflow() {
-
+  
   console.log("脚本开始运行")
 
   swiperDog();
