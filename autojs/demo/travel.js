@@ -51,9 +51,10 @@ function loop(){
             }
         }
     }catch(e){
+        e = e || {}
         runstack = [];
         currentHandler=null;
-        app.e.emit("systemError",e.message);
+        app.e.emit("systemError",e.message,e.stack);
     }
 
 
