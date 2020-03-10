@@ -7,13 +7,15 @@ function clickCity(){
      var list =  id("list").findOne(1000);
      if(list){
        var children2 = list.children();
-       if(children2){
+       if(children2&&children2.size()){
+         console.log("找到list",children2.size())
         children2.forEach(child=>{
           child.children().forEach(child2=>{
             if(child.className()=="android.widget.ImageView"){
               var img =child;
             }
             if(img){
+              console.log("找到子类图片")
               img.parent().click();
               sleep(1000);
               var close = id("iv_close").findOne(3000);
@@ -23,6 +25,8 @@ function clickCity(){
                 console.log("领取了城市轨迹礼物包")
                 close.click();
                 sleep(1000)
+              }else{
+                console.log("图片还没点亮")
               }
             }
           })
