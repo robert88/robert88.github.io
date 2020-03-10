@@ -48,6 +48,7 @@ function closeVolume(){
  maxCount++;
   if(maxCount<20){
     var currentVolume =  device.getMusicVolume();
+    console.log("声音",currentVolume,"启动","VolumeDown");
     VolumeDown();
     if(currentVolume>0){
        closeVolume()
@@ -64,7 +65,7 @@ function closeVolume(){
 
 /**观看广告*/
 function lookAD() {
-  
+
  //购买观看，离线观看按钮
   var btn = id("btn_see").findOne(1000)||id("btn_share").findOne(1000)
   if (!btn) {
