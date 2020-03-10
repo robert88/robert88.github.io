@@ -7,10 +7,6 @@ function checkAdEND(flow) {
 
 checkTime++;
 
- console.log("启动关闭声音")
-  
- closeVolume();
-  
   console.log("检查广告是否结束")
   //有钱花
   var close = id("tt_video_ad_close_layout").findOne(5000)
@@ -23,7 +19,7 @@ checkTime++;
     }
 
     //加入队列当中
-    app.g(checkAdEND,null,3000);
+    app.g2(checkAdEND,null,3000);
 
   } else {
       console.log("广告结束")
@@ -71,6 +67,9 @@ function lookAD() {
   if (!btn) {
     throw Error("没有找到观看视频的按钮");
   }
+  console.log("启动关闭声音")
+    
+  closeVolume();
 
   console.log("进入广告")
   btn.click();
