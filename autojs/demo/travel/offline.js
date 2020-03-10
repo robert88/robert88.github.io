@@ -11,15 +11,13 @@ function offlineBtn(sharename, flow) {
     //微信分享
     if (shareBtnText) {
       console.log("分享翻倍 点击翻倍按钮")
-      id("btn_share").findOne().click();
+      id("btn_share").findOne(1000).click();
       sleep(3000);
       wxshare(sharename);
 
     //广告翻倍
     } else if (doubleadd) {
       console.log("看广告翻倍，点击翻倍按钮")
-      id("btn_share").findOne().click();
-      sleep(3000);
       lookAd()
     } else {
       throw Error("未知界面")
