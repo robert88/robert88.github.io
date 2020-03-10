@@ -50,7 +50,7 @@ function getDogInfo(dog) {
 
 }
 findDogSpace().forEach(function(d,i){
-  var do = getDogInfo(d);
+  var dg = getDogInfo(d);
    
        console.log("移动",i,"d",d.level,"x",d.x,"y",d.y);
    swipe(d.x,d.y,d.x+(w+s)/2,d.y+(h+s)/2,1000)
