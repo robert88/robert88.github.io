@@ -1,18 +1,20 @@
 console.show()
 //更新对象
 var time = new Date().getTime();
-var ajaxcount = 0;
+//不要定义ajaxcount
+var ajaxcount1 = 0;
 
 
 /**ajax请求 */
 function r(name,localname) {
-  console.log("请求",name)
+
   localname = localname ||name
-  ajaxcount++;
+   console.log("请求",name,ajaxcount1)
+  ajaxcount1++;
   http.get("https://robert88.github.io//autojs/demo/" + name + ".js?ver=" + time, {},
    function(res, err) {
-    ajaxcount--;
-     console.log("请求end",name,ajaxcount)
+    ajaxcount1--;
+     console.log("请求end",name,ajaxcount1)
     c(name,localname,res, err);
   });
 }
@@ -21,7 +23,7 @@ function r(name,localname) {
 var backMessage = [];
 function c(name,localname,res, err){
   backMessage.push([name,localname,res, err]);
-  if (ajaxcount == 0) {
+  if (ajaxcount1 == 0) {
     backMessage.forEach(function(params) {
       w.apply(null,params);
     })
