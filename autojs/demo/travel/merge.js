@@ -36,6 +36,7 @@ var tryTime=0
         var close2 = id("tt_video_ad_close_layout").findOne(5000)
         var btn = id("btn").findOne(1000);
         var button2 = id("button2").findOne(1000);
+        var add = id("lyt_add").findOne(1000)
 
         if(close){
             console.log("发现未知关闭按钮,服务重新启动");
@@ -58,6 +59,9 @@ var tryTime=0
             console.log("发现未知系统取消按钮,服务重新启动");
             button2.click();
             run();
+        }else if(add) {
+          console.log("已回到主页,服务重新启动");
+          run();
         }else{
           console.log("没有找到任何按钮,3s之后再检测");
           app.g(handlerError,null,3000)
