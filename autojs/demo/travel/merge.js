@@ -37,6 +37,7 @@ var tryTime=0
         var btn = id("btn").findOne(1000);
         var button2 = id("button2").findOne(1000);
         var add = id("lyt_add").findOne(1000)
+        var back = id("iv_back").findOne(1000)
 
         if(close){
             console.log("发现未知关闭按钮,服务重新启动");
@@ -45,7 +46,7 @@ var tryTime=0
         }else if(close2){
             console.log("发现未知广告关闭按钮,服务重新启动");
             close2.click();
-            var btn = id("btn").findOne(1000);
+             btn = id("btn").findOne(1000);
             if(btn){
               console.log("点击确认按钮");
               btn.click();
@@ -61,6 +62,10 @@ var tryTime=0
             run();
         }else if(add) {
           console.log("已回到主页,服务重新启动");
+          run();
+        }else if(back){
+          console.log("找到返回按钮,返回并,服务重新启动");
+          btn.click();
           run();
         }else{
           console.log("没有找到任何按钮,3s之后再检测");
