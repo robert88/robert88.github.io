@@ -40,7 +40,14 @@ if (workBtn) {
         //6
         ok.click();
         sleep(1000)
-
+        
+          console.log("滑倒底部")
+          swipe(248, 1626, 304, 1005, 1000)
+          swipe(248, 1626, 304, 1005, 1000)
+          swipe(248, 1626, 304, 1005, 1000)
+          swipe(248, 1626, 304, 1005, 1000)
+          swipe(248, 1626, 304, 1005, 1000)
+          swipe(248, 1626, 304, 1005, 1000)
         //7
         var submit = className("android.widget.Button").text("Submit").findOne(2000)
         if (submit) {
