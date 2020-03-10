@@ -1,48 +1,28 @@
 console.show()
 //更新对象
 var time = new Date().getTime();
-//不要定义ajaxcount
-var ajaxcount1 = 0;
-
 
 /**ajax请求 */
 function r(name,localname) {
-
-  localname = localname ||name
-   console.log("请求",name,ajaxcount1)
-  ajaxcount1++;
-  http.get("https://robert88.github.io//autojs/demo/" + name + ".js?ver=" + time, {},
-   function(res, err) {
-    ajaxcount1--;
-     console.log("请求end",name,ajaxcount1)
-    c(name,localname,res, err);
-  });
-}
-
-/**回调队列 */
-var backMessage = [];
-function c(name,localname,res, err){
-  backMessage.push([name,localname,res, err]);
-  if (ajaxcount1 == 0) {
-    backMessage.forEach(function(params) {
-      w.apply(null,params);
-    })
-
+  console.log("请求",name)
+  localname = localname ||name;
+  try{
+    var res = http.get("https://robert88.github.io//autojs/demo/" + name + ".js?ver=" + time, {});
+    w(name,localname,res)
+  }catch(e){
+    t("更新失败"+ name + ".js");
   }
 
 }
-/* 消息队列*/
 
+/* 消息队列*/
 function t(msg) {
   toast(msg)
   sleep(1000)
 }
 /*写文件*/
-function w(name,localname,res, err){
-  if (err) {
-    t("更新失败"+ name + ".js")
-    return;
-  }
+function w(name,localname,res){
+
   var content = res.body.string();
 
   if (files.exists("./" + localname + ".js")) {
