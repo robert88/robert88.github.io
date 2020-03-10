@@ -217,7 +217,7 @@ function checkneedlookAd(flow) {
 }
 
 /**买狗*/
-function buyDog(dogspace, flow) {
+function buyDog(dogspace) {
   if(!dogspace){
     return;
   }
@@ -238,13 +238,11 @@ function buyDog(dogspace, flow) {
 
     }
   }
-  flow(true)
+
 }
 
 
 /**入口*/
-
-var initflowTimer = 0
 
 function initflow() {
   
