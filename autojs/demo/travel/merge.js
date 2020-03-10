@@ -28,7 +28,7 @@ var tryTime=0
     console.log("唤醒屏幕")
     device.wakeUpIfNeeded();
     //检查app是否还在
-    if (currentPackage() != app) {
+    if (currentPackage() != appName) {
         console.log("当前不在app内，服务重新启动");
         run();
     }else{
