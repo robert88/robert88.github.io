@@ -10,7 +10,9 @@ function clickCity(){
        if(children2){
         children2.forEach(child=>{
           child.children().forEach(child2=>{
-            var img = child.className("android.widget.ImageView").findOne(1000);
+            if(child.className()=="android.widget.ImageView"){
+              var img =child;
+            }
             if(img){
               img.parent().click();
               sleep(1000);
