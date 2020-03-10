@@ -1,4 +1,8 @@
 console.show()
+
+console.log("删除微信分享名称")
+storages.remove("wx_shareName");
+
 //更新对象
 var time = new Date().getTime();
 
@@ -20,6 +24,7 @@ function t(msg) {
   toast(msg)
   sleep(1000)
 }
+
 /*写文件*/
 function w(name,localname,res){
 
@@ -48,4 +53,4 @@ r("travel/launch")
 r("travel/gold")
 r("travel/offline")
 r("travel/city")
-//r("test/merge")
+r("test/swipe")
