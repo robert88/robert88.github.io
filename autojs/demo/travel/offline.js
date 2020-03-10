@@ -45,7 +45,10 @@ function wxshare(sharename) {
   if(!s.get("name")){
     sharename = rawInput("输入需要查找的朋友的名称,可以模糊匹配","rap");
     s.put("name",sharename)
+    sleep(1000)
   }
+  
+  sharename = s.get("name")
 
 
   //2跳到微信的分享页面
@@ -59,16 +62,17 @@ function wxshare(sharename) {
 
   console.log("找到微信朋友",friend.text());
   friend.parent().click();
-  sleep(1000);
+  sleep(2000);
 
   //3输入分享文字确认
   console.log("输入分享的文字")
   var iptText = id("b4h").findOne(3000)
   if (iptText) {
-    throw Error("没有找到分享的输入文字界面")
+    iptText.setText("我在玩一个可以挣点小钱的工具，分享给你有空可以玩一下");
+    sleep(1000);
+  }else{
+    console.log("没有找到输入框")
   }
-  iptText.setText("我在玩一个可以挣点小钱的工具，分享给你有空可以玩一下");
-  sleep(1000);
 
   //4分享确认
   console.log("点击分享")
