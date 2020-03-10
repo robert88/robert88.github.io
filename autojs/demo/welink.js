@@ -5,7 +5,7 @@ console.show()
 console.log("启动app")
 launchApp("com.huawei.works")
 
-var workBtn = id("tab_icon").className("android.widget.RedioButton").text("业务").findOne(2000)
+var workBtn = id("tab_icon").text("业务").findOne(2000)
 if (workBtn) {
   //2
   console.log("点击业务按钮")
