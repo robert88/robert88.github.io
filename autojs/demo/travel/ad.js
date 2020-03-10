@@ -49,13 +49,15 @@ function closeVolume(){
   if(maxCount<20){
     var currentVolume =  device.getMusicVolume();
     VolumeDown();
-    if(currentVolume){
+    if(currentVolume>0){
        closeVolume()
     }else{
       console.log("声音已关闭");
+      maxCount=0
     }
   }else{
       console.log("声音关闭不了");
+      maxCount=0
   }
   maxCount--
 }
