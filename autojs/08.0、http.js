@@ -3,11 +3,12 @@
 http.get(url[, options, callback])
 url {string} 请求的URL地址，需要以"http://"或"https://"开头。如果url没有以"http://"开头，则默认为"http://"。
 
+// 同步执行
 var r = http.get("www.baidu.com");
 log("code = " + r.statusCode);
 log("html = " + r.body.string());
 
-可以
+// 可以异步
 console.show();
 http.get("www.baidu.com", {}, function(res, err){
     if(err){
@@ -19,7 +20,7 @@ http.get("www.baidu.com", {}, function(res, err){
 });
 
 //bug 
-//不要去定义ajaxcount，目前发现这个变量在系统中会不确性
+// 异步会执行的变量错误
 
 http.post(url, data[, options, callback])
 //具体含义取决于options.contentType的值。默认为"application/x-www-form-urlencoded"(表单提交), 这种方式是JQuery的ajax函数的默认方式。
