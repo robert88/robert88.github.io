@@ -24,7 +24,7 @@ if (workBtn) {
     var workPlace = className("android.view.View").text("WorkPlace").findOne(2000);
     if (workPlace) {
       console.log("点击下拉选择")
-      click(100, workPlace.bounds().buttom - 10);
+      click(100, workPlace.bounds().bottom - 10);
       console.log("选择非研究")
       sleep(1000)
 
