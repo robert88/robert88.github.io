@@ -17,9 +17,9 @@ var friendName = "rap";
 var tryTime=0
 
 
- function handlerError(msg){
+ function handlerError(msg,stack){
 
-    console.error(msg);
+    console.error(msg,stack);
     tryTime++;
     if(tryTime>15){
         error.apply("已经尝试重启15次");
@@ -83,7 +83,7 @@ var homeMap ={"HWI-AL00":1}
 var s = 35 * rate
 var w = 210 * rate
 var h = 210 * rate
-var hashome = homeMap[device.model]?134:0
+var hashome = homeMap[device.model]?120:0
 
 /**狗的位置信息*/
 function findDogSpace() {
@@ -93,7 +93,7 @@ function findDogSpace() {
       throw Error("未知页面");
       return;
     }else{
-      hashome =  134*rate - (device.height - fristOne.bounds().bottom);
+      hashome = device.height - fristOne.bounds().bottom;
     }
   }else{
      console.log("有home键");
