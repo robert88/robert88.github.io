@@ -7,7 +7,7 @@ var homeMap ={"HWI-AL00":1}
 var s = 35 * rate
 var w = 210 * rate
 var h = 210 * rate
-var hashome = homeMap[device.model]?120:0
+var hashome = homeMap[device.model]?135:0
 
 /**狗的位置信息*/
 function findDogSpace() {
@@ -17,7 +17,7 @@ function findDogSpace() {
       throw Error("未知页面");
       return;
     }else{
-      hashome = device.height - fristOne.bounds().bottom;
+      hashome = 135 - (device.height - fristOne.bounds().bottom)*rate;
     }
   }else{
      console.log("有home键");
