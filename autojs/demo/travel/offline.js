@@ -1,4 +1,3 @@
-
 var lookAd = require("./ad.js");
 
 //离线按钮
@@ -38,7 +37,6 @@ function wxshare(sharename) {
   var ivwx = id("iv_wx").findOne(3000)
   if (!ivwx) {
     throw Error("分享找不到生成海报按钮");
-    return;
   }
   ivwx.click();
   sleep(9000);
@@ -58,7 +56,6 @@ function wxshare(sharename) {
   var iptText = id("b4h").findOne(3000)
   if (iptText) {
     throw Error("没有找到分享的输入文字界面")
-    return;
   }
   iptText.setText("我在玩一个可以挣点小钱的工具，分享给你有空可以玩一下");
   sleep(1000);
@@ -72,8 +69,7 @@ function wxshare(sharename) {
   console.log("点击返回旅行世界按钮")
   var back = className("android.widget.Button").text("返回旅行世界").findOne(5000)
   if (!back) {
-    console.error("分享之后没有找到分享的返回键")
-    return
+    throw Error("分享之后没有找到分享的返回键")
   }
   back.click()
   sleep(5000);
