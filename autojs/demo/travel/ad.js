@@ -65,7 +65,8 @@ function closeVolume(){
 /**观看广告*/
 function lookAD() {
   
-  var btn = id("btn_see").findOne(1000)
+ //购买观看，离线观看按钮
+  var btn = id("btn_see").findOne(1000)||id("btn_share").findOne(1000)
   if (!btn) {
     throw Error("没有找到观看视频的按钮");
   }
