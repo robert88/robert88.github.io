@@ -19,7 +19,10 @@ if (workBtn) {
     console.log("点击进入健康打卡")
     tv_app_name.parent().click();
     sleep(5000);
-
+    
+   console.log("滑出workplace")
+   swipe(248, 1626, 304, 1305, 1000)
+    
     //4
     var workPlace = className("android.view.View").text("WorkPlace").findOne(2000);
     if (workPlace) {
