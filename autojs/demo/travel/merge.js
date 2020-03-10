@@ -248,7 +248,8 @@ function initflow() {
   app.g(initflow,null,0)
  }else{
   app.g(gold,null,60000)
-  app.g(city,null,0)
+  app.g(city,null,0);
+  app.e.emit("gameover")
  }
 
 
@@ -256,10 +257,6 @@ function initflow() {
 
 
 function run(){
-
-  console.log("保持手机常亮")
-
-  device.keepScreenOn();
 
   app.g(launchApp,appName,0)
   
