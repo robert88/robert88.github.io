@@ -40,14 +40,14 @@ function loop(){
         return;
     }
     try{
-        if(runstack.length && !currentHandler || currentHandler.status=="finish"){
+        if(runstack.length && !currentHandler){
             currentHandler = runstack.shift();
         }
         if(currentHandler){
             var time= new Date().getTime();
             if(time>currentHandler.timeout){
                 currentHandler.handler.apply(currentHandler.context,currentHandler.args);
-                currentHandler.status="finish";
+                currentHandler = null;
             }
         }
     }catch(e){
