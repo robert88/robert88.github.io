@@ -1,31 +1,60 @@
 console.show();
 console.log("设备",device.width,device.height);
 
-//全部dog
-var homeMap ={"HWI-AL00":1}
+//坐标参数
 var rate = device.width / 1080
-var hashome = homeMap[device.model]?120:0
+var homeMap ={"HWI-AL00":1}
 var s = 35 * rate
 var w = 210 * rate
 var h = 210 * rate
-   console.log("宽高", s,w,h,"home高度",hashome);
+var hashome = homeMap[device.model]?120:0
 
+/**狗的位置信息*/
 function findDogSpace() {
-    var alldogs = []
-    var x0 = 65 * rate;
-    var y0 = 740 * rate+(device.height-device.width*1920/1080)+hashome
-    console.log("开始坐标", x0,y0);
-    for (var j = 0; j < 3; j++) {
-        for (var i = 0; i < 4; i++) {
-            alldogs.push({ x: w / 2 + x0 + (s + w) * i, y: h / 2 + y0 + (s + h) * j })
-        }
+  var fristOne = id("tv").className("android.widget.TextView").text("旅行").findOne(3000);
+  if(!hashome){
+    if(!fristOne){
+      throw Error("未知页面");
+      return;
+    }else{
+      hashome = device.height - fristOne.bounds().bottom;
     }
-    return alldogs
+  }else{
+     console.log("有home键");
+  }
+  var alldogs = []
+  var x0 = 65 * rate;
+  var y0 = 740 * rate + (device.height - device.width * 1920 / 1080)+hashome
+
+  for (var j = 0; j < 3; j++) {
+    for (var i = 0; i < 4; i++) {
+      alldogs.push({ x: w / 2 + x0 + (s + w) * i, y: h / 2 + y0 + (s + h) * j })
+    }
+  }
+  return alldogs
 }
 
+/**位置对应狗的信息*/
+function getDogInfo(dog) {
+  var left = dog.x;
+  var top = dog.y;
+  var right = dog.x + (s + w) / 2
+  var buttom = dog.y + (s + h) / 2;
+  var hasDog = boundsInside(left, top, right, buttom).find()
+  console.log(hasDog.size())
+  if (hasDog.size() == 1) {
+    return { level: hasDog.get(0).text(), x: dog.x, y: dog.y }
+  } else {
+    return null
+  }
 
+}
 findDogSpace().forEach(function(d,i){
-       console.log("移动",i);
+  var do = getDogInfo(d);
+   
+       console.log("移动",i,"d",d.level,"x",d.x,"y",d.y);
    swipe(d.x,d.y,d.x+(w+s)/2,d.y+(h+s)/2,1000)
    sleep(1000)
 })
+
+
