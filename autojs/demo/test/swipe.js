@@ -17,7 +17,7 @@ function findDogSpace() {
       throw Error("未知页面");
       return;
     }else{
-      hashome = 135 - (device.height - fristOne.bounds().bottom)*rate;
+      hashome = 135*rate - (device.height - fristOne.bounds().bottom);
     }
   }else{
      console.log("有home键");
