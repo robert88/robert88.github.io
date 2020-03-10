@@ -44,6 +44,11 @@ var tryTime=0
         }else if(close2){
             console.log("发现未知广告关闭按钮,服务重新启动");
             close2.click();
+            var btn = id("btn").findOne(1000);
+            if(btn){
+              console.log("点击确认按钮");
+              btn.click();
+            }
             run();
         }else if(btn){
             console.log("发现未知确认按钮,服务重新启动");
