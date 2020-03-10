@@ -1,6 +1,6 @@
 
 /**检查广告是否结束*/
-var lookADTime = 0;
+
 var checkTime = 0;
 
 function checkAdEND(flow) {
@@ -17,22 +17,28 @@ checkTime++;
   if (!close) {
     console.log("广告进行中")
     
-    clearTimeout(lookADTime);
-
     if(checkTime>20){
-      console.error("广告结束检测次数太多");
       checkTime=0;
-      return;
+      throw Error("广告结束检测次数太多");
     }
 
-    lookADTime = setTimeout(function() {
-      checkAdEND(flow)
-    }, 3000)
+    //加入队列当中
+    app.g(checkAdEND,null,3000);
+
   } else {
       console.log("广告结束")
       close.click()
+      sleep(2000)
+
+      var btn = id("btn").findOne(1000);
+      if (!btn) {
+        throw Error("观看之后确认收益按钮没找到");
+      }
+
+      console.log("点击确认收益按钮");
+      btn.click()
       sleep(1000)
-      flow(true);
+
   }
 }
 
@@ -55,32 +61,18 @@ function closeVolume(){
 }
 
 /**观看广告*/
-function lookAD(flow) {
+function lookAD() {
   
   var btn = id("btn_see").findOne(1000)
   if (!btn) {
-    console.error("没有找到观看视频的按钮");
-    return;
+    throw Error("没有找到观看视频的按钮");
   }
 
   console.log("进入广告")
   btn.click();
   sleep(5000)
 
-  checkAdEND(function() {
-
-      var btn = id("btn").findOne(1000);
-      if (!btn) {
-        console.error("观看之后确认收益按钮没找到");
-        return;
-      }
-
-      console.log("点击确认收益按钮");
-      btn.click()
-      sleep(2000)
-      flow(true)
-
-  });
+  checkAdEND();
 }
 
 module.exports = lookAD;
