@@ -18,7 +18,7 @@ var gameover = false;
 app.e = events.emitter();
 
 //添加到队列中
-app.g = function(handler,args,timeout,context){
+app.g = function(handler,p,timeout,context){
     var time = new Date();
     args = toArray(p)
     timeout = time.getTime()+(timeout||0);
