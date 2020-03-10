@@ -18,6 +18,9 @@ http.get("www.baidu.com", {}, function(res, err){
     log("html = " + res.body.string());
 });
 
+//bug 
+//不要去定义ajaxcount，目前发现这个变量在系统中会不确性
+
 http.post(url, data[, options, callback])
 //具体含义取决于options.contentType的值。默认为"application/x-www-form-urlencoded"(表单提交), 这种方式是JQuery的ajax函数的默认方式。
 
