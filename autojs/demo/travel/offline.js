@@ -40,13 +40,17 @@ function wxshare(sharename) {
   ivwx.click();
   sleep(9000);
 
+  sharename = rawInput("输入需要查找的朋友的名称,可以模糊匹配","rap");
+
   //2跳到微信的分享页面
   console.log("跳到微信的分享页面,查找朋友", sharename)
-  var friend = className("android.widget.TextView").text(sharename).findOne(3000)
+  var friend = className("android.widget.TextView").textContains(sharename).findOne(3000)
+
   if (!friend) {
     throw Error("没有找到需要分享的朋友")
   }
-  console.log("找到微信朋友");
+
+  console.log("找到微信朋友",friend.text());
   friend.parent().click();
   sleep(1000);
 
