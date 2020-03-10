@@ -1,5 +1,5 @@
 function clickCity(){
-    var citybackground = id("layout_background").findOne(1000)
+    var citybackground = id("progress_bar").findOne(1000)
     if(citybackground){
       console.log("点击城市轨迹按钮")
       citybackground.click()
