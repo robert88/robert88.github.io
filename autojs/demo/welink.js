@@ -19,6 +19,11 @@ if (workBtn) {
     console.log("点击进入健康打卡")
     tv_app_name.parent().click();
     sleep(5000);
+
+    if(checkWorkEnd()){
+      console.log("当天已打卡")
+      return
+    }
     
    console.log("滑出workplace")
    swipe(248, 1626, 304, 1305, 1000)
@@ -49,7 +54,7 @@ if (workBtn) {
           swipe(248, 1626, 304, 1005, 1000)
           swipe(248, 1626, 304, 1005, 1000)
         //7
-        var submit = className("android.widget.Button").text("Submit").findOne(2000)
+        var submit = className("android.widget.Button").findOne(2000)
         if (submit) {
           submit.click()
         } else {
@@ -71,13 +76,21 @@ if (workBtn) {
 
 function checkWorkEnd() {
   var history = className("android.view.View").text("打卡记录").findOne(3000);
+
   if (history) {
     history.click();
-    sleep(3000);
+    sleep(10000)
     var curD = new Date()
     var cur = className("android.view.View").textContains(curD.getFullYear() + "-" + (curD.getMonth() + 1) + "-" + curD.getDate()).findOne(3000);
     if (cur) {
       console.log("")
+    }
+    var back = id("tv_left_button").findOne()
+    if(back){
+      back()
+      sleep(3000)
+    }else{
+        console.error("没有找到返回按钮");
     }
   } else {
     console.error("未知界面");
