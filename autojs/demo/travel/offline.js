@@ -3,11 +3,9 @@ var lookAd = require("./ad.js");
 //离线按钮
 function offlineBtn(sharename, flow) {
   var offlineObj = className("android.widget.TextView").text("离线收益").findOne(1000);
-  var shareBtnText = className("android.widget.TextView").text("分享翻倍").findOne(1000)
-  var doubleadd = className("android.widget.TextView").text("看广告翻倍").findOne(1000)
   if (offlineObj) {
     console.log("离线收益提示")
-
+    var shareBtnText = className("android.widget.TextView").text("分享翻倍").findOne(1000)
     //微信分享
     if (shareBtnText) {
       console.log("分享翻倍 点击翻倍按钮")
@@ -15,12 +13,15 @@ function offlineBtn(sharename, flow) {
       sleep(3000);
       wxshare(sharename);
 
-    //广告翻倍
-    } else if (doubleadd) {
-      console.log("看广告翻倍，点击翻倍按钮")
-      lookAd()
+      //广告翻倍
     } else {
-      throw Error("未知界面")
+      var doubleadd = className("android.widget.TextView").text("看广告翻倍").findOne(1000)
+      if (doubleadd) {
+        console.log("看广告翻倍，点击翻倍按钮")
+        lookAd()
+      } else {
+        throw Error("未知界面")
+      }
     }
   } else {
     console.log("没有发现离线收益提示")
@@ -73,8 +74,8 @@ function wxshare(sharename) {
   sleep(5000);
 
   //6确认收益
-  var btn = id("btn").findOne(1000)||id("iv_close").findOne(1000);;
-  if(btn){
+  var btn = id("btn").findOne(1000) || id("iv_close").findOne(1000);;
+  if (btn) {
     console.log("确认收益")
     btn.close();
   }
