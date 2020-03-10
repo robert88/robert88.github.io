@@ -20,7 +20,7 @@ var tryTime=0
  function handlerError(msg){
 
     console.error(msg);
-
+    tryTime++;
     if(tryTime>15){
         error.apply("已经尝试重启15次");
         return;
@@ -58,6 +58,9 @@ var tryTime=0
             console.log("发现未知系统取消按钮,服务重新启动");
             button2.click();
             run();
+        }else{
+          console.log("没有找到任何按钮,3s之后再检测");
+          app.g(handlerError,null,3000)
         }
     }
   
