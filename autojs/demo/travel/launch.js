@@ -7,7 +7,7 @@ function launchApp(name) {
   app.launch(name);
   sleep(3000);
   if (currentPackage() != name) {
-    console.error("服务启动慢或者未启动")
+    throw Error("服务启动慢或者未启动")
   } else {
     console.log("启动完毕")
     var skipbtn = id("tt_splash_skip_btn").findOne(2000);

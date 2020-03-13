@@ -122,10 +122,24 @@ var b = desc("打开侧拉菜单").findOne().bounds();
 click(b.centerX(), b.centerY());
 
 boundsInParent()返回控件在父控件中的范围
+boundsInSCreen()
 drawingOrder()返回控件在父控件中的绘制次序
 
+//属性
+packageName()
+className()
 id()
 text()
+checked()
+focusable()
+checkable()
+clickable()
+enable()
+selected()
+longClickable()
+password()
+scrollable()
+
 
 基于当前控件来查找子控件，孙控件，曾孙控件
 findByText(str)
