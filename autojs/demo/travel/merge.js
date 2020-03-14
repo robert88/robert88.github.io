@@ -38,6 +38,7 @@ var tryTime=0
         var button2 = id("button2").findOne(1000);
         var add = id("lyt_add").findOne(1000)
         var back = id("iv_back").findOne(1000)
+        var img_close = id("img_close").findOne(1000)
 
         if(close){
             console.log("发现未知关闭按钮,服务重新启动");
@@ -66,6 +67,10 @@ var tryTime=0
         }else if(back){
           console.log("找到返回按钮,返回并,服务重新启动");
           btn.click();
+          run();
+        }else if(img_close){
+          console.log("未知提示信息");
+          img_close.click();
           run();
         }else{
           console.log("没有找到任何按钮,3s之后再检测");
