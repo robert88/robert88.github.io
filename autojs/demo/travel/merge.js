@@ -168,7 +168,7 @@ function mergeDog(dogs, dog) {
 }
 
 /**校验是否需要看广告*/
-function checkneedlookAd(flow) {
+function checkneedlookAd() {
   var coin = className("android.widget.TextView").text("金币不足").findOne(1000)
   console.log("是否金币不足", !!coin)
   if (coin) {
@@ -183,13 +183,13 @@ function checkneedlookAd(flow) {
         num = 0
       }
     } else {
-      num = 0;
+      throw Error("没有找到观看次数")
     }
     console.log("可以观看视频的次数", num)
     if (num) {
       //异步的
-      lookAd(flow);
-      return;
+      lookAd();
+      return num;
     } else {
       console.log("视频次数已看完", num)
       var closeb = id("iv_close").findOne(1000);
@@ -206,20 +206,19 @@ function checkneedlookAd(flow) {
     var btn = id("btn").findOne(1000);
     if (!btn) {
       throw Error("未知界面")
-      return;
     } else {
       btn.click();
       sleep(800)
-      flow(true);
     }
 
   }
+  return 15
 }
 
 /**买狗*/
 function buyDog(dogspace) {
   if(!dogspace){
-    return;
+    return 15;
   }
 
   for (var i = 0; i < dogspace.length; i++) {
@@ -233,12 +232,12 @@ function buyDog(dogspace) {
         sleep(2000);
       } else {
         console.log("需要观看视频")
-        return checkneedlookAd(flow)
+        return checkneedlookAd()
       }
 
     }
   }
-
+  return 15
 }
 
 
