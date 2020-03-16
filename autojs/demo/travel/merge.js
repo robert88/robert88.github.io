@@ -199,6 +199,7 @@ function checkneedlookAd() {
       if (closeb) {
         closeb.click()
       }
+      return 0;
     }
   } else {
     //升级界面，等等
