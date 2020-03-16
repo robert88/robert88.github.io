@@ -46,10 +46,14 @@ function w(name,localname,res){
   t("更新成功" + "./" + name + ".js")
 }
 
+r("lib/launch")
+r("lib/toArray")
+r("lib/work")
+
+r("welink")
 r("travel")
 r("travel/merge")
 r("travel/ad")
-r("travel/launch")
 r("travel/gold")
 r("travel/offline")
 r("travel/city")
