@@ -13,8 +13,9 @@ function clickCity() {
 
   var textImageView = className("android.widget.TextView").text("领取").find();
 
-  if (!textImageView || textImageView.size()) {
-    console.log("没有找到领取按钮")
+  if (!textImageView || !textImageView.size()) {
+    console.log("没有找到领取按钮");
+     back()
     return;
   }
 
@@ -37,6 +38,12 @@ function clickCity() {
 
   })
 
+ back();
+
+  console.info("-----city -end --")
+}
+
+function back(){
   console.log("返回主页")
   var backbtn = id("iv_back").findOne(1000);
   if (!backbtn) {
@@ -44,10 +51,7 @@ function clickCity() {
   }
   backbtn.click();
   sleep(1000)
-
-  console.info("-----city -end --")
 }
-
 
 
 module.exports = clickCity
