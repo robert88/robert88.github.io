@@ -24,7 +24,8 @@ function clickCity() {
   textImageView.forEach(child2 => {
 
     console.log("点击领取")
-    child2.parent().click();
+    var r =  child2.bounds()
+    click((r.left+r.right)/2,(r.top+r.bottom)/2);
     sleep(1000);
 
     var close = id("iv_close").findOne(3000) || id("btn").findOne(1000);
