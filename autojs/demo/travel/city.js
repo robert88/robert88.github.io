@@ -15,17 +15,21 @@ function clickCity() {
 
   if (!textImageView || !textImageView.size()) {
     console.log("没有找到领取按钮");
-     back()
+    back()
     return;
   }
+  var len = textImageView.size();
+  console.log("找到领取list", len);
 
-  console.log("找到领取list", textImageView.size());
+  var r = textImageView.get(0).bounds()
 
-  textImageView.forEach(child2 => {
 
+  var x0 = (r.left + r.right) / 2;
+  var y0 = (r.top + r.bottom) / 2;
+  var
+  for (var i = 0; i < len; i++) {
     console.log("点击领取")
-    var r =  child2.bounds()
-    click((r.left+r.right)/2,(r.top+r.bottom)/2);
+    click(x0, y0);
     sleep(1000);
 
     var close = id("iv_close").findOne(3000) || id("btn").findOne(1000);
@@ -36,15 +40,15 @@ function clickCity() {
     console.log("确认领取")
     close.click();
     sleep(1000)
+  }
 
-  })
 
- back();
+  back();
 
   console.info("-----city -end --")
 }
 
-function back(){
+function back() {
   console.log("返回主页")
   var backbtn = id("iv_back").findOne(1000);
   if (!backbtn) {
