@@ -26,7 +26,7 @@ function clickCity() {
 
   var x0 = (r.left + r.right) / 2;
   var y0 = (r.top + r.bottom) / 2;
-  var
+  //var
   for (var i = 0; i < len; i++) {
     console.log("点击领取")
     click(x0, y0);
