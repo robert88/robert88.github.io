@@ -6,7 +6,7 @@ console.log("成功加载组件 glod")
 var offline = require("./offline.js");
 console.log("成功加载组件 offline")
 
-var launchApp = require("./lib/launch.js");
+var launchApp = require("../lib/launch.js");
 console.log("成功加载组件 launch")
 
 var city = require("./city.js");
