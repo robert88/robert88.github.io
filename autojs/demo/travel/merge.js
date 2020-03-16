@@ -14,18 +14,12 @@ console.log("成功加载组件 city")
 
 var appName = "com.jiayouya.travel";
 var friendName = "rap";
-var tryTime=0
 
 
  function handlerError(msg,stack){
 
-    console.error(msg,stack);
-    tryTime++;
-    if(tryTime>15){
-        error.apply("已经尝试重启15次");
-        return;
-    }
-    console.log("唤醒屏幕")
+    console.error(msg,stack,"唤醒屏幕");
+  
     device.wakeUpIfNeeded();
     //检查app是否还在
     if (currentPackage() != appName) {
