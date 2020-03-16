@@ -60,7 +60,7 @@ var friendName = "rap";
           run();
         }else if(back){
           console.log("找到返回按钮,返回并,服务重新启动");
-          btn.click();
+          back.click();
           run();
         }else if(img_close){
           console.log("未知提示信息");
