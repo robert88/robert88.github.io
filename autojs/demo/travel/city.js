@@ -6,7 +6,8 @@ function clickCity() {
     console.log("没有找到城市轨迹按钮")
     return;
   }
-
+ sleep(3000);
+  
   console.log("点击城市轨迹按钮")
   citybackground.click()
   sleep(1000);
