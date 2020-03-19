@@ -96,9 +96,9 @@ app.g(findTvApp,null,0,function(){
 },"findTvApp-导向打卡页面")
 
 var hanlder = app.g(checkSummit,null,0,function(){
-  return className("android.view.View").text("默认展示最近20次打卡记录").findOne(2000)
+  return className("android.view.View").text("打卡记录").findOne(2000);
 },"checkSummit-是否打卡")
 
 app.g(inputAndsubmit,null,0,function(){
-  return hanlder.result=="not" && className("android.view.View").text("打卡记录").findOne(3000);
+  return hanlder.result=="not" && className("android.view.View").text("打卡记录").findOne(2000);
 },"inputAndsubmit-打卡")
