@@ -1,17 +1,17 @@
 //welink自动打卡
+require("./lib/work.js")
+
 console.show()
 
-requrie("./lib/work.js")
+var launchApp =  require("./lib/launch.js")
 
-var launchApp =  requrie("./lib/launch.js")
-
-function findWorkBtn(){
-  console.log("点击业务按钮")
+function findWorkBtn(args,workBtn){
+  console.log("点击进入业务页面")
   workBtn.click();
   sleep(1000);
 }
 
-function findTvApp(){
+function findTvApp(args,tv_app_name){
     console.log("点击进入健康打卡")
     tv_app_name.parent().click();
     sleep(5000);
@@ -24,9 +24,10 @@ function checkSummit(){
     console.log("今日已打卡");
     app.e.emit("gameKill");
   }else{
+    console.log("今日未打卡");
     var back = id("tv_left_button").findOne()
     if(back){
-      back()
+      back.click()
       sleep(3000)
     }else{
         throw Error("没有找到返回按钮");
@@ -72,7 +73,9 @@ function inputAndsubmit(){
 
         var submit = className("android.widget.Button").findOne(2000)
         if (submit) {
-          submit.click()
+          console.log("点击提交打卡")
+          submit.click();
+          app.e.emit("welinkKill");
         } else {
           console.log("没有找到提交按钮")
         }
@@ -81,20 +84,20 @@ function inputAndsubmit(){
 
 app.g(launchApp,"com.huawei.works",0,function(){
   return !currentPackage() == "com.huawei.works"
-},"launchApp")
+},"launchApp-启动welink")
 
 app.g(findWorkBtn,null,0,function(){
   return id("tab_icon").text("业务").findOne(2000);
-},"findWorkBtn")
+},"findWorkBtn-导向业务页面")
 
 app.g(findTvApp,null,0,function(){
   return id("tv_app_name").text("健康打卡轻应用").findOne(2000);
-},"findTvApp")
+},"findTvApp-导向打卡页面")
 
 app.g(checkSummit,null,0,function(){
   return className("android.view.View").text("默认展示最近20次打卡记录").findOne(2000)
-},"checkSummit")
+},"checkSummit-是否打卡")
 
 app.g(inputAndsubmit,null,0,function(){
   return className("android.view.View").text("打卡记录").findOne(3000);
-},"inputAndsubmit")
+},"inputAndsubmit-打卡")
