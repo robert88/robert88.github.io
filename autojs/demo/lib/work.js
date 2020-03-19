@@ -65,6 +65,7 @@ app.g = function(handler, args, timeout, condition, name) {
   var handlerObj = app.createG(handler, args, timeout, condition, name);
   g_handler.push(handlerObj);
   console.log("<<=", name);
+  return handlerObj;
 }
 
 //添加到队列中
