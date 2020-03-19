@@ -64,7 +64,7 @@ app.e.on("gameKill", function(msg) {
 app.g = function(handler, args, timeout, condition, name) {
   var handlerObj = app.createG(handler, args, timeout, condition, name);
   g_handler.push(handlerObj);
-  console.log("添加任务<<=", name);
+  console.log("<<=", name);
 }
 
 //添加到队列中
@@ -93,7 +93,7 @@ function releaseStack(s) {
       s.splice(i, 1);
       running = h;
       running.conditionResult = condition;
-      console.info("执行任务=>>", running.name);
+      console.info("=>>", running.name);
       break;
     }
   }
@@ -121,7 +121,7 @@ function loop() {
 
     if (running) {
 
-      running.handler( running.args, running.conditionResult);
+      running.handler( running.args, running.conditionResult,running);
 
       //需要等待执行
       if (running.waitFor) {
