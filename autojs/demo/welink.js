@@ -19,7 +19,9 @@ function findTvApp(args,tv_app_name){
 
 function checkSummit(args,condition,hd){
   var curD = new Date()
-  var cur = className("android.view.View").textContains(curD.getFullYear() + "-" + (curD.getMonth() + 1) + "-" + curD.getDate()).findOne(3000);
+  var MM= (curD.getMonth() + 1) 
+  var dd = curD.getDate()
+  var cur = className("android.view.View").textContains(curD.getFullYear() + "-" +("00"+MM).slice(-2) + "-" + ("00"+dd).slice(-2)).findOne(3000);
   if(cur){
     console.log("今日已打卡");
     app.e.emit("gameKill");
