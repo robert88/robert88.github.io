@@ -90,7 +90,7 @@ function inputAndsubmit(){
 }
 
 app.g(launchApp,"com.huawei.works",0,function(){
-  return !currentPackage() == "com.huawei.works"
+  return currentPackage() != "com.huawei.works"
 },"launchApp-启动welink")
 
 app.g(findWorkBtn,null,0,function(){
