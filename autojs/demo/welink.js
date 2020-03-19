@@ -101,7 +101,7 @@ app.g(findTvApp,null,0,function(){
 
  app.g(toCheckSummit,null,0,function(){
   return className("android.view.View").text("打卡记录").findOne(2000);
-},"checkSummit-是否打卡")
+},"toCheckSummit-导向历史页面")
 
 
 var hanlder = app.g(checkSummit,null,0,function(){
