@@ -30,16 +30,21 @@ if(global&&!global.app){
   console.show = function() {}
   
   global.sleep = function() {}
-  var events = { emitter: function() { this.stack = {}; } }
-  events.emitter.prototype.on = function(e, handler) {
-    this.stack[e] = handler;
-  }
-  events.emitter.prototype.emit = function(e, args) {
-    console.log("call events", e);
-    if (typeof this.stack[e] == "function") {
-      this.stack[e].apply(this, args);
+  var events = { emitter: function() {
+     var stack = {};
+    return {
+      on: function(e, handler) {
+        stack[e] = handler;
+      },
+      emit: function(e, args) {
+        console.log("call events", e);
+        if (typeof stack[e] == "function") {
+          stack[e].apply(this, args);
+        }
+      }
     }
-  }
+  } }
+
 }
 
 
@@ -48,7 +53,7 @@ var g_handler = [];
 var timer;
 var running = null;
 var g_overFlag = false;
-app.e = new events.emitter();
+app.e = events.emitter();
 
 //停止执行
 app.e.on("gameKill", function(msg) {
