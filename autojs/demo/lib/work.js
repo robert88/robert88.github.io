@@ -18,8 +18,8 @@ if(global&&!global.app){
   global.currentPackage = function() { return currpackage }
   global.id = function(name) {
     return {
-      findOne,
-      text(){return {findOne}},
+      findOne:findOne,
+      text(){return {findOne:findOne}},
       textContains(){return {findOne:function(){return false}}},
     }
   }
