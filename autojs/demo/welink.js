@@ -35,7 +35,11 @@ function checkSummit(args,condition,hd){
     }
   }
 }
-
+function toCheckSummit(args,historyBtn){
+  console.log("点击进入打卡历史页面")
+  historyBtn.click();
+  sleep(1000);
+}
 function inputAndsubmit(){
    console.log("滑出workplace")
    swipe(248, 1626, 304, 1305, 1000);
@@ -92,11 +96,16 @@ app.g(findWorkBtn,null,0,function(){
 },"findWorkBtn-导向业务页面")
 
 app.g(findTvApp,null,0,function(){
-  return id("tv_app_name").text("健康打卡轻应用").findOne(2000);
+  return className("android.view.View").text("打卡记录").findOne(3000);
 },"findTvApp-导向打卡页面")
 
-var hanlder = app.g(checkSummit,null,0,function(){
+ app.g(toCheckSummit,null,0,function(){
   return className("android.view.View").text("打卡记录").findOne(2000);
+},"checkSummit-是否打卡")
+
+
+var hanlder = app.g(checkSummit,null,0,function(){
+  return className("android.view.View").text("默认展示最近20次打卡记录").findOne(2000)
 },"checkSummit-是否打卡")
 
 app.g(inputAndsubmit,null,0,function(){
