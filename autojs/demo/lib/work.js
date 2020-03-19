@@ -34,7 +34,7 @@ if(global&&!global.app){
   events.emitter.prototype.on = function(e, handler) {
     this.stack[e] = handler;
   }
-  events.emitter.prototype.emit = function(e, ...args) {
+  events.emitter.prototype.emit = function(e, args) {
     console.log("call events", e);
     if (typeof this.stack[e] == "function") {
       this.stack[e].apply(this, args);
