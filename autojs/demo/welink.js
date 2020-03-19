@@ -17,7 +17,7 @@ function findTvApp(args,tv_app_name){
     sleep(5000);
 }
 
-function checkSummit(){
+function checkSummit(args,condition,hd){
   var curD = new Date()
   var cur = className("android.view.View").textContains(curD.getFullYear() + "-" + (curD.getMonth() + 1) + "-" + curD.getDate()).findOne(3000);
   if(cur){
@@ -28,7 +28,8 @@ function checkSummit(){
     var back = id("tv_left_button").findOne()
     if(back){
       back.click()
-      sleep(3000)
+      sleep(3000);
+      hd.result="not"
     }else{
         throw Error("没有找到返回按钮");
     }
@@ -94,10 +95,10 @@ app.g(findTvApp,null,0,function(){
   return id("tv_app_name").text("健康打卡轻应用").findOne(2000);
 },"findTvApp-导向打卡页面")
 
-app.g(checkSummit,null,0,function(){
+var hanlder = app.g(checkSummit,null,0,function(){
   return className("android.view.View").text("默认展示最近20次打卡记录").findOne(2000)
 },"checkSummit-是否打卡")
 
 app.g(inputAndsubmit,null,0,function(){
-  return className("android.view.View").text("打卡记录").findOne(3000);
+  return hanlder.result=="not" && className("android.view.View").text("打卡记录").findOne(3000);
 },"inputAndsubmit-打卡")
