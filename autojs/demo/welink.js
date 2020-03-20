@@ -98,7 +98,7 @@ app.g(findWorkBtn,null,0,function(){
 },"findWorkBtn-导向业务页面")
 
 app.g(findTvApp,null,0,function(){
-  return className("android.view.View").text("打卡记录").findOne(3000);
+  return className("android.view.View").text("健康打卡轻应用").findOne(3000);
 },"findTvApp-导向打卡页面")
 
  app.g(toCheckSummit,null,0,function(){
