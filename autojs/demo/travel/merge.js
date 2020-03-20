@@ -135,7 +135,7 @@ function swiperDog() {
 
     dog = getDogInfo(dog);
     console.log("获取位置" + idx + ((!!dog) ? "有" : "无") + "狗 等级:", dog && dog.level)
-    if (dog) {
+    if (dog&&(dog.level*1)!=38) {
       if (dogs[dog.level]) {
         console.log("合并狗：" + dog.level)
         mergeDog(dogs, dog)
