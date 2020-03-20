@@ -91,25 +91,25 @@ function inputAndsubmit(){
 
 app.g(launchApp,"com.huawei.works",0,function(){
   return currentPackage() != "com.huawei.works"
-},"launchApp-启动welink")
+},"1-启动welink")
 
 app.g(findWorkBtn,null,0,function(){
   return id("tab_icon").text("业务").findOne(2000);
-},"findWorkBtn-导向业务页面")
+},"2-导向业务页面")
 
 app.g(findTvApp,null,0,function(){
   return className("android.widget.TextView").text("健康打卡轻应用").findOne(3000);
-},"findTvApp-导向打卡页面")
+},"3-导向打卡页面")
 
  app.g(toCheckSummit,null,0,function(){
   return className("android.view.View").text("打卡记录").findOne(2000);
-},"toCheckSummit-导向历史页面")
+},"4-导向历史页面")
 
 
 var hanlder = app.g(checkSummit,null,0,function(){
   return className("android.view.View").text("默认展示最近20次打卡记录").findOne(2000)
-},"checkSummit-是否打卡")
+},"5-是否打卡")
 
 app.g(inputAndsubmit,null,0,function(){
   return hanlder.result=="not" && className("android.view.View").text("打卡记录").findOne(2000);
-},"inputAndsubmit-打卡")
+},"6-打卡")
