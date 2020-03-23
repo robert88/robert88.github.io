@@ -7,12 +7,8 @@ require("./lib/work.js")
 console.show()
 
 var launchApp =  require("./lib/launch.js")
-//
-function pageTo(args,condition){
-  console.log("点击进入页面")
-  condition.click();
-  sleep(2000);
-}
+var pageTo =  require("./lib/pageTo.js")
+
 //
 function offwork(args,condition){
   var local = id("ft").className("android.view.TextView").text("你已再打卡范围内").findOne(3000)
