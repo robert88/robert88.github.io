@@ -1,51 +1,6 @@
 //调试
 if(global&&!global.app){
-  var currpackage;
-  global.app = {
-    launch: function(appname) {
-      console.log("call app.launch");
-      currpackage = appname;
-    }
-  }
-  var findOne =  function() {
-    return {
-      click: function() {},
-      bounds:function(){return {top:100,height:100,left:100,bottom:100,right:100,width:100}},
-      clickable:function(){return true},
-      parent: function() { return { click: function() {} } }
-    }
-  }
-  
-  global.currentPackage = function() { return currpackage }
-  global.id = function(name) {
-    return {
-      findOne:findOne,
-      text(){return {findOne:findOne}},
-      textContains(){return {findOne:function(){return false}}},
-    }
-  }
-  global.className = global.id
-  global.swipe = function(){console.log("call swipe")}
-  global.click = function(){console.log("call click")}
-  
-  console.show = function() {}
-  
-  global.sleep = function() {}
-  var events = { emitter: function() {
-     var stack = {};
-    return {
-      on: function(e, handler) {
-        stack[e] = handler;
-      },
-      emit: function(e, args) {
-        console.log("call events", e);
-        if (typeof stack[e] == "function") {
-          stack[e].apply(this, args);
-        }
-      }
-    }
-  } }
-
+  require("./debugfix.js")
 }
 
 

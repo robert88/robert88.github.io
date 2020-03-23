@@ -1,5 +1,6 @@
 //welink自动打卡
 require("./lib/work.js")
+var notice = require("./lib/notice.js")
 
 console.show()
 
@@ -13,6 +14,7 @@ function checkSummit(args,condition,hd){
   var cur = className("android.view.View").textContains(curD.getFullYear() + "-" +("00"+MM).slice(-2) + "-" + ("00"+dd).slice(-2)).findOne(3000);
   if(cur){
     console.log("今日已打卡");
+    notice("welink 已健康打卡",new Date().toString())
     app.e.emit("gameKill");
   }else{
     console.log("今日未打卡");
