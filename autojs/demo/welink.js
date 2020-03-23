@@ -3,7 +3,8 @@ require("./lib/work.js")
 var notice = require("./lib/notice.js")
 
 console.show()
-console.setSize(300,100)
+console.setPosition(1/16*device.width,3/32*device.height)
+console.setSize(1/4*device.width,1/16*device.height)
 
 var launchApp =  require("./lib/launch.js")
 var pageTo =  require("./lib/pageTo.js")
