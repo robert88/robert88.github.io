@@ -82,5 +82,7 @@ var currpackage;
   }
 
   global.device = {
-    sdkInt:58
+    sdkInt:58,
+    width:720,
+    height:1920
   }
