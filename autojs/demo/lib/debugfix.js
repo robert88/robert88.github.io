@@ -27,6 +27,7 @@ var currpackage;
   global.click = function(){console.log("call click")}
   
   console.show = function() {}
+  console.setSize = function() {}
   
   global.sleep = function() {}
   global.events = { emitter: function() {

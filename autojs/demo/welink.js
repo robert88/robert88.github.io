@@ -3,6 +3,7 @@ require("./lib/work.js")
 var notice = require("./lib/notice.js")
 
 console.show()
+console.setSize(300,100)
 
 var launchApp =  require("./lib/launch.js")
 var pageTo =  require("./lib/pageTo.js")
