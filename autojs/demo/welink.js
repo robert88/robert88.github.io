@@ -1,5 +1,5 @@
 //welink自动打卡
-require("./lib/work.js")
+var wk = require("./lib/work.js")
 var notice = require("./lib/notice.js")
 
 console.show()
@@ -13,7 +13,7 @@ function checkSummit(args,condition,hd){
   var curD = new Date()
   var MM= (curD.getMonth() + 1) 
   var dd = curD.getDate()
-  var cur = className("android.view.View").textContains(curD.getFullYear() + "-" +("00"+MM).slice(-2) + "-" + ("00"+dd).slice(-2)).findOne(3000);
+  var cur = wk.t(curD.getFullYear() + "-" +("00"+MM).slice(-2) + "-" + ("00"+dd).slice(-2));className("android.view.View");
   if(cur){
     console.log("今日已打卡");
     notice("welink 已健康打卡",new Date().toString())
@@ -36,7 +36,7 @@ function inputAndsubmit(){
    swipe(248, 1626, 304, 1305, 1000);
   
     //4
-    var workPlace = className("android.view.View").text("WorkPlace").findOne(2000);
+    var workPlace = wk.t("WorkPlace");
       if (!workPlace) {
         throw Error("没有工作地点选择项")
       }
@@ -83,22 +83,22 @@ app.g(launchApp,"com.huawei.works",0,function(){
 },"1-启动welink")
 
 app.g(pageTo,null,0,function(){
-  return id("tab_icon").text("业务").findOne(2000);
+  return wk.t("业务",id("tab_icon"));
 },"2-导向业务页面")
 
 app.g(pageTo,null,0,function(){
-  return className("android.widget.TextView").text("健康打卡轻应用").findOne(3000);
+  return wk.t("健康打卡轻应用"); 
 },"3-导向打卡页面")
 
  app.g(pageTo,null,0,function(){
-  return className("android.view.View").text("打卡记录").findOne(2000);
+  return  wk.t("打卡记录"); 
 },"4-导向历史页面")
 
 
 var hanlder = app.g(checkSummit,null,0,function(){
-  return className("android.view.View").text("默认展示最近20次打卡记录").findOne(2000)
+  return   wk.t("默认展示最近20次打卡记录"); 
 },"5-是否打卡")
 
 app.g(inputAndsubmit,null,0,function(){
-  return hanlder.result=="not" && className("android.view.View").text("打卡记录").findOne(2000);
+  return hanlder.result=="not" && wk.t("打卡记录"); 
 },"6-打卡")

@@ -124,3 +124,30 @@ loop();
 // app.g(a2,[1,2],0,function(){return true},"a2handler")
 // app.g(a3,[1,2],0,function(){return true},"a3handler")
 // app.g(a4,[1,2],0,function(){return true},"a4handler")
+function selectWithContext(klassName,context){
+  if(context){
+   return  context.className(klassName)
+  }
+  return  className(klassName)
+}
+module.exports = {
+  t:function(text,context){
+    var textObj = selectWithContext("android.widget.TextView",context).text(text).findOne(1000);
+    if(!textObj){
+      textObj = selectWithContext("android.view.View",context).text(text).findOne(1000);
+      if(!textObj){
+        textObj = selectWithContext("android.view.TextView",context).text(text).findOne(1000);
+      }
+    }
+    if(!textObj){
+      selectWithContext("android.widget.TextView",context).textContains(text).findOne(1000);
+      if(!textObj){
+        textObj = selectWithContext("android.view.View",context).textContains(text).findOne(1000);
+        if(!textObj){
+          textObj = selectWithContext("android.view.TextView",context).textContains(text).findOne(1000);
+        }
+      }
+    }
+    return textObj;
+  }
+}

@@ -16,18 +16,22 @@ var currpackage;
   
   global.currentPackage = function() { return currpackage }
   global.id = function(name) {
-    return {
+    var idObj = {
       findOne:findOne,
       text(){return {findOne:findOne}},
       textContains(){return {findOne:function(){return false}}},
     }
+    idObj.className = Object.assign({},idObj )
+    return idObj
   }
-  global.className = global.id
+  global.className =global.id 
+
   global.swipe = function(){console.log("call swipe")}
   global.click = function(){console.log("call click")}
   
   console.show = function() {}
   console.setSize = function() {}
+  console.setPosition  = function() {}
   
   global.sleep = function() {}
   global.events = { emitter: function() {
