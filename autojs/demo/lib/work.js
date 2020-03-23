@@ -11,6 +11,7 @@ if(global&&!global.app){
     return {
       click: function() {},
       bounds:function(){return {top:100,height:100,left:100,bottom:100,right:100,width:100}},
+      clickable:function(){return true},
       parent: function() { return { click: function() {} } }
     }
   }

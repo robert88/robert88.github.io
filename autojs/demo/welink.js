@@ -4,18 +4,7 @@ require("./lib/work.js")
 console.show()
 
 var launchApp =  require("./lib/launch.js")
-
-function findWorkBtn(args,workBtn){
-  console.log("点击进入业务页面")
-  workBtn.click();
-  sleep(1000);
-}
-
-function findTvApp(args,tv_app_name){
-    console.log("点击进入健康打卡")
-    tv_app_name.parent().click();
-    sleep(5000);
-}
+var pageTo =  require("./lib/pageTo.js")
 
 function checkSummit(args,condition,hd){
   var curD = new Date()
@@ -27,7 +16,7 @@ function checkSummit(args,condition,hd){
     app.e.emit("gameKill");
   }else{
     console.log("今日未打卡");
-    var back = id("tv_left_button").findOne()
+    var back = id("tv_left_button").findOne(2000)
     if(back){
       back.click()
       sleep(3000);
@@ -37,11 +26,7 @@ function checkSummit(args,condition,hd){
     }
   }
 }
-function toCheckSummit(args,historyBtn){
-  console.log("点击进入打卡历史页面")
-  historyBtn.click();
-  sleep(1000);
-}
+
 function inputAndsubmit(){
    console.log("滑出workplace")
    swipe(248, 1626, 304, 1305, 1000);
@@ -93,15 +78,15 @@ app.g(launchApp,"com.huawei.works",0,function(){
   return currentPackage() != "com.huawei.works"
 },"1-启动welink")
 
-app.g(findWorkBtn,null,0,function(){
+app.g(pageTo,null,0,function(){
   return id("tab_icon").text("业务").findOne(2000);
 },"2-导向业务页面")
 
-app.g(findTvApp,null,0,function(){
+app.g(pageTo,null,0,function(){
   return className("android.widget.TextView").text("健康打卡轻应用").findOne(3000);
 },"3-导向打卡页面")
 
- app.g(toCheckSummit,null,0,function(){
+ app.g(pageTo,null,0,function(){
   return className("android.view.View").text("打卡记录").findOne(2000);
 },"4-导向历史页面")
 
