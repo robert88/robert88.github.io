@@ -52,7 +52,7 @@ function inputAndsubmit(){
     
        //6
       console.log("点击确定")
-      var ok = className("android.view.View").text("确定/ok").findOne(2000);
+      var ok = wk.t("确定/ok");
       if (!ok) {
           throw Error("没有找到确认按钮")
       }
@@ -83,7 +83,7 @@ app.g(launchApp,"com.huawei.works",0,function(){
 },"1-启动welink")
 
 app.g(pageTo,null,0,function(){
-  return wk.t("业务",id("tab_icon"));
+  return wk.t("业务",true,id("tab_icon"));
 },"2-导向业务页面")
 
 app.g(pageTo,null,0,function(){

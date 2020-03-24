@@ -124,30 +124,47 @@ loop();
 // app.g(a2,[1,2],0,function(){return true},"a2handler")
 // app.g(a3,[1,2],0,function(){return true},"a3handler")
 // app.g(a4,[1,2],0,function(){return true},"a4handler")
-function selectWithContext(klassName,context){
+
+//text查询
+function selectWithText(klassName,text,context){
   if(context){
-   return  context.className(klassName)
+   return  context.className(klassName).text(text).findOne(1000);
   }
-  return  className(klassName)
+  return  className(klassName).text(text).findOne(1000);
 }
-module.exports = {
-  t:function(text,context){
-    var textObj = selectWithContext("android.widget.TextView",context).text(text).findOne(1000);
+//包含文字查询
+function selectWithContains(klassName,context){
+  if(context){
+   return  context.className(klassName).text(text).findOne(1000);
+  }
+  return  className(klassName).text(text).findOne(1000);
+}
+//不同的处理分支
+function findWidth(text,context,flag){
+  var handler;
+  if(flag){
+    handler = selectWithText;
+  }else{
+    handler = selectWithContains;
+  }
+  var textObj = handler.call(null,"android.widget.TextView",text,context)
     if(!textObj){
-      textObj = selectWithContext("android.view.View",context).text(text).findOne(1000);
+      textObj = handler.call(null,"android.view.View",text,context)
       if(!textObj){
-        textObj = selectWithContext("android.view.TextView",context).text(text).findOne(1000);
-      }
-    }
-    if(!textObj){
-      selectWithContext("android.widget.TextView",context).textContains(text).findOne(1000);
-      if(!textObj){
-        textObj = selectWithContext("android.view.View",context).textContains(text).findOne(1000);
-        if(!textObj){
-          textObj = selectWithContext("android.view.TextView",context).textContains(text).findOne(1000);
-        }
+        textObj = handler.call(null,"android.view.TextView",text,context)
       }
     }
     return textObj;
+}
+
+module.exports = {
+  t:function(text,flag,context){
+    if(flag===true){
+     return findWidth(text,context,flag)
+    }else if(flag===false){
+      return findWidth(text,context,flag)
+    }else{
+      return findWidth(text,context,true)||findWidth(text,context,false)
+    }
   }
 }

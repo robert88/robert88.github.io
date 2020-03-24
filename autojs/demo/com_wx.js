@@ -2,7 +2,7 @@
 
 
 //welink自动打卡
-require("./lib/work.js")
+var wk = require("./lib/work.js")
 
 console.show()
 
@@ -11,7 +11,7 @@ var pageTo =  require("./lib/pageTo.js")
 
 //
 function offwork(args,condition){
-  var local = id("ft").className("android.view.TextView").text("你已再打卡范围内").findOne(3000)
+  var local = wk.t("你已再打卡范围内",true,id("ft"))
     if(local){
       condition.parent().click();
       console.log("下班打卡成功")
@@ -21,7 +21,7 @@ function offwork(args,condition){
 }
 //
 function onwork(args,condition){
-  var local = id("ft").className("android.view.TextView").text("你已再打卡范围内").findOne(3000)
+  var local = wk.t("你已再打卡范围内",true,id("ft"))
   if(local){
     condition.parent().click();
     console.log("上班打卡成功")
@@ -48,24 +48,23 @@ var workstatus;
 app.g(launchApp,"com.tencent.wework",0,function(){
   workstatus = ontime();
   return workstatus&&(currentPackage() != "com.tencent.wework")
-},"2-启动企业微信")
+},"1-启动企业微信")
 
 app.g(pageTo,null,0,function(){
-  return  workstatus&&(id("d0j").className("android.view.TextView").text("工作台").findOne(3000));
-},"3-导向工作台页面")
+  return  workstatus&&wk.t("工作台",true,id("d0j"))
+},"2-导向工作台页面")
 
 app.g(pageTo,null,0,function(){
-  var textObj = id("ajo").className("android.view.TextView").text("打卡").findOne(3000)
-  return workstatus&&(textObj&&textObj.parent());
-},"4-导向打卡页面")
+  return workstatus&&wk.t("打卡",true,id("ajo"))
+},"3-导向打卡页面")
 
 
 
  app.g(onwork,null,0,function(){
-  return workstatus=="onwork"&&(id("acs").className("android.view.TextView").text("下班打卡").findOne(3000))
-},"toCheckSummit-上班打卡")
+  return workstatus=="onwork"&& wk.t("上班打卡",true,id("acs")) 
+},"4、toCheckSummit-上班打卡")
 
 app.g(offwork,null,0,function(){
-  return workstatus=="offwork"&&(id("acs").className("android.view.TextView").text("下班打卡").findOne(3000))
-},"toCheckSummit-下班打卡")
+  return workstatus=="offwork"&& wk.t("下班打卡",true,id("acs")) 
+},"5、toCheckSummit-下班打卡")
 

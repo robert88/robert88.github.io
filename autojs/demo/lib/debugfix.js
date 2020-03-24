@@ -21,7 +21,7 @@ var currpackage;
       text(){return {findOne:findOne}},
       textContains(){return {findOne:function(){return false}}},
     }
-    idObj.className = Object.assign({},idObj )
+    idObj.className = function(){return Object.assign({},idObj )} 
     return idObj
   }
   global.className =global.id 
