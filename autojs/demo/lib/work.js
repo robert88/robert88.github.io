@@ -3,6 +3,7 @@ if(global&&!global.app){
   require("./debugfix.js")
 }
 
+console.log("-------------------------------------------------------------------")
 
 var toArray = require("./toArray");
 var g_handler = [];
@@ -45,13 +46,16 @@ function releaseStack(s) {
   var time = new Date().getTime();
   for (var i = 0; i < s.length; i++) {
     var h = s[i];
-    var condition = h.condition();
-    if (time > h.timeout && condition && running == null) {
-      s.splice(i, 1);
-      running = h;
-      running.conditionResult = condition;
-      console.info("=>>", running.name);
-      break;
+
+    if (time > h.timeout  && running == null) {
+      var condition = h.condition();
+      if(condition){
+        s.splice(i, 1);
+        running = h;
+        running.conditionResult = condition;
+        console.info("=>>", running.name);
+        break;
+      }
     }
   }
   h = null;
