@@ -142,12 +142,12 @@ function findWidth(text,context,flag){
 
 module.exports = {
   t:function(text,flag,context){
-    if(flag===true){
-     return findWidth(text,context,flag)
-    }else if(flag===false){
-      return findWidth(text,context,flag)
+    if(flag=="both"){
+        return findWidth(text,context,true)||findWidth(text,context,false)
+    }else if(flag==="contain"){
+          return findWidth(text,context,false)
     }else{
-      return findWidth(text,context,true)||findWidth(text,context,false)
+          return findWidth(text,context,true)
     }
   }
 }
