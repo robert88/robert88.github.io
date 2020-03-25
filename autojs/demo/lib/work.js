@@ -133,11 +133,20 @@ function selectWithStart(klassName,text,context){
 //不同的处理分支
 function findWidth(text,context,handler){
   var textObj = handler.call(null,"android.widget.TextView",text,context)
+    
     if(textObj.size()==0){
       textObj = handler.call(null,"android.view.View",text,context)
+     if(textObj.size()){
+        console.log("find view.View")
+        }
       if(!textObj.size()==0){
         textObj = handler.call(null,"android.view.TextView",text,context)
+        if(textObj.size()){
+        console.log("find view.TextView")
+        }
       }
+    }else{
+      console.log("find widget.TextView")
     }
     return textObj;
 }
