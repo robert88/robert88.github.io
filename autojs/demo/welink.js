@@ -3,8 +3,6 @@ var wk = require("./lib/work.js")
 var notice = require("./lib/notice.js")
 
 console.show()
-console.setPosition(1/16*device.width,3/32*device.height)
-console.setSize(1/4*device.width,1/16*device.height)
 
 var launchApp =  require("./lib/launch.js")
 var pageTo =  require("./lib/pageTo.js")
@@ -83,7 +81,7 @@ app.g(launchApp,"com.huawei.works",0,function(){
 },"1-启动welink")
 
 app.g(pageTo,null,0,function(){
-  return wk.t("业务",true,id("tab_icon"));
+  return id("tab_icon").className("android.widget.RadioButton").text("业务");
 },"2-导向业务页面")
 
 app.g(pageTo,null,0,function(){
