@@ -111,9 +111,9 @@ loop();
 //text查询
 function selectWithText(klassName,text,context){
   if(context){
-   return  context.className(klassName).text(text).findOne(1000);
+   return  context.className(klassName).text(text).find();
   }
-  return  className(klassName).text(text).findOne(1000);
+  return  className(klassName).text(text).find();
 }
 //包含文字查询
 function selectWithContains(klassName,text,context){
@@ -133,9 +133,9 @@ function selectWithStart(klassName,text,context){
 //不同的处理分支
 function findWidth(text,context,handler){
   var textObj = handler.call(null,"android.widget.TextView",text,context)
-    if(!textObj){
+    if(textObj.size()==0){
       textObj = handler.call(null,"android.view.View",text,context)
-      if(!textObj){
+      if(!textObj.size()==0){
         textObj = handler.call(null,"android.view.TextView",text,context)
       }
     }
@@ -144,14 +144,21 @@ function findWidth(text,context,handler){
 
 module.exports = {
   t:function(text,flag,context){
-    if(flag=="both"){
-        return findWidth(text,context,selectWithText)||findWidth(text,context,selectWithStart)||findWidth(text,context,selectWithContains)
-    }else if(flag==="contain"){
-          return findWidth(text,context,selectWithContains)
+    var list;
+    if(flag==="contain"){
+          list = findWidth(text,context,selectWithContains)
     }else if(flag==="start"){
-          return findWidth(text,context,selectWithStart)
+          list = findWidth(text,context,selectWithStart)
     }else{
-          return findWidth(text,context,selectWithText)
+          list = findWidth(text,context,selectWithText)
+    }
+    if(list.size()==1){
+      return list.get(0);
+    }else{
+      if(list.size()>1){
+        console.warn("查找出来不止一个！")
+      }
+      return null;
     }
   }
 }
