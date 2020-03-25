@@ -137,11 +137,11 @@ function selectWithText(klassName,text,context){
   return  className(klassName).text(text).findOne(1000);
 }
 //包含文字查询
-function selectWithContains(klassName,context){
+function selectWithContains(klassName,text,context){
   if(context){
-   return  context.className(klassName).text(text).findOne(1000);
+   return  context.className(klassName).textContains(text).findOne(1000);
   }
-  return  className(klassName).text(text).findOne(1000);
+  return  className(klassName).textContains(text).findOne(1000);
 }
 //不同的处理分支
 function findWidth(text,context,flag){
