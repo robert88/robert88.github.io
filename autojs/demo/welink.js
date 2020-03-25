@@ -81,7 +81,7 @@ app.g(launchApp,"com.huawei.works",0,function(){
 },"1-启动welink")
 
 app.g(pageTo,true,0,function(){
-  return id("tab_icon").className("android.widget.RadioButton").text("业务");
+  return id("tab_icon").className("android.widget.RadioButton").text("业务").findOne(2000);
 },"2-导向业务页面")
 
 app.g(pageTo,null,0,function(){
