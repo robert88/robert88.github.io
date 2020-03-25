@@ -90,3 +90,22 @@ var currpackage;
     width:720,
     height:1920
   }
+// function a1(a,b){
+//   console.log("a1",a,b)
+// }
+// function a2(){
+//   console.log("a2")
+// }
+// function a3(){
+//   console.log("a3")
+//   throw Error("高兴")
+// }
+// function a4(){
+//   console.log("a4")
+
+// }
+
+// app.g(a1,[1,2],0,function(){return true},"a1handler")
+// app.g(a2,[1,2],0,function(){return true},"a2handler")
+// app.g(a3,[1,2],0,function(){return true},"a3handler")
+// app.g(a4,[1,2],0,function(){return true},"a4handler")
