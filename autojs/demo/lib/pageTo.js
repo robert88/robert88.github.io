@@ -1,7 +1,7 @@
 function pageTo(args,condition){
     console.log("点击进入页面");
     if(!condition.clickable()){
-        if(condition.parent().clickable()){
+        if(!args[0]&&condition.parent().clickable()){
             condition.parent().click()
         }else{
             var bd = condition.bounds();
