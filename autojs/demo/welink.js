@@ -80,7 +80,7 @@ app.g(launchApp,"com.huawei.works",0,function(){
   return currentPackage() != "com.huawei.works"
 },"1-启动welink")
 
-app.g(pageTo,null,0,function(){
+app.g(pageTo,true,0,function(){
   return id("tab_icon").className("android.widget.RadioButton").text("业务");
 },"2-导向业务页面")
 
