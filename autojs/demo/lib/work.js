@@ -137,16 +137,16 @@ function findWidth(text,context,handler){
     if(textObj.size()==0){
       textObj = handler.call(null,"android.view.View",text,context)
      if(textObj.size()){
-        console.log("find view.View")
+        console.log(text+":find view.View")
         }
       if(!textObj.size()==0){
         textObj = handler.call(null,"android.view.TextView",text,context)
         if(textObj.size()){
-        console.log("find view.TextView")
+        console.log(text+":find view.TextView")
         }
       }
     }else{
-      console.log("find widget.TextView")
+      console.log(text+":find widget.TextView")
     }
     return textObj;
 }
