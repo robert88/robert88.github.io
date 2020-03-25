@@ -165,9 +165,11 @@ module.exports = {
       return list.get(0);
     }else{
       if(list.size()>1){
-        console.log("查找出来不止一个！")
+        console.log("查找出来不止一个！");
+        return list;
+      }else{
+           return null;
       }
-      return null;
     }
   }
 }
