@@ -88,7 +88,7 @@ app.g(pageTo,null,0,function(){
   return wk.t("健康打卡轻应用"); 
 },"3-导向打卡页面")
 
- app.g(pageTo,null,0,function(){
+ app.g(pageTo,true,0,function(){
   return  wk.t("打卡记录"); 
 },"4-导向历史页面")
 
