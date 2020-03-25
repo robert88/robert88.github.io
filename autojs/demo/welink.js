@@ -81,16 +81,15 @@ app.g(launchApp,"com.huawei.works",0,function(){
 },"1-启动welink")
 
 app.g(pageTo,true,0,function(){
-  return id("tab_icon").className("android.widget.RadioButton").text("业务").findOne(2000);
+  return id("tab_icon").className("android.widget.RadioButton").text("业务");
 },"2-导向业务页面")
 
 app.g(pageTo,null,0,function(){
   return wk.t("健康打卡轻应用"); 
 },"3-导向打卡页面")
 
- app.g(pageTo,true,0,function(){
-   var list = wk.t("打卡记录")
-  return list&&list.size()>1&&list.get(0); 
+ app.g(pageTo,null,0,function(){
+  return  wk.t("打卡记录"); 
 },"4-导向历史页面")
 
 
