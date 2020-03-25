@@ -137,16 +137,16 @@ function findWidth(text,context,handler){
     if(textObj.size()==0){
       textObj = handler.call(null,"android.view.View",text,context)
      if(textObj.size()){
-        console.log(text+":find view.View")
+        console.log(text+":find view.View",textObj.size())
         }
       if(!textObj.size()==0){
         textObj = handler.call(null,"android.view.TextView",text,context)
         if(textObj.size()){
-        console.log(text+":find view.TextView")
+        console.log(text+":find view.TextView",textObj.size())
         }
       }
     }else{
-      console.log(text+":find widget.TextView")
+      console.log(text+":find widget.TextView",textObj.size())
     }
     return textObj;
 }
@@ -165,7 +165,7 @@ module.exports = {
       return list.get(0);
     }else{
       if(list.size()>1){
-        console.warn("查找出来不止一个！")
+        console.log("查找出来不止一个！")
       }
       return null;
     }
