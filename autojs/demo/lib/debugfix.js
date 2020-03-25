@@ -19,6 +19,7 @@ var currpackage;
     var idObj = {
       findOne:findOne,
       text(){return {findOne:findOne}},
+      textStartsWith(){return {findOne:findOne}},
       textContains(){return {findOne:function(){return false}}},
     }
     idObj.className = function(){return Object.assign({},idObj )} 
