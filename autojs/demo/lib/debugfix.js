@@ -1,3 +1,5 @@
+var wake = require("./filesystem.js")
+var pt = require("path")
 var currpackage;
   global.app = {
     launch: function(appname) {
@@ -19,7 +21,6 @@ var currpackage;
     var idObj = {
       findOne:findOne,
       text(){return {findOne:findOne}},
-      textStartsWith(){return {findOne:findOne}},
       textContains(){return {findOne:function(){return false}}},
     }
     idObj.className = function(){return Object.assign({},idObj )} 
@@ -91,22 +92,60 @@ var currpackage;
     width:720,
     height:1920
   }
-// function a1(a,b){
-//   console.log("a1",a,b)
-// }
-// function a2(){
-//   console.log("a2")
-// }
-// function a3(){
-//   console.log("a3")
-//   throw Error("高兴")
-// }
-// function a4(){
-//   console.log("a4")
 
-// }
+  global.storages = {getItem:function(){},setItem:function(){},clear:function(){}}
 
-// app.g(a1,[1,2],0,function(){return true},"a1handler")
-// app.g(a2,[1,2],0,function(){return true},"a2handler")
-// app.g(a3,[1,2],0,function(){return true},"a3handler")
-// app.g(a4,[1,2],0,function(){return true},"a4handler")
+  function getCallPath(){
+    try{
+      throw Error("path error stack look for call path")
+    }catch(e){
+      var stack =e.stack;
+     stack =  stack.split(/\n/)
+    }
+    var path = /\((.*):\d*:\d*\)/.exec(stack[3])
+    return path&&path[1];
+  }
+  global.files = {
+    ensureDir:function(){},
+    write:function(path,content){
+      curpath = pt.dirname(getCallPath())
+      if(curpath){
+        path = pt.resolve(curpath,path);
+      }else{
+        path = pt.resolve(curpath,path);
+      }
+
+      wake.writeData(path,content)
+    },
+    exists:function(path){
+      curpath = pt.dirname(getCallPath())
+      if(curpath){
+        path = pt.resolve(curpath,path);
+      }else{
+        path = pt.resolve(curpath,path);
+      }
+      return wake.isExist(path)
+    }
+  }
+  var rootPath = __dirname.replace("lib","")
+  global.http={
+    get(url){
+      var ret;
+      if(url=="https://github.com/robert88/robert88.github.io/tree/8669023de0f1af586008a21438cb97bee2c20e10/autojs/demo/"){
+        ret = wake.readData(rootPath+"/res/index.html")
+      }else if(url.indexOf("https://github.com/robert88/robert88.github.io/tree/8669023de0f1af586008a21438cb97bee2c20e10/autojs/demo/")!=-1){
+        ret =wake.readData(rootPath+"/res/index2.html")
+      }else{
+        ret =wake.readData(rootPath+url.replace("https://raw.githubusercontent.com/robert88/robert88.github.io/master/autojs/demo","."))
+      }
+      return {
+        body:{string(){
+          return ret;
+        }}
+      } 
+    }
+  }
+
+  global.toast = function(msg){
+    console.log("toast",msg)
+  }

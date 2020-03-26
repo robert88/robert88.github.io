@@ -1,83 +1,84 @@
 var parse = require("./parse.js");
-var cacheInfo;
-if (files.exists("./cache.json")) {
-  cacheInfo = JSON.parse(require("./cache.json"));
-}
+var githubPage //github代码列表页
+var githubUrl //github代码访问地址
+
 //请求页面数据
-function getDataByUrl(url){
-  url = "https://github.com/robert88/robert88.github.io/tree/8669023de0f1af586008a21438cb97bee2c20e10/autojs/demo/"+url;
-  try{
+function getDataByUrl(url) {
+  url = githubPage + url;
+  try {
+    console.log("请求url", url)
     var res = http.get(url, {});
-    return  res.body.string();
-  }catch(e){
-    console.log("请求失败",url)
+    return res.body.string();
+  } catch (e) {
+    console.log("请求失败", url,e.stack)
   }
   return "";
 }
+//解析页面数据 得到文件的更新时间
+function parseTreeData(obj, url) {
+  var data = getDataByUrl(url);
+  var parentDir = parentDir || "";
+  var obj = obj || { dirs: {}, files: {} };
+  var ol = parse("table", data);
+  if (ol && ol[0]) {
+    var li = parse("tbody", ol[0].template)
+    li = li[li.length - 1];
+    if (li) {
+      var tr = parse("tr", li.template);
+      tr.forEach(function(t) {
+        var td = parse("td", t.template);
+        if (td.length < 4) {
+          return;
+        }
+        var isdir = td[0].template.indexOf("octicon-file-directory") != -1 ? 1 : 0
+        var name = parse("a", td[1].template)[0].attrs.title;
+        var time = parse("time-ago", td[3].template)[0].attrs.datetime;
+        if (isdir) {
+          obj.dirs[name] = { dirs: {}, files: {} };
+          parseTreeData(obj.dirs[name], url + name+"/");
+        } else {
+          obj.files[name] = {
+            time: new Date(time),
+            absolute: url +  name
+          }
+        }
 
-function parseTreeData(obj,url){
-	var data = getDataByUrl(url);
-	var parentDir = parentDir||"";
-	var obj = obj ||{dirs:{},files:{}};
-	var ol = parse("table",data);
-	if(ol&&ol[0]){
-		var li = parse("tbody",ol[0].template)
-		li = li[li.length-1];
-		if(li){
-			var tr = parse("tr",li.template);
-			tr.forEach(function(t){
-				var td =  parse("td",t.template);
-				if(td.length<4){
-					return;
-				}
-				var isdir =  td[0].template.indexOf("octicon-file-directory")!=-1?1:0
-				var name =  parse("a",td[1].template)[0].attrs.title;
-				var time =  parse("time-ago",td[3].template)[0].attrs.datetime;
-				
-				if(isdir){
-					obj.dirs[name]={dirs:{},files:{}};
-					parseTreeData(obj.dirs[name],url+"/"+name);
-				}else{
-					obj.files[name] ={
-						time: new Date(time),
-						absolute:url+"/"+name
-					} 
-				}
-	
-			})
-		}
-	
-	}
+      })
+    }
 
-	return obj;
-}
-function writeTree(obj){
-  for(var dir in obj.dirs){
-    writeTree(dir);
   }
-  for(var file in obj.files){
-    r(file.absolute);
+  return obj;
+}
+
+//写文件
+function writeTree(obj, cache) {
+  for (var dir in obj.dirs) {
+    writeTree(obj.dirs[dir], cache && cache[dir]);
+  }
+  for (var file in obj.files) {
+    var notModify = cache && cache[file] && cache[file].time.getTime() == obj.files[file].time.getTime()
+    //时间不一致
+    if (!notModify) {
+      r(obj.files[file].absolute, localUrl + obj.files[file].absolute);
+    }else{
+      console.info(obj.files[file].absolute,"is not modify")
+    }
   }
 }
 
-var treedata = parseTreeData(null,"autojs","");
 
-if(cache){
-  wake.write("./cache.js",JSON.stringify(treedata))
-  writeTree(treedata)
-}else{
-  diff(treedata,cache);
-}
 
 /**ajax请求 */
-function r(name,localname) {
-  console.log("请求",name)
-  localname = localname ||name;
-  try{
-    var res = http.get("https://robert88.github.io//autojs/demo/" + name + ".js?ver=" + time, {});
-    w(name,localname,res)
-  }catch(e){
-    t("更新失败"+ name + ".js");
+function r(name, localname) {
+
+  var url = githubUrl + name ;
+  console.log("请求", url,"写入文件",localname)
+  try {
+    var res = http.get(url, {});
+    w(name, localname, res)
+  } catch (e) {
+    console.log(e.stack)
+    t("更新失败" + name);
   }
 
 }
@@ -89,23 +90,28 @@ function t(msg) {
 }
 
 /*写文件*/
-function w(name,localname,res){
-
+function w(name, localname, res) {
   var content = res.body.string();
-
-  if (files.exists("./" + localname + ".js")) {
-      console.log("存在",localname)
-    if (files.read("./" + localname + ".js") == content) {
-      return t("服务器代码未变动" + "./" + name + ".js")
-    }
-     console.log("内容不相同")
-    files.remove("./" + localname + ".js")
-  }else{
-    console.log("不存在",localname)
-  }
-   console.log("写入数据",localname)
-  files.ensureDir("./" + localname + ".js")
-  files.write("./" + localname + ".js", content);
-  t("更新成功" + "./" + name + ".js")
+  console.log("写入数据", localname)
+  files.ensureDir(localname)
+  files.write(localname, content);
+  t("更新成功" + name)
 }
 
+module.exports = function(url, page,local) {
+  console.log(module)
+  githubPage = page; //github代码列表页
+  githubUrl = url //github代码访问地址
+  localUrl = local //github代码访问地址
+  var cacheInfo;
+  if (files.exists("./cache.js")) {
+    cacheInfo = require("./cache.js")
+  }
+
+  var treedata = parseTreeData(null, "", "");
+
+  writeTree(treedata,cacheInfo)
+
+  files.write("./cache.js", "module.exports="+JSON.stringify(treedata))
+
+}

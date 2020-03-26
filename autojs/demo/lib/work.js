@@ -1,7 +1,12 @@
 //调试
 if(global&&!global.app){
   require("./debugfix.js")
+}else{
+  if(!global.__dirname){
+    global.__dirname = ""
+  }
 }
+
 var toArray = require("./toArray");
 var g_handler = [];
 var timer;
@@ -106,70 +111,66 @@ function loop() {
 
 loop();
 
+// function a1(a,b){
+//   console.log("a1",a,b)
+// }
+// function a2(){
+//   console.log("a2")
+// }
+// function a3(){
+//   console.log("a3")
+//   throw Error("高兴")
+// }
+// function a4(){
+//   console.log("a4")
 
+// }
+
+// app.g(a1,[1,2],0,function(){return true},"a1handler")
+// app.g(a2,[1,2],0,function(){return true},"a2handler")
+// app.g(a3,[1,2],0,function(){return true},"a3handler")
+// app.g(a4,[1,2],0,function(){return true},"a4handler")
 
 //text查询
 function selectWithText(klassName,text,context){
   if(context){
-   return  context.className(klassName).text(text).find();
+   return  context.className(klassName).text(text).findOne(1000);
   }
-  return  className(klassName).text(text).find();
+  return  className(klassName).text(text).findOne(1000);
 }
 //包含文字查询
 function selectWithContains(klassName,text,context){
   if(context){
-   return  context.className(klassName).textContains(text).find();
+   return  context.className(klassName).textContains(text).findOne(1000);
   }
-  return  className(klassName).textContains(text).find();
-}
-////开始
-function selectWithStart(klassName,text,context){
-    if(context){
-   return  context.className(klassName).textStartsWith(text).find();
-  }
-  return  className(klassName).textStartsWith(text).find();
-
+  return  className(klassName).textContains(text).findOne(1000);
 }
 //不同的处理分支
-function findWidth(text,context,handler){
+function findWidth(text,context,flag){
+  var handler;
+  if(flag){
+    handler = selectWithText;
+  }else{
+    handler = selectWithContains;
+  }
   var textObj = handler.call(null,"android.widget.TextView",text,context)
-    
-    if(textObj.size()==0){
+    if(!textObj){
       textObj = handler.call(null,"android.view.View",text,context)
-
-      if(textObj.size()==0){
+      if(!textObj){
         textObj = handler.call(null,"android.view.TextView",text,context)
-        if(textObj.size()){
-          console.log(text+":find view.TextView",textObj.size())
-        }
-      }else{
-       console.log(text+":find view.View",textObj.size())
       }
-    }else{
-      console.log(text+":find widget.TextView",textObj.size())
     }
     return textObj;
 }
 
 module.exports = {
   t:function(text,flag,context){
-    var list;
-    if(flag==="contain"){
-          list = findWidth(text,context,selectWithContains)
-    }else if(flag==="start"){
-          list = findWidth(text,context,selectWithStart)
+    if(flag===true){
+     return findWidth(text,context,flag)
+    }else if(flag===false){
+      return findWidth(text,context,flag)
     }else{
-          list = findWidth(text,context,selectWithText)
-    }
-    if(list.size()==1){
-      return list.get(0);
-    }else{
-      if(list.size()>1){
-        console.log("查找出来不止一个！");
-        return list;
-      }else{
-           return null;
-      }
+      return findWidth(text,context,true)||findWidth(text,context,false)
     }
   }
 }
