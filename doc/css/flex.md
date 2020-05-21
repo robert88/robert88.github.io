@@ -26,6 +26,8 @@ flex-direction的意义：
 .box { flex-direction:column }效果是一样的，这样就没有任何意义，这个设置的意义在于，可以将子类全部变为block，
 也就是box1不管是什么元素可以统一设置为block元素,并且高度会自动适应最大高度
 
+但是如果加上了    align-items: center;那么元素的高度默认会回到自身内容的高度
+
 (默认)
 .box { flex-direction:row}统一设置为inline-block元素，但是要比inline-block元素没有间隙
 
