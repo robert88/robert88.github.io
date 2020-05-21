@@ -26,7 +26,7 @@ flex-direction的意义：
 .box { flex-direction:column }效果是一样的，这样就没有任何意义，这个设置的意义在于，可以将子类全部变为block，
 也就是box1不管是什么元素可以统一设置为block元素,并且高度会自动适应最大高度
 
-但是如果加上了    align-items: center;那么元素的高度默认会回到自身内容的高度
+但是如果加上了    align-items: center;那么元素的高度默认会回到自身内容的高度，而不会等高；
 
 (默认)
 .box { flex-direction:row}统一设置为inline-block元素，但是要比inline-block元素没有间隙
@@ -51,3 +51,16 @@ flex-wrap
 如align-items属性定义项目在交叉轴上如何对齐。这种父类容器对子类容器的约束是整体的约束，那么如何调整单个元素的布局方式
 
 可以对子容器设置  align-self: auto | flex-start | flex-end | center | baseline | stretch;
+
+这个居中是针对子项和子项的垂直居中
+
+那么子项和父类的垂直居中应该使用 align-content: flex-start | flex-end | center | space-between | space-around | stretch
+且flex-wrap:wrap,否则不会有效果
+
+## 水平居中
+
+   父类使用 justify-content: center;
+   
+   如果想1：2  >2为居中,那么就需要1：2：1这样的结构结合    justify-content: space-between;来实现2的居中
+   
+   
