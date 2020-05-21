@@ -24,7 +24,7 @@ flex-direction的意义：
 
 对应这样的结构，都是块状那么
 .box { flex-direction:column }效果是一样的，这样就没有任何意义，这个设置的意义在于，可以将子类全部变为block，
-也就是box1不管是什么元素可以统一设置为block元素
+也就是box1不管是什么元素可以统一设置为block元素,并且高度会自动适应最大高度
 
 (默认)
 .box { flex-direction:row}统一设置为inline-block元素，但是要比inline-block元素没有间隙
