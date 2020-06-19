@@ -56,7 +56,7 @@ background_color :1、启动时候的背景色
 
 要在chrome上起作用还得配置离线访问
 
-service worker
+
 
 web worker
 
@@ -64,5 +64,68 @@ let worker = new Workers("xx.js")
 worker.addEventListener("message",function(e){
 console.log(e.data)
 })
-在xx.js里面设置
+在xx.js里面设置 self或者this
 self.postMessage({data:1})
+
+
+service worker
+可以理解一个代理服务器，用于读取缓存和服务切换
+
+window.onload=function(){
+  if("serviceWorker" in navigator){
+    navigator.serviceWorker.register("wx.js").then().catch()
+  }
+}
+
+
+生命周期
+install
+activate
+fetch
+wx.js
+
+self.addEventListener("install",()=>{
+console.log()
+})
+
+self.addEventListener("activate",()=>{
+console.log()
+})
+
+self.addEventListener("fetch",()=>{
+console.log()
+})
+
+install
+是在安装第一次的触发和在wx.js改变时候触发
+
+第二次修改
+install会触发，而activate会等待上一个worker停止之后执行
+
+可以通过api跳过
+self.addEventListener("install",()=>{
+self.skipWaiting()//这个是异步的
+})
+self.addEventListener("install",(e)=>{
+e.waitUntil(self.skipWaiting())//这个是异步的
+})
+
+激活之后立即获得控制权
+
+self.addEventListener("activate",(e)=>{
+console.log()
+//激活之后立即获得控制权
+e.waitUntil(self.clients.claim())
+})
+
+
+cacheStorage
+
+caches.open(cachename).then(cach=>{})
+caches.keys()获取全部缓存
+caches.delete(key)//删除缓存
+
+caches.put(req,res)
+caches.add(url)
+caches.addAll(urls)
+caches.match()
