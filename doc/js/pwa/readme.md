@@ -190,5 +190,7 @@ new Notification("提示",{body:"当前网络"})
 window.addEventListener("online",(){
 new Notification("提示",{body:"当前网络"})
 })
-
+window.addEventListener("offline",(){
+new Notification("提示",{body:"当前网络"})
+})
 ```
