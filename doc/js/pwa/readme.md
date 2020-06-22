@@ -83,7 +83,7 @@ install
 activate
 fetch
 wx.js
-
+```
 self.addEventListener("install",()=>{
 console.log()
 })
@@ -95,6 +95,7 @@ console.log()
 self.addEventListener("fetch",()=>{
 console.log()
 })
+```
 
 install
 是在安装第一次的触发和在wx.js改变时候触发
@@ -135,3 +136,59 @@ caches.match()
 install事件获取缓存
 activate事件清除缓存
 fetch事件设置缓存
+```
+const CACHENAME="cachekey"
+self.addEventListener("install",async ()=>{
+ await caches.open(CACHENAME);
+ await caches.addAll("/index.html","/logo.png")
+ await self.skipWaiting()
+})
+
+self.addEventListener("activate",async()=>{
+  await keys = cache.keys();
+  keys.forEach(key=>{
+    if(key!=CACHENAME){
+      caches.delete(key)
+    }
+  })
+  await self.clients.claim()
+})
+
+self.addEventListener("fetch",async (e)=>{
+const req = e.request
+e.respondWith(networkFirst(req))
+})
+
+function async networkFirst(req){
+  try{
+    var first =await fetch(req);
+    return first;
+  }catch(){
+    var c = await caches.open(CACHENAME);
+    var cacheReq = await c.match(req);
+    return cacheReq
+  }
+}
+```
+notification
+```
+Notification.permission
+Notification.requestPermission
+
+//default:咨询
+//denied:拒绝
+//granted:允许
+
+navigator.online来判断是否有网络
+
+if(Notification.permission=="default"){
+  Notification.requestPermission()
+}
+if(!window.navigator.online){
+new Notification("提示","当前网络")
+}
+window.addEventListener("online",(){
+new Notification("提示","当前网络")
+})
+
+```
