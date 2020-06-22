@@ -185,10 +185,10 @@ if(Notification.permission=="default"){
   Notification.requestPermission()
 }
 if(!window.navigator.online){
-new Notification("提示","当前网络")
+new Notification("提示",{body:"当前网络"})
 }
 window.addEventListener("online",(){
-new Notification("提示","当前网络")
+new Notification("提示",{body:"当前网络"})
 })
 
 ```
