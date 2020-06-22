@@ -129,3 +129,9 @@ caches.put(req,res)
 caches.add(url)
 caches.addAll(urls)
 caches.match()
+
+
+
+install事件获取缓存
+activate事件清除缓存
+fetch事件设置缓存
