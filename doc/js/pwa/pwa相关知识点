@@ -20,7 +20,7 @@ sw本身缓存怎么办
 
 fetch会拦截整个浏览器的请求，意味着不同窗口的请求也会触发·
 
-当wx.js文件改变时候，需要被请求之后才会触发install
+当wx.js文件改变时候，需要被请求之后才会触发install（wx为啥不能自动更新？）
 
 窗口打开页面wx.js会chrome会提示注册删除不掉
 
@@ -35,3 +35,16 @@ fetch会拦截整个浏览器的请求，意味着不同窗口的请求也会触
 触发流程 register - > install ->activate
 如果注册不在onload里面触发
 触发流程  install -> activate -> register 
+why?
+
+刷新页面每次都可以触发register，但是不会触发install
+
+为啥第二次注册没看到fetch捕获当前页面刷新的资源？为啥跨页面的请求可以fetch，而本地的里面并没有？
+
+
+这里首先执行了一个event.waitUntil函数，该函数是service worker标准提供的函数，接收一个promise参数，并且监听函数内所有的promise,只要有一个promise的结果是reject，那么这次安装就会失败。
+比如说cache.addAll 时，有一个资源下载不回来
+
+activate这个事件在第一次注册的时候会随着install触发，install第二次触发时候activate就处于等待触发，但没触发，application里面就会看到两个workerservice，
+elf.skipWaiting()这个就是手动触发activate
+
