@@ -51,3 +51,8 @@ elf.skipWaiting()这个就是手动触发activate
 https://blog.csdn.net/VhWfR2u02Q/article/details/84801178
 
 https://blog.csdn.net/chuogun0812/article/details/100766104
+
+如何再chorme中设置里面有 "安装..."
+
+那么必须在manifest.json要有192这个尺寸的icons
+
