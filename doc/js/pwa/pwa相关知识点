@@ -48,4 +48,4 @@ why?
 activate这个事件在第一次注册的时候会随着install触发，install第二次触发时候activate就处于等待触发，但没触发，application里面就会看到两个workerservice，
 elf.skipWaiting()这个就是手动触发activate
 
-
+https://blog.csdn.net/VhWfR2u02Q/article/details/84801178
