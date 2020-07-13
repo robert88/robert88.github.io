@@ -56,3 +56,4 @@ https://blog.csdn.net/chuogun0812/article/details/100766104
 
 那么必须在manifest.json要有192这个尺寸的icons
 
+本节课讲介绍三款能够帮助开发者快速编写 Service Worker 的成熟工具：sw-precache, sw-toolbox 和 workbox。
