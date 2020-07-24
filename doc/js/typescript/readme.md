@@ -385,3 +385,32 @@ handleEvent(document.getElementById('world'), 'dblclick'); // 报错，event 不
 常数项（constant member）和计算所得项（computed member）。
 
 // index.ts(7,47): error TS2345: Argument of type '"dblclick"' is not assignable to parameter of type 'EventNames'.
+
+接口（Interfaces）可以用于对「对象的形状（Shape）」进行描述。
+
+## 常见的面向对象语言中，接口是不能继承类的，但是在 TypeScript 中却是可以的：
+ ```
+class Point {
+    x: number;
+    y: number;
+    constructor(x: number, y: number) {
+        this.x = x;
+        this.y = y;
+    }
+}
+
+interface Point3d extends Point {
+    z: number;
+}
+
+let point3d: Point3d = {x: 1, y: 2, z: 3};
+```
+## 当我们在声明 class Point 时，除了会创建一个名为 Point 的类之外，同时也创建了一个名为 Point 的类型（实例的类型）
+```
+const p = new Point(1, 2);
+
+function printPoint(p: Point) {
+    console.log(p.x, p.y);
+}
+
+```
