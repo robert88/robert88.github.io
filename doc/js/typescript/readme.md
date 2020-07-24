@@ -416,7 +416,15 @@ function printPoint(p: Point) {
 ```
 
 ### 范型
+
+```
+function name<T>(args){
+    //可以使用T做为类型
+    }
+
+```
 在函数内部使用泛型变量的时候，由于事先不知道它是哪种类型，所以不能随意的操作它的属性或方法：
+
 
 ```
 interface Lengthwise {
@@ -428,3 +436,64 @@ function loggingIdentity<T extends Lengthwise>(arg: T): T {
     return arg;
 }
 ```
+
+### 泛型接口
+```
+//普通接口
+interface SearchFunc {
+  (source: string, subString: string): boolean;
+}
+//泛型接口
+interface CreateArrayFunc {
+    <T>(length: number, value: T): Array<T>;
+}
+interface CreateArrayFunc<T> {
+    (length: number, value: T): Array<T>;
+}
+```
+
+### 范型类
+```
+
+与泛型接口类似，泛型也可以用于类的类型定义中：
+
+class GenericNumber<T> {
+    zeroValue: T;
+    add: (x: T, y: T) => T;
+}
+
+let myGenericNumber = new GenericNumber<number>();
+```
+这样通过范型传递了类型
+
+可以定义一个默认类型
+```
+function createArray<T = string>(length: number, value: T): Array<T> {
+    let result: T[] = [];
+    for (let i = 0; i < length; i++) {
+        result[i] = value;
+    }
+    return result;
+}
+```
+
+### 合并的属性的类型必须是唯一的：
+
+```
+interface Alarm {
+    price: number;
+}
+interface Alarm {
+    price: number;  // 虽然重复了，但是类型都是 `number`，所以不会报错
+    weight: number;
+}
+interface Alarm {
+    price: number;
+}
+interface Alarm {
+    price: string;  // 类型不一致，会报错
+    weight: number;
+}
+```
+
+                            
