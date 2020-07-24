@@ -496,4 +496,119 @@ interface Alarm {
 }
 ```
 
-                            
+ ### eslint
+ 
+存在的问题	tsc 是否报错	eslint 是否报错
+应该使用 let 或 const 而不是 var	❌	✅
+myName 被误写成了 myNane	✅	✅
+toString 被误写成了 toStrng	✅️	❌
+
+npm install --save-dev eslint
+npm install --save-dev typescript @typescript-eslint/parser
+npm install --save-dev @typescript-eslint/eslint-plugin
+
+配置文件
+//.eslintrc.js
+module.exports = {
+    parser: '@typescript-eslint/parser',
+    plugins: ['@typescript-eslint'],
+    rules: {
+        // 禁止使用 var
+        'no-var': "error",
+        // 优先使用 interface 而不是 type
+        '@typescript-eslint/consistent-type-definitions': [
+            "error",
+            "interface"
+        ]
+    }
+}
+
+vs code
+setting.json
+{
+    "eslint.validate": [
+        "javascript",
+        "javascriptreact",
+        "typescript"
+    ],
+    "typescript.tsdk": "node_modules/typescript/lib"
+}
+
+自动修复功能
+{
+    "eslint.autoFixOnSave": true,
+    "eslint.validate": [
+        "javascript",
+        "javascriptreact",
+        {
+            "language": "typescript",
+            "autoFix": true
+        },
+    ],
+    "typescript.tsdk": "node_modules/typescript/lib"
+}
+
+格式化代码
+npm install --save-dev prettier
+
+然后创建一个 prettier.config.js 文件，里面包含 Prettier 的配置项。Prettier 的配置项很少，这里我推荐大家一个配置规则，作为参考：
+
+// prettier.config.js or .prettierrc.js
+module.exports = {
+    // 一行最多 100 字符
+    printWidth: 100,
+    // 使用 4 个空格缩进
+    tabWidth: 4,
+    // 不使用缩进符，而使用空格
+    useTabs: false,
+    // 行尾需要有分号
+    semi: true,
+    // 使用单引号
+    singleQuote: true,
+    // 对象的 key 仅在必要时用引号
+    quoteProps: 'as-needed',
+    // jsx 不使用单引号，而使用双引号
+    jsxSingleQuote: false,
+    // 末尾不需要逗号
+    trailingComma: 'none',
+    // 大括号内的首尾需要空格
+    bracketSpacing: true,
+    // jsx 标签的反尖括号需要换行
+    jsxBracketSameLine: false,
+    // 箭头函数，只有一个参数的时候，也需要括号
+    arrowParens: 'always',
+    // 每个文件格式化的范围是文件的全部内容
+    rangeStart: 0,
+    rangeEnd: Infinity,
+    // 不需要写文件开头的 @prettier
+    requirePragma: false,
+    // 不需要自动在文件开头插入 @prettier
+    insertPragma: false,
+    // 使用默认的折行标准
+    proseWrap: 'preserve',
+    // 根据显示样式决定 html 要不要折行
+    htmlWhitespaceSensitivity: 'css',
+    // 换行符使用 lf
+    endOfLine: 'lf'
+};
+
+
+.vscode/settings.json：
+
+{
+    "files.eol": "
+",
+    "editor.tabSize": 4,
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "eslint.autoFixOnSave": true,
+    "eslint.validate": [
+        "javascript",
+        "javascriptreact",
+        {
+            "language": "typescript",
+            "autoFix": true
+        }
+    ],
+    "typescript.tsdk": "node_modules/typescript/lib"
+}
