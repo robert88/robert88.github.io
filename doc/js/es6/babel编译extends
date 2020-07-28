@@ -1,0 +1,14 @@
+class a extends b{
+  constructor(){
+    this.a =1;
+  }
+}
+上面代码es6可用执行，但是babel会报this为undefined
+
+解决方案
+class a extends b{
+  constructor(){
+  super()//
+    this.a =1;
+  }
+}
