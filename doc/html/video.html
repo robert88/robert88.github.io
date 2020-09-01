@@ -2,4 +2,10 @@
 那么如何解决这个问题，
 如果使用padding-top来撑开video，那么ie11兼容问题就是padding-top的精确度为小数点2位
 
-移动端视频，不能自动播放视频，而且只能同时播放一个视频
+移动端视频，不能自动播放视频，而且只能同时播放一个视频，需要用户点击
+否则会报
+DOMException: play() can only be initiated by a user gesture
+
+ios下微信版不能提前load(),也需要用户点击load
+
+
