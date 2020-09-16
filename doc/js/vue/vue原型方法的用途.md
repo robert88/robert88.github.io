@@ -1,3 +1,4 @@
+```
 $delete: ƒ del(target, key)
 $destroy: ƒ ()
 $emit: ƒ (event)
@@ -31,11 +32,11 @@ _t: ƒ renderSlot( name, fallback, props, bindObject )
 _u: ƒ resolveScopedSlots( fns, // see flow/vnode res, // the following are added in 2.6 hasDynamicKeys, contentHashKey )
 _update: ƒ (vnode, hydrating)
 _v: ƒ createTextVNode(val)
+```
 
-
-https://www.cnblogs.com/dotnet261010/p/10223632.html
-$delete: ƒ del(target, key)
-$set: ƒ (target, key, val)
+https://www.cnblogs.com/dotnet261010/p/10223632.html  
+$delete: ƒ del(target, key)  
+$set: ƒ (target, key, val)  
 
 $set重要观点
 如果在实例创建之后添加新的属性到实例上，不会触发视图更新。
