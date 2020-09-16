@@ -53,3 +53,38 @@ delete target[key];
     // 核心就是在删除后通知了依赖更新
     ob.dep.notify();
 ```
+
+
+$destroy
+$remove
+https://segmentfault.com/q/1010000011521940
+https://ask.csdn.net/questions/274528
+https://blog.csdn.net/zjh1002492540/article/details/79603584
+
+$destroy只是完全销毁一个实例。清理它与其它实例的连接，解绑它的全部指令及事件监听器。并不能清除已有的页面上的DOM，
+remove 只是会清除掉这个实例渲染到页面上的dom节点，绑定的实例并没有清除
+
+
+$emit
+1.父组件可以使用 props 把数据传给子组件。
+1.子组件可以使用 $emit 触发父组件的自定义事件。
+$off
+$on
+$once
+
+$forceUpdate
+http://www.qiutianaimeili.com/html/page/2019/03/7802qotr1x9.html
+vue强制更新$forceUpdate()
+调用强制更新方法this.$forceUpdate()会更新视图和数据，触发updated生命周期。
+
+$inspect
+是vue的debug工具，具体用法未知
+
+$nextTick
+https://www.cnblogs.com/jin-zhe/p/9985436.html
+this.$nextTick()将回调延迟到下次 DOM 更新循环之后执行
+如
+而在created()里使用this.$nextTick()可以等待dom生成以后再来获取dom对象
+
+$watch
+提供了一种分离式的写法
