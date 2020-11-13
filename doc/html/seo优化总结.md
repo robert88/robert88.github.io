@@ -13,3 +13,20 @@ SEO    quake工具使用
 https://chrome.google.com/webstore/category/extensions?hl=zh-CN
 2、	搜索扩展程序SEOquake，点击添加。即可安装成功
 
+seo规范
+
+SEM第一条开始  搜索营销
+seo第二条开始 
+
+
+spider -> huawei confidential -> siteMap/站内互链
+站内优化
+
+页面内容和结构符合搜索引擎是规则
+被搜索引擎收录
+
+站外优化
+
+外链（数量、质量、链接关键词）
+社媒分享（fb twitter linkedin）
+
