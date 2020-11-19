@@ -3,8 +3,7 @@ var githubPage //github代码列表页
 var githubUrl //github代码访问地址
 
 //请求页面数据
-function getDataByUrl(url) {
-  url = githubPage + url;
+function loadPageHtml(url) {
   try {
     console.log("请求url", url)
     var res = http.get(url, {});
@@ -15,14 +14,19 @@ function getDataByUrl(url) {
   return "";
 }
 //解析页面数据 得到文件的更新时间
-function parseTreeData(obj, url) {
-  var data = getDataByUrl(url);
+function parseTreeData( githubPage,localPath) {
+  var html = loadPageHtml(githubPage);
   var parentDir = parentDir || "";
   var obj = obj || { dirs: {}, files: {} };
-  var ol = parse("table", data);
+
+  //得到内容
+  var ol = parse("table", html);
+
   if (ol && ol[0]) {
     var li = parse("tbody", ol[0].template)
+
     li = li[li.length - 1];
+
     if (li) {
       var tr = parse("tr", li.template);
       tr.forEach(function(t) {
@@ -98,17 +102,14 @@ function w(name, localname, res) {
   t("更新成功" + name)
 }
 
-module.exports = function(url, page,local) {
-  console.log(module)
-  githubPage = page; //github代码列表页
-  githubUrl = url //github代码访问地址
-  localUrl = local //github代码访问地址
-  var cacheInfo;
+module.exports = function(githubPage,localPath) {
+
+
   if (files.exists("./cache.js")) {
     cacheInfo = require("./cache.js")
   }
-
-  var treedata = parseTreeData(null, "", "");
+  //解析github文件列表
+  var treedata = parseTreeData(githubPage,localPath);
 
   writeTree(treedata,cacheInfo)
 
