@@ -131,13 +131,12 @@ var currpackage;
   global.http={
     get(url){
       var ret;
-      if(url=="https://github.com/robert88/robert88.github.io/tree/8669023de0f1af586008a21438cb97bee2c20e10/autojs/demo/"){
-        ret = wake.readData(rootPath+"/res/index.html")
-      }else if(url.indexOf("https://github.com/robert88/robert88.github.io/tree/8669023de0f1af586008a21438cb97bee2c20e10/autojs/demo/")!=-1){
-        ret =wake.readData(rootPath+"/res/index2.html")
+      if(url=="https://github.com/robert88/robert88.github.io/file-list/master/autojs/demo"){
+        ret = wake.readData(rootPath+"/res/demo.html")
       }else{
-        ret =wake.readData(rootPath+url.replace("https://raw.githubusercontent.com/robert88/robert88.github.io/master/autojs/demo","."))
+        ret = wake.readData(rootPath+"/res/lib.html")
       }
+
       return {
         body:{string(){
           return ret;

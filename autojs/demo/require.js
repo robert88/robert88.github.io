@@ -1,5 +1,6 @@
 //调试
 if(global&&!global.app){
+  global.debugger = true;
   require("./lib/debugfix.js");
 }else{
   if(!global.__dirname){
@@ -14,4 +15,4 @@ console.log("缓存已清除")
 
 
 
-history("https://github.com/robert88/robert88.github.io/tree/master/autojs/demo","./build/")
+history("https://github.com/robert88/robert88.github.io/file-list/master/autojs/demo","https://robert88.github.io/autojs/demo")

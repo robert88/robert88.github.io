@@ -70,42 +70,42 @@ function find(content, tag, className,attrsName) {
   return ""
 }
 
-function parseTreeData(githubPage) {
+function parseTreeData(githubPage,obj) {
   var html = loadPageHtml(githubPage);
   var parentDir = parentDir || "";
   var obj = obj || { dirs: {}, files: {} };
 
   //得到内容
-  var content = parse("main", html);
-  content = find(content[0], "div","row","role");
+  var content = find({innerHTML:html}, "div","row","role");
   content.forEach(item => {
     if (~item.attrs["class"].indexOf("py-2")) {
       item = find(item,  "div");
       var isDir = ~item[0].template.indexOf('aria-label="Directory"');
-      var filename = find(item[1], 0, "a").innerHTML
-      var time = new Date(find(item[3], 0, "time-ago").attrs.datetime).getTime()
+      var filename = find(item[1],  "a")[0].innerHTML
+      var time = new Date(find(item[3],  "time-ago")[0].attrs.datetime).getTime()
       if (isDir) {
         obj.dirs[githubPage + "/" + filename] = time;
-        parseTreeData(githubPage + "/" + filename)
+        parseTreeData(githubPage + "/" + filename,obj)
       } else {
         obj.files[githubPage + "/" + filename] = time;
       }
     }
   })
+  return obj;
 }
 
 //写文件
-function writeTree(obj, cache) {
-  for (var dir in obj.dirs) {
-    writeTree(obj.dirs[dir], cache && cache[dir]);
-  }
-  for (var file in obj.files) {
-    var notModify = cache && cache[file] && cache[file].time.getTime() == obj.files[file].time.getTime()
+function writeTree(treedata, cacheInfo,githubPage,githubLoad) {
+
+  for (var file in treedata.files) {
+    var notModify = cacheInfo && cacheInfo[file] == treedata.files[file];
+    var loadFile = file.replace(githubPage,githubLoad);
+    var localFile = file.replace(githubPage,"");
     //时间不一致
     if (!notModify) {
-      r(obj.files[file].absolute, localUrl + obj.files[file].absolute);
+      r(loadFile, localFile);
     } else {
-      console.info(obj.files[file].absolute, "is not modify")
+      console.info(file.replace(githubPage), "is not modify")
     }
   }
 }
@@ -113,13 +113,12 @@ function writeTree(obj, cache) {
 
 
 /**ajax请求 */
-function r(name, localname) {
+function r(loadFile, localFile) {
 
-  var url = githubUrl + name;
-  console.log("请求", url, "写入文件", localname)
+  console.log("请求", loadFile, "写入文件", localFile)
   try {
-    var res = http.get(url, {});
-    w(name, localname, res)
+    var res = http.get(loadFile, {});
+    w(localFile, res)
   } catch (e) {
     console.log(e.stack)
     t("更新失败" + name);
@@ -134,24 +133,27 @@ function t(msg) {
 }
 
 /*写文件*/
-function w(name, localname, res) {
+function w(localFile, res) {
+  if( global.debugger){
+    localFile = "build/"+localFile
+  }
   var content = res.body.string();
-  console.log("写入数据", localname)
-  files.ensureDir(localname)
-  files.write(localname, content);
-  t("更新成功" + name)
+  console.log("写入数据", localFile)
+  files.ensureDir(localFile)
+  files.write(localFile, content);
+  t("更新成功" + localFile)
 }
 
-module.exports = function(githubPage, localPath) {
+module.exports = function(githubPage, githubLoad) {
 
-
+  var cacheInfo ={}
   if (files.exists("./cache.js")) {
     cacheInfo = require("./cache.js")
   }
   //解析github文件列表
-  var treedata = parseTreeData(githubPage, localPath);
+  var treedata = parseTreeData(githubPage);
 
-  writeTree(treedata, cacheInfo)
+  writeTree(treedata, cacheInfo,githubPage,githubLoad)
 
   files.write("./cache.js", "module.exports=" + JSON.stringify(treedata))
 
