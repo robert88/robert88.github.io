@@ -9,7 +9,7 @@ function loadPageHtml(url) {
     var res = http.get(url, {});
     return res.body.string();
   } catch (e) {
-    console.log("请求失败", url, e.stack)
+    console.log("请求失败",e.message, url, e.stack)
   }
   return "";
 }
@@ -120,8 +120,9 @@ function r(loadFile, localFile) {
     var res = http.get(loadFile, {});
     w(localFile, res)
   } catch (e) {
-    console.log(e.stack)
-    t("更新失败" + name);
+      console.log(e)
+      console.log(e.stack);
+    t("更新失败" + localFile);
   }
 
 }
@@ -135,8 +136,10 @@ function t(msg) {
 /*写文件*/
 function w(localFile, res) {
   if( global.debugger){
-    localFile = "build/"+localFile
-  }
+      localFile = "build/"+localFile;
+  }else{
+      localFile = "../"+ localFile;
+      }
   var content = res.body.string();
   console.log("写入数据", localFile)
   files.ensureDir(localFile)
