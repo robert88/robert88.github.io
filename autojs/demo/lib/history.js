@@ -7,6 +7,7 @@ function loadPageHtml(url) {
   try {
     console.log("请求url", url)
     var res = http.get(url, {});
+    sleep(5000);
     return res.body.string();
   } catch (e) {
     console.log("请求失败", e.message, url, e.stack)
@@ -124,16 +125,17 @@ function r(loadFile, localFile) {
   try {
     console.log("请求：", loadFile, " 即将写入文件：", localFile)
     var res = http.get(loadFile, {});
+    sleep(5000)
      content = res.body.string();
   } catch (e) {
     console.log(e)
     console.log(e.stack);
-    t("更新失败" + localFile);
+
   }
   try {
     w(localFile,  content )
   } catch (e) {
-
+    t("更新失败" + localFile);
   }
 
 }
@@ -149,9 +151,10 @@ function w(localFile,  content ) {
   if (global.debugger) {
     localFile = ("build/" + localFile).replace(/\/+/g, "/");
   } else {
-    localFile = (localFile).replace(/^\//g, "");
+    localFile = "./"+(localFile).replace(/\/+/g, "/");
   }
   console.log("写入数据到文件：", localFile)
+  sleep(2000)
   files.ensureDir(localFile)
   files.write(localFile, content);
   t("更新成功" + localFile)
