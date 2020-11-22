@@ -149,7 +149,7 @@ function w(localFile,  content ) {
   if (global.debugger) {
     localFile = ("build/" + localFile).replace(/\/+/g, "/");
   } else {
-    localFile = ("./" + localFile).replace(/\/+/g, "/");
+    localFile = (localFile).replace(/^\//g, "");
   }
   console.log("写入数据到文件：", localFile)
   files.ensureDir(localFile)
