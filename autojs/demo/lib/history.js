@@ -9,7 +9,7 @@ function loadPageHtml(url) {
     var res = http.get(url, {});
     return res.body.string();
   } catch (e) {
-    console.log("请求失败",e.message, url, e.stack)
+    console.log("请求失败", e.message, url, e.stack)
   }
   return "";
 }
@@ -54,12 +54,12 @@ function loadPageHtml(url) {
 //   }
 //   return obj;
 // }
-function find(content, tag, className,attrsName) {
+function find(content, tag, className, attrsName) {
   if (content) {
     var li = parse(tag, content.innerHTML)
-    if(className&&attrsName){
+    if (className && attrsName) {
       li = li.filter(item => {
-        if ((item.attrs&&item.attrs[attrsName]&&item.attrs[attrsName]==className)) {
+        if ((item.attrs && item.attrs[attrsName] && item.attrs[attrsName] == className)) {
           return true
         }
         return false
@@ -70,22 +70,27 @@ function find(content, tag, className,attrsName) {
   return ""
 }
 
-function parseTreeData(githubPage,obj) {
+function parseTreeData(githubPage, obj) {
   var html = loadPageHtml(githubPage);
   var parentDir = parentDir || "";
-  var obj = obj || { dirs: {}, files: {} };
+  var obj = obj || {
+    dirs: {},
+    files: {}
+  };
 
   //得到内容
-  var content = find({innerHTML:html}, "div","row","role");
+  var content = find({
+    innerHTML: html
+  }, "div", "row", "role");
   content.forEach(item => {
     if (~item.attrs["class"].indexOf("py-2")) {
-      item = find(item,  "div");
+      item = find(item, "div");
       var isDir = ~item[0].template.indexOf('aria-label="Directory"');
-      var filename = find(item[1],  "a")[0].innerHTML
-      var time = new Date(find(item[3],  "time-ago")[0].attrs.datetime).getTime()
+      var filename = find(item[1], "a")[0].innerHTML
+      var time = new Date(find(item[3], "time-ago")[0].attrs.datetime).getTime()
       if (isDir) {
         obj.dirs[githubPage + "/" + filename] = time;
-        parseTreeData(githubPage + "/" + filename,obj)
+        parseTreeData(githubPage + "/" + filename, obj)
       } else {
         obj.files[githubPage + "/" + filename] = time;
       }
@@ -95,12 +100,12 @@ function parseTreeData(githubPage,obj) {
 }
 
 //写文件
-function writeTree(treedata, cacheInfo,githubPage,githubLoad) {
+function writeTree(treedata, cacheInfo, githubPage, githubLoad) {
 
   for (var file in treedata.files) {
     var notModify = cacheInfo && cacheInfo[file] == treedata.files[file];
-    var loadFile = file.replace(githubPage,githubLoad);
-    var localFile = file.replace(githubPage,"");
+    var loadFile = file.replace(githubPage, githubLoad);
+    var localFile = file.replace(githubPage, "");
     //时间不一致
     if (!notModify) {
       r(loadFile, localFile);
@@ -114,15 +119,21 @@ function writeTree(treedata, cacheInfo,githubPage,githubLoad) {
 
 /**ajax请求 */
 function r(loadFile, localFile) {
+  var content 
 
-  console.log("请求", loadFile, "写入文件", localFile)
   try {
+    console.log("请求：", loadFile, " 即将写入文件：", localFile)
     var res = http.get(loadFile, {});
-    w(localFile, res)
+     content = res.body.string();
   } catch (e) {
-      console.log(e)
-      console.log(e.stack);
+    console.log(e)
+    console.log(e.stack);
     t("更新失败" + localFile);
+  }
+  try {
+    w(localFile,  content )
+  } catch (e) {
+
   }
 
 }
@@ -134,29 +145,28 @@ function t(msg) {
 }
 
 /*写文件*/
-function w(localFile, res) {
-  if( global.debugger){
-      localFile = "build/"+localFile;
-  }else{
-      localFile = "../"+ localFile;
-      }
-  var content = res.body.string();
-  console.log("写入数据", localFile)
+function w(localFile,  content ) {
+  if (global.debugger) {
+    localFile = ("build/" + localFile).replace(/\/+/g, "/");
+  } else {
+    localFile = ("./" + localFile).replace(/\/+/g, "/");
+  }
+  console.log("写入数据到文件：", localFile)
   files.ensureDir(localFile)
   files.write(localFile, content);
   t("更新成功" + localFile)
 }
 
-module.exports = function(githubPage, githubLoad) {
+module.exports = function (githubPage, githubLoad) {
 
-  var cacheInfo ={}
+  var cacheInfo = {}
   if (files.exists("./cache.js")) {
-    cacheInfo = require("./cache.js")
+    cacheInfo = require("../cache.js")
   }
   //解析github文件列表
   var treedata = parseTreeData(githubPage);
 
-  writeTree(treedata, cacheInfo,githubPage,githubLoad)
+  writeTree(treedata, cacheInfo, githubPage, githubLoad)
 
   files.write("./cache.js", "module.exports=" + JSON.stringify(treedata))
 

@@ -47,6 +47,7 @@ function ontime(){
 var workstatus;
 app.g(launchApp,"com.tencent.wework",0,function(){
   workstatus = ontime();
+  console.log(workstatus)
   return workstatus&&(currentPackage() != "com.tencent.wework")
 },"1-启动企业微信")
 
