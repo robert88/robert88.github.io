@@ -1,64 +1,64 @@
 pre {
   overflow-x: auto;
 }
-.makedown pre {
+.markdown pre {
   margin-top: 10px;
   border: 8px solid #e0dfcc;
   border-radius: 8px;
   padding: 0;
 }
-.makedown h1 {
+.markdown h1 {
   padding-top: 10px;
   color: #000;
 }
-.makedown h2 {
+.markdown h2 {
   padding-top: 10px;
   color: #000;
 }
-.makedown h3 {
+.markdown h3 {
   padding-top: 10px;
   color: #000;
 }
-.makedown h4 {
+.markdown h4 {
   padding-top: 10px;
   color: #000;
 }
-.makedown h5 {
+.markdown h5 {
   padding-top: 10px;
   color: #000;
 }
-.makedown h6 {
+.markdown h6 {
   padding-top: 10px;
   color: #000;
 }
-.makedown hr {
+.markdown hr {
   border: none;
   border-bottom: 1px solid #C1DAD7;
   margin-top: 10px;
 }
-.makedown a {
+.markdown a {
   display: inline;
   color: #666;
   border-bottom: 1px solid #666;
   text-decoration: none;
   cursor: pointer;
 }
-.makedown a:hover {
+.markdown a:hover {
   color: #72b5ad;
   border-bottom: 1px solid #72b5ad;
 }
-.makedown p {
+.markdown p {
   padding-top: 10px;
 }
-.makedown img {
+.markdown img {
   max-width: 100%;
 }
-.makedown .list {
+.markdown .list {
   border: 1px solid #CCC;
   border-radius: 4px;
   margin-top: 10px;
 }
-.makedown .list li {
+.markdown .list li {
   cursor: pointer;
   display: block;
   padding: 8px 20px;
@@ -70,19 +70,19 @@ pre {
   -webkit-transition: all 0.4s ease;
   transition: all 0.4s ease;
 }
-.makedown .list li:hover {
+.markdown .list li:hover {
   color: #72b5ad;
 }
-.makedown .list li.open .more {
+.markdown .list li.open .more {
   -webkit-transform: rotate(-135deg) translate(0px, -12px);
       -ms-transform: rotate(-135deg) translate(0px, -12px);
           transform: rotate(-135deg) translate(0px, -12px);
 }
-.makedown .list li.open > ul {
+.markdown .list li.open > ul {
   display: block;
   margin-top: 0px;
 }
-.makedown .list li .more {
+.markdown .list li .more {
   -webkit-transition: all 0.4s ease;
   transition: all 0.4s ease;
   position: absolute;
@@ -96,32 +96,32 @@ pre {
           transform: rotate(45deg);
   right: 20px;
 }
-.makedown .list li:last-child {
+.markdown .list li:last-child {
   border-bottom: none;
 }
-.makedown .list li > ul {
+.markdown .list li > ul {
   margin-top: 8px;
   padding-left: 20px;
   display: none;
   font-size: 14px;
   border: none;
 }
-.makedown table {
+.markdown table {
   padding: 0;
   margin: 0;
   width: 100%;
   border-collapse: collapse;
   margin-top: 10px;
 }
-.makedown table td,
-.makedown table th {
+.markdown table td,
+.markdown table th {
   border: 1px solid #C1DAD7;
   background: #fff;
   font-size: 11px;
   padding: 6px 6px 6px 12px;
   color: #4f6b72;
 }
-.makedown .btn {
+.markdown .btn {
   cursor: pointer;
   border-radius: 3px;
   border-bottom: none;
@@ -129,20 +129,20 @@ pre {
   padding: 5px 8px;
   border: 1px solid #666;
 }
-.makedown .btn:hover {
+.markdown .btn:hover {
   border: 1px solid #333;
   color: #333;
 }
-.makedown .tl {
+.markdown .tl {
   text-align: left;
 }
-.makedown .tr {
+.markdown .tr {
   text-align: right;
 }
-.makedown .tc {
+.markdown .tc {
   text-align: center;
 }
-.makedown .col {
+.markdown .col {
   list-style: none;
   padding-left: 0;
   display: -webkit-box;
@@ -152,156 +152,156 @@ pre {
   margin: -5px;
 }
 @media (max-width: 992px) {
-  .makedown .col {
+  .markdown .col {
     display: block;
   }
 }
-.makedown .col:after,
-.makedown .col::before {
+.markdown .col:after,
+.markdown .col::before {
   clear: both;
   content: "";
   display: block;
 }
-.makedown .col .col1 {
+.markdown .col .col1 {
   width: 8.33333333%;
   padding: 5px;
 }
 @media (max-width: 992px) {
-  .makedown .col .col1 {
+  .markdown .col .col1 {
     width: 100%;
   }
 }
-.makedown .col .col1 .first-inner {
+.markdown .col .col1 .first-inner {
   padding-top: 0;
   margin-top: 0;
 }
-.makedown .col .col2 {
+.markdown .col .col2 {
   width: 16.66666667%;
   padding: 5px;
 }
 @media (max-width: 992px) {
-  .makedown .col .col2 {
+  .markdown .col .col2 {
     width: 100%;
   }
 }
-.makedown .col .col2 .first-inner {
+.markdown .col .col2 .first-inner {
   padding-top: 0;
   margin-top: 0;
 }
-.makedown .col .col3 {
+.markdown .col .col3 {
   width: 25%;
   padding: 5px;
 }
 @media (max-width: 992px) {
-  .makedown .col .col3 {
+  .markdown .col .col3 {
     width: 100%;
   }
 }
-.makedown .col .col3 .first-inner {
+.markdown .col .col3 .first-inner {
   padding-top: 0;
   margin-top: 0;
 }
-.makedown .col .col4 {
+.markdown .col .col4 {
   width: 33.33333333%;
   padding: 5px;
 }
 @media (max-width: 992px) {
-  .makedown .col .col4 {
+  .markdown .col .col4 {
     width: 100%;
   }
 }
-.makedown .col .col4 .first-inner {
+.markdown .col .col4 .first-inner {
   padding-top: 0;
   margin-top: 0;
 }
-.makedown .col .col5 {
+.markdown .col .col5 {
   width: 41.66666667%;
   padding: 5px;
 }
 @media (max-width: 992px) {
-  .makedown .col .col5 {
+  .markdown .col .col5 {
     width: 100%;
   }
 }
-.makedown .col .col5 .first-inner {
+.markdown .col .col5 .first-inner {
   padding-top: 0;
   margin-top: 0;
 }
-.makedown .col .col6 {
+.markdown .col .col6 {
   width: 50%;
   padding: 5px;
 }
 @media (max-width: 992px) {
-  .makedown .col .col6 {
+  .markdown .col .col6 {
     width: 100%;
   }
 }
-.makedown .col .col6 .first-inner {
+.markdown .col .col6 .first-inner {
   padding-top: 0;
   margin-top: 0;
 }
-.makedown .col .col7 {
+.markdown .col .col7 {
   width: 58.33333333%;
   padding: 5px;
 }
 @media (max-width: 992px) {
-  .makedown .col .col7 {
+  .markdown .col .col7 {
     width: 100%;
   }
 }
-.makedown .col .col7 .first-inner {
+.markdown .col .col7 .first-inner {
   padding-top: 0;
   margin-top: 0;
 }
-.makedown .col .col8 {
+.markdown .col .col8 {
   width: 66.66666667%;
   padding: 5px;
 }
 @media (max-width: 992px) {
-  .makedown .col .col8 {
+  .markdown .col .col8 {
     width: 100%;
   }
 }
-.makedown .col .col8 .first-inner {
+.markdown .col .col8 .first-inner {
   padding-top: 0;
   margin-top: 0;
 }
-.makedown .col .col9 {
+.markdown .col .col9 {
   width: 75%;
   padding: 5px;
 }
 @media (max-width: 992px) {
-  .makedown .col .col9 {
+  .markdown .col .col9 {
     width: 100%;
   }
 }
-.makedown .col .col9 .first-inner {
+.markdown .col .col9 .first-inner {
   padding-top: 0;
   margin-top: 0;
 }
-.makedown .col .col10 {
+.markdown .col .col10 {
   width: 83.33333333%;
   padding: 5px;
 }
 @media (max-width: 992px) {
-  .makedown .col .col10 {
+  .markdown .col .col10 {
     width: 100%;
   }
 }
-.makedown .col .col10 .first-inner {
+.markdown .col .col10 .first-inner {
   padding-top: 0;
   margin-top: 0;
 }
-.makedown .col .col11 {
+.markdown .col .col11 {
   width: 91.66666667%;
   padding: 5px;
 }
 @media (max-width: 992px) {
-  .makedown .col .col11 {
+  .markdown .col .col11 {
     width: 100%;
   }
 }
-.makedown .col .col11 .first-inner {
+.markdown .col .col11 .first-inner {
   padding-top: 0;
   margin-top: 0;
 }
