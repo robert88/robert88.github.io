@@ -1,1 +1,48 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>robert88 page</title><script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script></head><body>
+
+
+ <div class="markdown">
+ 
+## 函数作用域
+var function
+变量提升
+变量多次声明不提示错误
+
+var a = b();
+function b(){};
+
+## 块级作用域
+let const
+这些都不能重复定义
+不能变量提升
+{}外不起效
+
+## 字符模板
+   可以使用${表达式}
+   可以换行
+   可以嵌套
+   `abdcd${`ddsfsd`}`
+  
+ ## 带标签的模板字 符串
+   function template($all,$1,$2,$3){}
+ template`${0}${1}${0}!`//调用template,并且按$分割
+ </div>
+  
+  ## 原生字符串（含转义符）
+  在标签函数的第一个参数中，存在一个特殊的属性raw 
+  String.raw()
+
+  var str1= `Hi\n${2+3}!`
+  var str2 = String.raw`Hi\n${2+3}!`;
+  str1.length;
+  str2.length;
+  
+  
+  Unicode字符以"\u"开头，例如\u00A9
+  Unicode码位用"\u{}"表示，例如\u{2F804}
+  十六进制以"\x"开头，例如\xA9
+  八进制以"\"和数字开头，例如\251
+  
+</body><script id="removeScript">$.ajax({url:"https://robert88.github.io/page/common.html",success:function(ret){var aja = $("#removeScript").html();var s=$("body").html().replace(aja,"");if(~ret.indexOf("-RAP-CONTENT-")){$("body").html(ret.replace("-RAP-CONTENT-",s))}else{$("body").html(ret+s)};}})</script></html>
+
 
