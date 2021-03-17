@@ -42,12 +42,24 @@
         return fullScreenElement && fullScreenElement.tagName == "VIDEO"
       }
     
-    $(document).on("click",function(){
-      setTimeout(function(){
-            alert(checkVideoPlaying());
-      },5000)
+//     $(document).on("click",function(){
+//       setTimeout(function(){
+//             alert(checkVideoPlaying());
+//       },5000)
 
     })
+    
+    f(element.requestFullscreen) {
+alert("requestFullscreen")
+} else if(element.mozRequestFullScreen) {
+alert("mozRequestFullScreen")
+} else if(element.webkitRequestFullscreen) {
+alert("webkitRequestFullscreen")
+} else if(element.msRequestFullscreen) {
+alert("msRequestFullscreen")
+}else{
+alert("no")
+}
   </script>
 
 </body><script id="removeScript">$("#loading").show();$.ajax({url:"https://robert88.github.io/page/common.html",success:function(ret){$("#loading").hide();var aja = $("#removeScript").html();var s=$("body").html().replace(aja,"");if(~ret.indexOf("-RAP-CONTENT-")){$("body").html(ret.replace("-RAP-CONTENT-",s))}else{$("body").html(ret+s)};}})</script></html>
