@@ -54,8 +54,29 @@
       },3000)
 
     })
+$("video")[0].addEventListener("fullscreenchange", function(e) {
 
+  console.log("fullscreenchange");
 
+});
+
+$("video")[0].addEventListener("mozfullscreenchange", function(e) {
+
+  console.log("mozfullscreenchange ");
+
+});
+
+$("video")[0].addEventListener("webkitfullscreenchange", function(e) {
+
+  console.log("webkitfullscreenchange");
+
+});
+
+$("video")[0].addEventListener("msfullscreenchange", function(e) {
+
+  console.log("msfullscreenchange");
+
+});
   </script>
 
 </body><script id="removeScript">$("#loading").show();$.ajax({url:"https://robert88.github.io/page/common.html",success:function(ret){$("#loading").hide();var aja = $("#removeScript").html();var s=$("body").html().replace(aja,"");if(~ret.indexOf("-RAP-CONTENT-")){$("body").html(ret.replace("-RAP-CONTENT-",s))}else{$("body").html(ret+s)};}})</script></html>
