@@ -30,6 +30,22 @@
     
 
   </div>
+  <video controls  muted="" class="scroll-autoplay" src="//e-file.huawei.com/mediares/MarketingMaterial_MCD/EBG/PUBLIC/zh/2021/03/f3ed18eb-39d2-4a2b-aa73-0dcd2c5fa4c5.mp4" x-webkit-airplay="false" preload="meta" playsinline="true" webkit-playsinline="true" x5-video-player-type="h5" x5-video-player-fullscreen="false" loop=""></video>
+  <script>
+  
+        function hasFullScreenElement() {
+        return document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement
+      }
+      //视频播放不刷新页面
+      function checkVideoPlaying() {
+        var fullScreenElement = hasFullScreenElement();
+        return fullScreenElement && fullScreenElement.tagName == "VIDEO"
+      }
+    
+    $(document).on("click",function(){
+    alert(checkVideoPlaying());
+    })
+  </script>
 
 </body><script id="removeScript">$("#loading").show();$.ajax({url:"https://robert88.github.io/page/common.html",success:function(ret){$("#loading").hide();var aja = $("#removeScript").html();var s=$("body").html().replace(aja,"");if(~ret.indexOf("-RAP-CONTENT-")){$("body").html(ret.replace("-RAP-CONTENT-",s))}else{$("body").html(ret+s)};}})</script></html>
 
