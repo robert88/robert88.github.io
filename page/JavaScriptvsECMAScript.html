@@ -32,9 +32,14 @@
   </div>
   <video controls  muted="" class="scroll-autoplay" src="//e-file.huawei.com/mediares/MarketingMaterial_MCD/EBG/PUBLIC/zh/2021/03/f3ed18eb-39d2-4a2b-aa73-0dcd2c5fa4c5.mp4" x-webkit-airplay="false" preload="meta" playsinline="true" webkit-playsinline="true" x5-video-player-type="h5" x5-video-player-fullscreen="false" loop=""></video>
   <script>
-  
+  function checkFull(){
+　　　　var isFull = document.fullscreenEnabled || window.fullScreen || document.webkitIsFullScreen || document.msFullscreenEnabled;
+　　　　if(isFull === undefined) isFull = false;
+　　　　return isFull;
+}
         function hasFullScreenElement() {
           alert($("video").width,$("video").height(),$(window).width(),$(window.height()))
+          alert(checkFull())
         return document.fullscreen || document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement
       }
       //视频播放不刷新页面
