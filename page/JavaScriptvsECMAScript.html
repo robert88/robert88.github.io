@@ -34,6 +34,7 @@
   <script>
   
         function hasFullScreenElement() {
+          alert($("video").width,$("video").height(),$(window).width(),$(window.height()))
         return document.fullscreen || document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement
       }
       //视频播放不刷新页面
@@ -45,7 +46,7 @@
     $(document).on("click",function(){
       setTimeout(function(){
             alert(checkVideoPlaying());
-      },5000)
+      },3000)
 
     })
 
