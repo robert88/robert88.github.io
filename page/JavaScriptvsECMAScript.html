@@ -48,33 +48,33 @@
         return fullScreenElement && fullScreenElement.tagName == "VIDEO"
       }
     
-    $(document).on("click",function(){
-      setTimeout(function(){
-            alert(checkVideoPlaying());
-      },3000)
+//     $(document).on("click",function(){
+//       setTimeout(function(){
+// //             alert(checkVideoPlaying());
+//       },3000)
 
-    })
+//     })
 $("video")[0].addEventListener("fullscreenchange", function(e) {
 
-  console.log("fullscreenchange");
+ alert("fullscreenchange");
 
 });
 
 $("video")[0].addEventListener("mozfullscreenchange", function(e) {
 
-  console.log("mozfullscreenchange ");
+  alert("mozfullscreenchange ");
 
 });
 
 $("video")[0].addEventListener("webkitfullscreenchange", function(e) {
 
-  console.log("webkitfullscreenchange");
+  alert("webkitfullscreenchange");
 
 });
 
 $("video")[0].addEventListener("msfullscreenchange", function(e) {
 
-  console.log("msfullscreenchange");
+  alert("msfullscreenchange");
 
 });
   </script>
