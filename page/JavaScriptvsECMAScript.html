@@ -34,7 +34,7 @@
   <script>
   
         function hasFullScreenElement() {
-        return document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement
+        return document.fullscreen || document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement
       }
       //视频播放不刷新页面
       function checkVideoPlaying() {
@@ -42,27 +42,13 @@
         return fullScreenElement && fullScreenElement.tagName == "VIDEO"
       }
     
-//     $(document).on("click",function(){
-//       setTimeout(function(){
-//             alert(checkVideoPlaying());
-//       },5000)
+    $(document).on("click",function(){
+      setTimeout(function(){
+            alert(checkVideoPlaying());
+      },5000)
 
-//     })
-    function l(element){
-    if(element.requestFullscreen) {
-alert("requestFullscreen")
-} else if(element.mozRequestFullScreen) {
-alert("mozRequestFullScreen")
-} else if(element.webkitRequestFullscreen) {
-alert("webkitRequestFullscreen")
-} else if(element.msRequestFullscreen) {
-alert("msRequestFullscreen")
-}else{
-alert("no")
-}
-    }
-    
-    l($("video")[0])
+    })
+
 
   </script>
 
