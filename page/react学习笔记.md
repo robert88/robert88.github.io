@@ -8,7 +8,7 @@
  yarn add antd
  ```
  
- 2、而外添加工程打包项( react-app-rewired(https://github.com/timarney/react-app-rewired) 和 customize-cra(https://github.com/arackaf/customize-cra) 也是可行的)
+ 2、而外添加工程打包项( (react-app-rewired,https://github.com/timarney/react-app-rewired) 和 customize-cra(https://github.com/arackaf/customize-cra) 也是可行的)
  
   ①添加less
 ```
