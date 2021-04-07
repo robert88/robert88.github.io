@@ -1,0 +1,412 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+
+	<title>Parallelogram</title>
+	<meta charset="utf-8">
+	<script type="text/javascript" src="scripts/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" src="scripts/jquery.ui.touch-punch.js"></script>
+	<link rel="stylesheet" type="text/css" href="../commonCss/common.css">
+</head> 
+<style>
+.info img{border-top:1px solid #eee;}
+.ansLayout,.anstext{float:left}
+.ansLayout{width:420px;height:206px;padding:20px 0}
+.anstext{width:320px;height:206px;padding:20px 0px 0px 0px;line-height:24px;}
+.anstext p{padding:10px 0px 0px 0px;}
+.anstext .content{width:269px;}
+.anstext .red{color:red;}
+</style>
+<body>
+<div class="ui border" style="position:relative;width: 800px; height: 600px; margin:0 auto;">
+	<div class="title " style="position: absolute; width: 316px; height: 45px; background-image: url(images/icon.png); background-repeat:no-repeat;"></div>
+	
+<!--画板-->
+<div class="user">
+
+	<div class="canvasPanel " style="position: absolute; width: 454px; height: 224px; left: 0px; top: 57px; text-align: left;">
+		<canvas style="position: absolute; left: 0px; top: 1px;" width="440" height="218" id="cvsbg"></canvas>
+		<canvas style="position: absolute; left: 0px; top: 1px;" width="440" height="218" id="cvsMouse"></canvas>
+		<canvas style="position: absolute; left: 0px; top: 1px;" width="440" height="218" id="cvs"></canvas>
+		<canvas style="position: absolute; left: 0px; top: 1px;" width="440" height="218" id="tip"></canvas>
+	</div>
+	<div class="ansui">
+		<!--题目-->
+			<!--1-->
+			<div  class="a " >
+				<div class="contain">
+					<span class="number">（a）</span>
+					<span class="content width-44">
+						這個三角形的 <span style="color:#00af50">底</span>是
+						<span class="num">
+							<input type="number" value="0" >
+						</span>cm,<span style="color:#e36c08">高</span>是
+						<span class="num">
+							<input type="number" value="0" >
+						</span>cm。
+					</span>
+				</div>
+				<div class="right hide left-5"></div>
+				<div class="wrong hide left-5"></div>
+				<div class="btn_blue left-6">
+					<input type="button"  value="核 對" id="checkA" onclick="check_A_answer(this);">
+				</div>
+			</div>
+			
+			<!--2-->
+			<div class="b hide ">
+				<div class="contain">
+					<span class="number">（b）</span>
+					<span class="content width-44">
+					怎樣計算這個三角形的面積 ? 可先把三角形複製，然後合併成另一個圖形，完成後按「確定」。
+					</span>
+				</div>
+				<div class="prompt hide width-44">
+					你懂得計算這個圖形的面積嗎？
+				</div>
+			
+				<div class="btn_red left-44" style=" top: -280px; ">
+					<input type="button" value="複 製"  onclick="clonePolygon(this)">
+				</div>
+				<div class="btn_red left-44" style="top: -220px;">
+					<input type="button" value="重 設"  onclick="canvasReset(this)">
+				</div>
+				<div class="btn_red left-44 " style=" top: -160px;">
+					<input type="button" value="確 定"  onclick="check_B_answer('connection')">
+				</div>
+				<div class="btn_blue calculate left-55" >
+					<input type="button"  value="計 算"  onclick="check_B_answer('calculate')">
+				</div>
+			</div>
+			
+			<!--3-->
+			<div class="c hide">
+				<div  class="contain ">
+					<span class="number">（c）</span>
+					<span class="content width-55">拼出的是一個
+						<select id="selectType" style="width:115px;">
+							<option value="parallelogram">平行四邊形</option>
+							<option value="square">正方形</option>
+							<option value="rectangle">長方形</option>
+						</select> ,它的面積是:
+						<span class="num">
+							<input type="number" value="0" >
+						</span>
+						×
+						<span class="num">
+							<input type="number" value="0" >
+						</span>
+						<br>
+						<span style="display:inline-block;width:331px;height:20px;"></span>
+						=
+						<span class="num">
+							<input type="number" value="0" >
+						</span>					
+						（cm<sup>2</sup>）
+						<br>
+						所以原來的三角形的面積是
+						<span class="num">
+							<input type="number" value="0" >
+						</span>				
+						cm<sup>2</sup>。
+					</span>
+				</div>
+			
+				<div class="prompt hide width-55">
+				你發現三角形的面積，與它的底和高有甚麼關係?
+				</div>
+			
+				<div class="  wrong hide left-55"></div>
+				<div class="  right hide left-55"></div>
+				<div class="btn_blue left-6" >
+					<input type="button"  value="核 對" onclick="check_C_answer()">
+				</div>
+				<div class="btn_blue left-7">
+					<input type="button"  value="重 設" onclick="resetC()">
+				</div>
+			</div>
+	</div>
+	<div class="btn_green p1">
+		<input type="button"  value="使用說明" onclick="turnToInfo();">
+	</div>
+	<div class="btn_yellow per_button hide p3" >
+		<input type="button"  value="上一題" onclick="perPage(this);">
+	</div>
+    <div class="btn_yellow next_button hide p4">
+		<input type="button"  value="下一題" onclick="nextPage(this);">
+	</div>
+	<div class="btn_green p2 record_button">
+		<input type="button"   value="作答記錄" onclick="recordShow()">
+	</div>
+</div> 
+<!--end user-->
+<!--start userAns-->
+<div class="useAns hide">
+<!-- 	<div class="btn_green" style="position: absolute; width: 102px; height: 48px; left: 455px; top: 57px;">
+		<input type="button"  value="重設" id="instruction">
+	</div> -->
+	<div class="btn_blue" style="position: absolute; width: 102px; height: 48px; left: 440px; top: 57.5714263916015625px;">
+		<input type="button"  value="清 除" onclick="restartHTML(this);">
+	</div>
+	<div class="btn_blue" style="position: absolute; width: 102px; height: 48px; left: 573.5714416503906px; top: 57.5714263916015625px;">
+		<input type="button"  value="返 回" onclick="recordback(this);">
+	</div>
+	<div class="showAns" style="position:absolute;width:760px;height:500px;overflow:auto;top:100px;left:0px ;right:0px;margin-left:auto;margin-right:auto;border:1px solid black">
+		<div class="question00">
+				<div class="ansLayout">
+					<canvas width="440" height="218" id="cvsAns0"></canvas>
+				</div>
+				<div  class="anstext">
+				<p class="hide"><span class="number">（a）</span><span class="content">這個三角形的 底 是 <span class="red">2</span> cm，高 是 <span class="red">3</span> cm。</span></p>
+				<p class="hide"><span class="number">（b）</span><span class="content">見左圖。</span></p>
+				<p class="hide"><span class="number">（c）</span><span class="content"> 拼出的是一個 <span class='selectAns'>平行四邊形</span>，它的面積是:<span class="red">3 × 2 = 6</span>（cm<sup>2</sup>）,所以原來的三角形的面積是 <span class="red">3</span> cm<sup>2</sup>。</span></p>
+				</div>
+		</div>
+		<div class="question01">
+				<div class="ansLayout hide">
+					<canvas width="440" height="218" id="cvsAns1"></canvas>
+				</div>
+				<div  class="anstext">
+					<p class="hide"><span class="number">（a）</span><span class="content"> 這個三角形的 底 是 <span class="red">4</span> cm，高 是 <span class="red">2</span> cm。</span></p>
+					<p class="hide"><span class="number">（b）</span><span class="content">見左圖。</span></p>
+					<p  class="hide"><span class="number">（c） </span><span class="content">拼出的是一個 <span class='selectAns'>平行四邊形</span>，它的面積是:<span class="red">2 × 4 = 8 </span>（cm<sup>2</sup>）,所以原來的三角形的面積是 <span class="red">4</span> cm<sup>2</sup>。</span></p>
+				</div>
+		</div>
+		<div class="question02">
+				<div  class="ansLayout hide">
+					<canvas  width="440" height="218" id="cvsAns2"></canvas>
+				</div>
+				<div  class="anstext">
+						<p  class="hide"><span class="number">（a）</span><span class="content"> 這個三角形的 底 是 <span class="red">5</span> cm，高 是 <span class="red">2</span> cm。</span></p>
+						<p class="hide"><span class="number">（b）</span><span class="content">見左圖。</span></p>
+						<p class="hide"><span class="number">（c）</span><span class="content"> 拼出的是一個 <span class='selectAns'>平行四邊形</span>，它的面積是:<span class="red">5 × 2 = 10 </span>（cm<sup>2</sup>）,所以原來的三角形的面積是 <span class="red">5</span> cm<sup>2</sup>。</span></p>
+				</div>
+		</div>
+		<div class="question03">
+				<div  class="ansLayout hide">
+					<canvas  width="440" height="218" id="cvsAns3"></canvas>
+				</div>
+				<div  class="anstext">
+				</div>
+		</div>
+	</div>
+</div>
+<!--end useAns-->
+<!--start intruduction-->
+<div class="info border hide"  style="position:relative ;width:802px;height:auto;background:#fff">
+	<div class="btn_blue" >
+		<input type="button"  value="返 回" onclick="infoBack();">
+	</div>
+	<hr>
+	<img src="images/0.png">
+	<img src="images/1.png">
+	<img src="images/2.png">
+	<img src="images/3.png">
+	<img src="images/4.png">
+	<img src="images/5.png">
+	<hr>
+	<div class="btn_blue"  style="background:#fff;width:800px;">
+		<input type="button"  value="返 回" onclick="infoBack();">
+	</div>
+
+</div>
+<!--end intruduction-->
+<!--按钮-->
+</div>
+	<script src="../commonJs/polygon.js"></script>
+	<script src="../commonJs/utility.js"></script>
+	<script src="../commonJs/data.js"></script>
+	<script src="../commonJs/init.js"></script>
+	<script>	
+	/*初始化 可变参数*/
+		var g_test=false;
+		//var g_test=true;
+		var g_lmtSeg =1;//允许分割次数
+		var g_font_family='"Adobe 繁黑體 Std B", serif';
+		var g_bgData ={
+			bgText:	[{word:"1.",x:0,y:20,color:"black",font:"16px "+g_font_family}],		
+			grid:	{x:38,y:2,w:36,h:36,col:10,row:5,color:"#7f7f7f",border:1},	
+			pic:	[{src:BGiCON.join(""),x:0,y:4+36*4,w:65,h:49,load:false}],			
+			text:	[
+						{word:"高",x:0,y:0,color:"#e36c08",font:"16px "+g_font_family},//font 必须指定字体和大小
+						{word:"底",x:0,y:0,color:"#00af50",font:"16px "+g_font_family}
+					],
+			line:	[
+						{x:[],y:[],color:"#e36c08",border:2},
+						{x:[],y:[],color:"#18f456",border:2}
+					],
+					turning:[
+						{x:0,y:0,dx:[],dy:[],color:"#e36c08",border:1}
+					]
+		};
+		var g_question =[
+						{
+							a:[2,3],
+							b:[Math.PI/2],
+							c:[2,3,6,3],
+							stepX:[4,4,6],
+							stepY:[1,4,4],
+							text:[
+								{x:4,y:3,dx:0,dy:-10},//高
+								{x:4,y:5,dx:0,dy:-10}//下底
+							],
+							line:[
+									{x:[4,4],y:[1,4],dx:[0,0],dy:[0,0]},
+									{x:[4,6],y:[4,4],dx:[0,0],dy:[0,0]}
+								],
+							turning:[
+								{x:4,y:4,dx:[12,1],dy:[12,-1]}
+								]
+						},
+						{
+							a:[4,2],
+							b:[Math.PI/2],
+							c:[4,2,8,4],
+							stepX:[5,3,7],
+							stepY:[1,3,3],
+							text:[
+								{x:5,y:2,dx:0,dy:-10},//高
+								{x:5,y:4,dx:0,dy:-10}//下底
+							],
+							line:[
+									{x:[5,5],y:[1,3],dx:[0,0],dy:[0,0],style:"dashed"},
+									{x:[3,7],y:[3,3],dx:[0,0],dy:[0,0]}
+								],
+							turning:[
+								{x:5,y:3,dx:[12,1],dy:[12,-1]}
+								]
+						},
+						{
+							a:[5,2],
+							b:[Math.PI/2],
+							c:[5,2,10,5],
+							stepX:[1,3,8],
+							stepY:[1,3,3],
+							text:[
+								{x:1,y:1,dx:0,dy:-10},//高
+								{x:3,y:4,dx:0,dy:-10}//下底
+							],
+							line:[
+									{x:[1,1],y:[1,3],dx:[0,0],dy:[0,0]},
+									{x:[3,8],y:[3,3],dx:[0,0],dy:[0,0]}
+								],
+							turning:[
+								{x:1,y:3,dx:[12,1],dy:[12,-1]}
+								]
+						},
+						{
+							a:[2,3],
+							b:[Math.PI/2],
+							c:[2,3,6,3],
+							stepX:[4,4,6],
+							stepY:[1,4,4],
+							text:[
+								{x:4,y:3,dx:0,dy:-10},//高
+								{x:4,y:5,dx:0,dy:-10}//下底
+							],
+							line:[
+									{x:[4,4],y:[2,5],dx:[0,0],dy:[0,0]},
+									{x:[4,6],y:[5,5],dx:[0,0],dy:[0,0]}
+								],
+							turning:[
+								{x:4,y:5,dx:[12,1],dy:[12,-1]}
+								]
+						}
+		];
+		/**  
+	初始化最后一题
+**/
+	function initRandom(idx){
+		var x=10,y=5;
+		for(var i=0;i<1000;i++){
+			g_question[idx].a[0]=getRandom(5);
+			g_question[idx].a[1]=getRandom(3);	
+			if(g_question[idx].a[0]==0){
+				g_question[idx].a[0]=1;
+			}
+			if(g_question[idx].a[1]==0){
+				g_question[idx].a[1]=1;
+			}
+			if(isSameQuestion(g_question[idx].a,idx)){
+				break;
+			}
+		}
+		//答案a
+		var dx=g_question[idx].a[0];
+		var dy=g_question[idx].a[1];
+		
+		//答案c
+		g_question[idx].c[0]=dx;
+		g_question[idx].c[1]=dy;
+		var s1=g_question[idx].c[2]=dy*dx;
+		var s2=g_question[idx].c[3]=s1/2;
+		//答案记录文字
+		var str=[];
+		str.push("<p class='hide'><span class='number'>（a）</span><span class='content'>這個三角形的 底 是 <span class='red'>",dx," </span>cm，高 是 <span class='red'>",dy," </span>cm。</span></p>")
+		str.push("<p class='hide'><span class='number'>（b）</span><span class='content'>見左圖。</span></p>")
+		str.push("<p class='hide'><span class='number'>（c）</span><span class='content'> 拼出的是一個 <span class='selectAns'>平行四邊形</span>，它的面積是:<span class='red'>",dx," × ",dy," = ",s1," </span>（cm<sup>2</sup>）,所以原來的三角形的面積是<span class='red'> ",s2," </span>cm<sup>2</sup>。</span></p>");
+		var anstextObj=$(".question0"+idx+" .anstext");
+			if(anstextObj.length>0){
+				$(".question0"+idx+" .anstext").html(str.join(""));	
+			}
+
+		//顶点		
+		var xs=[0,0,0];
+		var ys=[0,0,0];
+		xs[1]=Math.floor((x-dx)/2);//dian 2(x)	基准点			
+		ys[1]=ys[2]=Math.floor((y+dy)/2);//dian 2(x)	
+		
+		xs[0]=getRandom(x-dx);//dian 1(x)
+		xs[2]=xs[1]+dx;
+		ys[0]=ys[1]-dy;//dian 1(y)
+		
+		for(i=0;i<xs.length;i++){
+			g_question[idx].stepX[i]=xs[i];
+			g_question[idx].stepY[i]=ys[i];
+		}
+		var basex,tx
+		if( xs[0] >= xs[2] ){
+			tx = -1;
+		}else{
+			tx = 1;
+		}
+		g_question[idx].turning[0].x=xs[0];//拐角1的x
+		g_question[idx].turning[0].y=ys[1];////拐角1的y
+		g_question[idx].turning[0].dx[0]=12;//拐角x的方向
+		g_question[idx].turning[0].dy[0]=12;//拐角x的方向
+		g_question[idx].turning[0].dx[1]=tx;//拐角x的方向
+		g_question[idx].turning[0].dy[1]=-1;//拐角y的方向
+		
+
+		g_question[idx].line[0].x[0]=g_question[idx].line[0].x[1]=xs[0];//高点x
+		g_question[idx].line[0].y[0]=ys[0];//高点y
+		g_question[idx].line[0].y[1]=ys[1];//高点y
+		
+		g_question[idx].line[1].x[0]=xs[1];//底一个点x
+		g_question[idx].line[1].x[1]=xs[2];//底另一个点x
+		g_question[idx].line[1].y[0]=g_question[idx].line[1].y[1]=ys[1];//下底另一个点y
+		
+		g_question[idx].text[0].x=xs[0];//文字高x
+		g_question[idx].text[0].y=ys[0]+1;
+		
+		g_question[idx].text[1].x=xs[1];//文字底x
+		g_question[idx].text[1].y=ys[1]+1;
+	}
+		//var g_test=true;
+		$(document).ready(function(){
+			if(!data_js){
+				throw "data.js 未加载";
+			}
+			if(!polygon_js){
+				throw "canvas.js 未加载";
+			}
+			if(!utility_js){
+				throw "canvas.js 未加载";
+			}
+			initRandom(g_question.length-1);
+			allReset();
+			g_html=$(".user .ansui").html();
+		});
+	</script>
+</body>
+</html>
