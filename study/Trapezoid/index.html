@@ -1,0 +1,456 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+
+	<title>Parallelogram</title>
+	<meta charset="utf-8">
+	<script type="text/javascript" src="scripts/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" src="scripts/jquery.ui.touch-punch.js"></script>
+	<link rel="stylesheet" type="text/css" href="../commonCss/common.css">
+</head> 
+<style>
+.ansLayout{width:600px;height:206px;padding:20px 20px}
+.anstext{width:600px;height:150px;padding:20px 0px 0px 0px;line-height:24px;}
+.anstext p{padding:10px 0px 0px 0px;}
+.anstext .content{width:550px;}
+.anstext .red{color:red;}
+</style>
+<body>
+<div class="ui border" style="position:relative;width: 800px; height: 600px; margin:0 auto;">
+	<div class="title " style="position: absolute; width: 316px; height: 45px; background-image: url(images/icon.png); background-repeat:no-repeat;"></div>
+	
+<!--画板-->
+<div class="user">
+
+	<div class="canvasPanel " style="position: absolute; width: 454px; height: 224px; left: 0px; top: 57px; text-align: left;">
+		<canvas style="position: absolute; left: 0px; top: 1px;" width="600" height="218" id="cvsbg"></canvas>
+		<canvas style="position: absolute; left: 0px; top: 1px;" width="600" height="218" id="cvsMouse"></canvas>
+		<canvas style="position: absolute; left: 0px; top: 1px;" width="600" height="218" id="cvs"></canvas>
+		<canvas style="position: absolute; left: 0px; top: 1px;" width="600" height="218" id="tip"></canvas>
+	</div>
+	<div class="ansui">
+		<!--题目-->
+			<!--1-->
+			<div  class="a " >
+				<div class="contain">
+					<span class="number">（a）</span>
+					<span class="content width-55">
+						這個梯形的 <span style="color:#8064a1">上底</span>是
+						<span class="num " style="width: 32px; height: 31px;">
+							<input id="ainput" type="number" value=0 style="width: 32px; height: 22px;">
+						</span>
+						cm,<span style="color:#00af50">下底</span>是
+						<span class=" num " style="width: 32px; height: 31px;">
+							<input type="number" value=0  style="width: 32px; height: 22px;">
+						</span>					
+						cm,<span style="color:#e36c08">高</span> 是
+						<span class=" num " style=" width: 32px; height: 31px;">
+							<input type="number" value=0  style="width: 32px; height: 22px;">
+						</span>cm。
+					</span>
+				</div>
+				<div class="right hide left-6"></div>
+				<div class="wrong hide left-6"></div>
+				<div class="btn_blue left-66">
+					<input type="button"  value="核 對" id="checkA" onclick="check_A_answer(this);">
+				</div>
+			</div>
+			
+			<!--2-->
+			<div class="b hide ">
+				<div class="contain">
+					<span class="number">（b）</span>
+					<span class="content width-44">
+					 怎樣計算這個梯形的面積 ? 可先把梯形複製，然後合併成另一個圖形，完成後按「確定」。
+					</span>
+				</div>
+				<div class="prompt hide width-44">
+					你懂得計算這個圖形的面積嗎？
+				</div>
+			
+				<div class="btn_red left-6" style=" top: -280px; ">
+					<input type="button" value="複 製"  onclick="clonePolygon(this)">
+				</div>
+				<div class="btn_red left-6" style="top: -220px;">
+					<input type="button" value="重 設"  onclick="canvasReset(this)">
+				</div>
+				<div class="btn_red left-6 " style=" top: -160px;">
+					<input type="button" value="確 定"  onclick="check_B_answer('connection')">
+				</div>
+				<div class="btn_blue calculate left-55" >
+					<input type="button"  value="計 算"  onclick="check_B_answer('calculate')">
+				</div>
+			</div>
+			
+			<!--3-->
+			<div class="c hide">
+				<div  class="contain ">
+					<span class="number">（c）</span>
+					<span class="content width-55">拼出的是一個
+						<select id="selectType" style="width:115px;">
+							<option value="parallelogram">平行四邊形</option>
+							<option value="square">正方形</option>
+							<option value="rectangle">長方形</option>
+						</select>,它的面積是:(
+					<span class="  num " style="width: 32px; height: 31px;">
+						<input type="number" value=0 style="width: 32px; height: 22px;">
+					</span>
+					+
+					<span class="num " style="width: 32px; height: 31px;">
+						<input type="number" value=0 style="width: 32px; height: 22px;">
+					</span>					
+					)
+					<span>×</span>
+					<span class="num " style="width: 32px; height: 37px;">
+						<input type="number" value=0 style="width: 32px; height: 22px;">
+					</span>		
+					<br><span style="display:inline-block;width:341px;height:20px;"></span>=
+					<span class="num " style="width: 32px; height: 31px;">
+						<input type="number" value=0 style="width: 32px; height: 22px;">
+					</span>					
+					（cm<sup>2</sup>）<br>
+					所以原來的梯形的面積是
+					<span class="num " style=" width: 32px; height: 31px;">
+						<input type="number" value=0 style="width: 32px; height: 22px;">
+					</span>					
+					cm<sup>2</sup>。
+					<span>
+				</div>
+			
+				<div class="prompt hide width-55">
+				你發現梯形的面積，與它的上底、下底和高有甚麼關係?
+				</div>
+			
+				<div class="  wrong hide left-55 top-00"></div>
+				<div class="  right hide left-55 top-00"></div>
+				<div class="btn_blue left-6" >
+					<input type="button"  value="核 對" onclick="check_C_answer()">
+				</div>
+				<div class="btn_blue left-7">
+					<input type="button"  value="重 設" onclick="resetC()">
+				</div>
+			</div>
+	</div>
+	<div class="btn_green p1">
+		<input type="button"  value="使用說明" onclick="turnToInfo();">
+	</div>
+	<div class="btn_yellow per_button hide p4" >
+		<input type="button"  value="上一題" onclick="perPage(this);">
+	</div>
+    <div class="btn_yellow next_button hide p5">
+		<input type="button"  value="下一題" onclick="nextPage(this);">
+	</div>
+	<div class="btn_green p2 record_button">
+		<input type="button"   value="作答記錄" onclick="recordShow()">
+	</div>
+</div> 
+<!--end user-->
+<!--start userAns-->
+<div class="useAns hide">
+<!-- 	<div class="btn_green" style="position: absolute; width: 102px; height: 48px; left: 455px; top: 57px;">
+		<input type="button"  value="重設" id="instruction">
+	</div> -->
+	<div class="btn_blue" style="position: absolute; width: 102px; height: 48px; left: 440px; top: 57.5714263916015625px;">
+		<input type="button"  value="清 除" onclick="restartHTML(this);">
+	</div>
+	<div class="btn_blue" style="position: absolute; width: 102px; height: 48px; left: 573.5714416503906px; top: 57.5714263916015625px;">
+		<input type="button"  value="返 回" onclick="recordback(this);">
+	</div>
+	<div class="showAns" style="position:absolute;width:760px;height:500px;overflow:auto;top:100px;left:0px ;right:0px;margin-left:auto;margin-right:auto;border:1px solid black">
+		<div class="question00">
+				<div class="ansLayout">
+					<canvas width="600" height="218" id="cvsAns0"></canvas>
+				</div>
+				<div  class="anstext">
+				<p class="hide"><span class="number">（a）</span><span class="content">這個梯形的 上底 是 <span class="red">2</span> cm，下底 是 <span class="red">6</span> cm，高 是 <span class="red">3</span> cm。</span></p>
+				<p class="hide"><span class="number">（b）</span><span class="content">見上圖。</span></p>
+				<p class="hide"><span class="number">（c）</span><span class="content">拼出的是一個  <span class='selectAns'>平行四邊形</span>，它的面積是:<span class="red">(2 + 6) × 3 = 24 </span>（cm<sup>2</sup>）,所以原來的梯形的面積是 <span class="red">12</span> cm<sup>2</sup>。</span></p>
+				</div>
+		</div>
+		<div class="question01">
+				<div class="ansLayout hide">
+					<canvas width="600" height="218" id="cvsAns1"></canvas>
+				</div>
+				<div  class="anstext">
+					<p class="hide"><span class="number">（a）</span><span class="content">這個梯形的 上底 是 <span class="red">2</span> cm，下底 是 <span class="red">5</span> cm，高 是 <span class="red">2</span> cm。</span></p>
+					<p class="hide"><span class="number">（b）</span><span class="content">見上圖。</span></p>
+					<p class="hide"><span class="number">（c）</span><span class="content"> 拼出的是一個  <span class='selectAns'>平行四邊形</span>，它的面積是:<span class="red">(2 + 5) × 2 = 14</span> （cm<sup>2</sup>）,所以原來的梯形的面積是 <span class="red">7</span> cm<sup>2</sup>。</span></p>
+				</div>
+		</div>
+		<div class="question02">
+				<div  class="ansLayout hide">
+					<canvas  width="600" height="218" id="cvsAns2"></canvas>
+				</div>
+				<div  class="anstext">
+						<p class="hide"><span class="number">（a）</span><span class="content"> 這個梯形的 上底 是 <span class="red">4</span> cm，下底 是 <span class="red">6</span> cm，高 是 <span class="red">3</span> cm。</span></p>
+						<p class="hide"><span class="number">（b）</span><span class="content">見上圖。</span></p>
+						<p class="hide"><span class="number">（c）</span><span class="content"> 拼出的是一個  <span class='selectAns'>平行四邊形</span>，它的面積是:<span class="red">(4 + 6) × 3 = 30 </span>（cm<sup>2</sup>）,所以原來的梯形的面積是 <span class="red">15</span> cm<sup>2</sup>。</span></p>
+				</div>
+		</div>
+		<div class="question03">
+				<div  class="ansLayout hide">
+					<canvas  width="600" height="218" id="cvsAns3"></canvas>
+				</div>
+				<div  class="anstext">
+				</div>
+		</div>
+	</div>
+</div>
+<!--end useAns-->
+<!--start intruduction-->
+<div class="info border hide"  style="position:relative ;width:802px;height:auto;background:#fff">
+	<div class="btn_blue" >
+		<input type="button"  value="返 回" onclick="infoBack();">
+	</div>
+	<hr>
+	<img src="images/0.png">
+	<img src="images/1.png">
+	<img src="images/2.png">
+	<img src="images/3.png">
+	<img src="images/4.png">
+	<img src="images/5.png">
+	<hr>
+	<div class="btn_blue"  style="background:#fff;width:800px;">
+		<input type="button"  value="返 回" onclick="infoBack();">
+	</div>
+
+</div>
+<!--end intruduction-->
+<!--按钮-->
+</div>
+	<script src="../commonJs/polygon.js"></script>
+	<script src="../commonJs/utility.js"></script>
+	<script src="../commonJs/data.js"></script>
+	<script src="../commonJs/init.js"></script>
+	<script>	
+	/*初始化 可变参数*/
+		var g_test=false;
+		//var g_test=true;
+		var g_lmtSeg =1;//允许分割次数
+		var g_font_family='"Adobe 繁黑體 Std B","Microsoft JhengHei","細明體","黑体","Times New Roman", Times, serif';
+		var g_bgData ={
+			text:[
+				{word:"高",x:12+36*6,y:36*4,color:"#e36c08",font:"16px "+g_font_family},//font 必须指定字体和大小
+				{word:"上底",x:12+36*7,y:36*2,color:"#8064a1",font:"16px "+g_font_family},
+				{word:"下底",x:12+36*7,y:36*6,color:"#00af50",font:"16px "+g_font_family}
+			],
+			bgText:[{word:"1.",x:0,y:20,color:"black",font:"16px Arial"}],
+			pic:[{src:BGiCON.join(""),x:0,y:4+36*4,w:65,h:49,load:false}],
+			grid:{x:38,y:2,w:36,h:36,col:14,row:5,color:"#7f7f7f",border:1},
+			line:[
+				{x:[],y:[],color:"#e36c08",border:2,style:"dashed"},
+				{x:[],y:[],color:"#8064a1",border:2},
+				{x:[],y:[],color:"#18f456",border:2}
+
+			],
+			turning:[
+				{x:[],y:[],w:[12,1],h:[12,-1],color:"#e36c08",border:1},
+				{x:[],y:[],w:[12,1],h:[12,-1],color:"#e36c08",border:1}
+			]
+		};
+		var g_question =[
+	{
+			a:[2,6,3],
+			c:[2,6,3,24,12],
+			stepX:[6,4,10,8],
+			stepY:[1,4,4,1],
+			text:[
+				{x:6,y:3,dx:0,dy:-10},//高
+				{x:6,y:1,dx:0,dy:-10},//上底
+				{x:6,y:5,dx:0,dy:-10}//下底
+			],
+			line:[
+					{x:[6,6],y:[1,4],dx:[0,0],dy:[0,0],style:"dashed"},
+					{x:[6,8],y:[1,1],dx:[0,0],dy:[0,0]},
+					{x:[4,10],y:[4,4],dx:[0,0],dy:[0,0]}
+				],
+			turning:[
+					{x:6,y:1,dx:[12,1],dy:[12,1]},			
+					{x:6,y:4,dx:[12,1],dy:[12,-1]}
+			]
+		},
+		{
+			a:[2,5,2],
+			c:[2,5,2,14,7],
+			stepX:[6,4,9,8],
+			stepY:[2,4,4,2],
+			text:[
+				{x:6,y:4,dx:0,dy:-20},
+				{x:6,y:2,dx:0,dy:-10},
+				{x:6,y:5,dx:0,dy:-10}
+			],
+			line:[
+					{x:[6,6],y:[2,4],dx:[0,0],dy:[0,0],style:"dashed"},//高
+					{x:[6,8],y:[2,2],dx:[0,0],dy:[0,0]},//上底
+					{x:[4,9],y:[4,4],dx:[0,0],dy:[0,0]}//下底
+				],
+			turning:[
+					{x:6,y:2,dx:[12,1],dy:[12,1]},	
+					{x:6,y:4,dx:[12,1],dy:[12,-1]}
+				]
+		},
+		{
+			a:[4,6,3],
+			c:[4,6,3,30,15],
+			stepX:[6,4,10,10],
+			stepY:[1,4,4,1],
+			text:[
+				{x:9,y:3,dx:0,dy:-10},
+				{x:6,y:1,dx:0,dy:-10},
+				{x:6,y:5,dx:0,dy:-10}
+			],
+			line:[
+					{x:[10,10],y:[1,4],dx:[0,0],dy:[0,0]},//高
+					{x:[6,10],y:[1,1],dx:[0,0],dy:[0,0]},//上底
+					{x:[4,10],y:[4,4],dx:[0,0],dy:[0,0]}//下底
+				],
+			turning:[
+					{x:10,y:1,dx:[12,-1],dy:[12,1]},
+					{x:10,y:4,dx:[12,-1],dy:[12,-1]}
+				]
+		},
+		{
+			a:[4,6,3],
+			c:[4,6,3,30,15],
+			stepX:[6,4,10,10],
+			stepY:[1,4,4,1],
+			text:[
+				{x:9,y:3,dx:0,dy:-10},
+				{x:6,y:1,dx:0,dy:-10},
+				{x:6,y:5,dx:0,dy:-10}
+			],
+			line:[
+					{x:[10,10],y:[1,4],dx:[0,0],dy:[0,0]},//高
+					{x:[6,10],y:[1,1],dx:[0,0],dy:[0,0]},//上底
+					{x:[4,10],y:[4,4],dx:[0,0],dy:[0,0]}//下底
+				],
+			turning:[
+					{x:10,y:1,dx:[12,1],dy:[12,1]},
+					{x:10,y:4,dx:[12,1],dy:[12,-1]}
+				]
+		}
+		];
+/**  
+	初始化最后一题
+**/
+	function initRandom(idx){
+		var x=14,y=5;
+		for(var i=0;i<1000;i++){
+			g_question[idx].a[0]=getRandom(4)+1;
+			g_question[idx].a[2]=getRandom(2)+1;	
+			if(isSameQuestion(g_question[idx].a,idx)){
+				break;
+			}
+		}
+		//答案a
+		var dx=g_question[idx].a[0];//上底x
+		var dx0=g_question[idx].a[1]=(dx+(getRandom(3)+1));//dx0 +dx<10 dx0!=dx//下底x
+		if((dx0+dx)>10){
+			dx0=g_question[idx].a[1]=(dx-1);
+		}
+		var dy=g_question[idx].a[2];
+		
+		//答案c
+		g_question[idx].c[0]=dx;
+		g_question[idx].c[1]=dx0;
+		g_question[idx].c[2]=dy;
+		//答案记录文字
+		var s1=g_question[idx].c[3]=dy*(dx+dx0);
+		var s2=g_question[idx].c[4]=(s1/2);
+		var str=[];
+		str.push("<p class='hide'><span class='number'>（a）</span><span class='content'>這個梯形的 上底 是<span class='red'> ",dx,"</span> cm，下底 是 <span class='red'>",dx0," </span>cm，高 是 <span class='red'>",dy,"</span> cm。</span></p>")
+		str.push("<p class='hide'><span class='number'>（b）</span><span class='content'>見上圖。</span></p>")
+		str.push("<p class='hide'><span class='number'>（c）</span><span class='content'>拼出的是一個  <span class='selectAns'>平行四邊形</span>，它的面積是:<span class='red'> ( ",dx," + ",dx0," ) × ",dy," = ",s1,"</span>（cm<sup>2</sup>）,所以原來的梯形的面積是<span class='red'> ",s2," </span>cm<sup>2</sup>。</span></p>");
+		var anstextObj=$(".question0"+idx+" .anstext");
+			if(anstextObj.length>0){
+				$(".question0"+idx+" .anstext").html(str.join(""));	
+			}
+
+		//顶点		
+		var xs=[0,0,0,0];
+		var ys=[0,0,0,0];
+		xs[1]=Math.floor((x-dx0)/2);//dian 2(x)	基准点	
+		xs[2]=xs[1]+dx0;	//dian 3(x)	
+		ys[2]=ys[1]=Math.floor((y+dy)/2);	//dian 2 3(y)
+		xs[0]=getRandom(x-dx);//dian 1(x)
+		xs[3]=xs[0]+dx;//dian 4(x)	
+		ys[3]=ys[0]=ys[1]-dy;//dian 1 4 (y)
+		var xs0_xs1=Math.abs(xs[0]-xs[1])
+		var maxLen=dx+dx0+xs0_xs1;
+		if(maxLen>10){
+			xs[0]=xs[0]-(maxLen-10)*Math.round((xs[0]-xs[1])/xs0_xs1)
+			xs[3]=xs[0]+dx;//dian 4(x)	
+		}
+		
+		for(i=0;i<4;i++){
+			g_question[idx].stepX[i]=xs[i];
+			g_question[idx].stepY[i]=ys[i];
+		}
+		var baseX,tx1,tx2;
+		if( xs[0] > xs[2] ){
+			baseX = xs[3];
+			tx1 = -1;
+			tx2 = -1;
+		}else{
+			baseX = xs[0];
+			tx1 = 1;
+			if( xs[2] > xs[0] ){
+				tx2 = 1;
+			}else{
+				tx2 = -1;
+			}
+		}
+		g_question[idx].turning[0].x=baseX;//拐角1的x
+		g_question[idx].turning[0].y=ys[0];////拐角1的y
+		g_question[idx].turning[0].dx[0]=12;//拐角x的方向
+		g_question[idx].turning[0].dy[0]=12;//拐角x的方向
+		g_question[idx].turning[0].dx[1]=tx1;//拐角x的方向
+		g_question[idx].turning[0].dy[1]=1;//拐角y的方向
+		
+		g_question[idx].turning[1].x=baseX;//拐角2的x
+		g_question[idx].turning[1].y=ys[1];////拐角2的y
+		g_question[idx].turning[1].dx[0]=12;//拐角x的方向
+		g_question[idx].turning[1].dy[0]=12;//拐角x的方向
+		g_question[idx].turning[1].dx[1]=tx2;//拐角x的方向
+		g_question[idx].turning[1].dy[1]=-1;////拐角y的方向
+
+
+		g_question[idx].line[0].x[0]=g_question[idx].line[0].x[1]=baseX;//高点x
+		g_question[idx].line[0].y[0]=ys[0];//高点y
+		g_question[idx].line[0].y[1]=ys[1];//高点y
+		
+		g_question[idx].line[1].x[0]=xs[0];//上底一个点x
+		g_question[idx].line[1].x[1]=xs[3];//上底另一个点x
+		g_question[idx].line[1].y[0]=g_question[idx].line[1].y[1]=ys[0];//上底另一个点y
+		
+		g_question[idx].line[2].x[0]=xs[1];//下底一个点x
+		g_question[idx].line[2].x[1]=xs[2];//下底另一个点x
+		g_question[idx].line[2].y[0]=g_question[idx].line[2].y[1]=ys[1];//下底另一个点y
+		
+		g_question[idx].text[0].x=baseX;//文字高x
+		g_question[idx].text[0].y=ys[0]+1;
+		
+		g_question[idx].text[1].x=xs[0]+1;//文字上底x
+		g_question[idx].text[1].y=ys[0];
+		
+		g_question[idx].text[2].x=xs[0];//文字下底x
+		g_question[idx].text[2].y=ys[1]+1;
+	}
+		//var g_test=true;
+		$(document).ready(function(){
+			if(!data_js){
+				throw "data.js 未加载";
+			}
+			if(!polygon_js){
+				throw "canvas.js 未加载";
+			}
+			if(!utility_js){
+				throw "canvas.js 未加载";
+			}
+			initRandom(g_question.length-1);
+			allReset();
+			g_html=$(".user .ansui").html();
+		});
+	</script>
+</body>
+</html>
