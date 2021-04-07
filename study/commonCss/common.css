@@ -1,0 +1,104 @@
+﻿input[type="button"]{
+	vertical-align:middle;display:inline-block;padding:3px 5px;margin-bottom:5px;
+	-webkit-border-radius:4px; 
+	-moz-border-radius:4px;
+	border-radius:4px;
+}
+input[type="button"]:focus{
+	outline:none;-moz-outline:none;
+}
+input[type="button"]:active{
+border-color:rgba(82, 168, 236, 0.8);
+outline:0;outline:thin dotted \9;
+}
+.btn_green input[type="button"]{
+	width: auto; height: auto;	
+	font-size: 18px; color: #006600;
+	 position: relative; background-color: #d3f372;  
+	border: 1px solid #999900;
+}
+.btn_green input[type="button"]:hover{
+	color: #3399cc;
+}
+.btn_yellow_active input[type="button"]{
+	width: auto; height: auto;	
+	font-size: 18px; color: #c28e5d;
+	 position: relative; background-color: #ffeb9a;  
+	border: 0;
+}
+.btn_green_active input[type="button"]{
+	width: auto; height: auto;	
+	font-size: 18px; color: #90bf78;
+	 position: relative; background-color: #eefac7;  
+	border: 1px solid #d1d589;
+}
+.btn_red input[type="button"]{
+	width: auto; height: auto;	
+	font-size: 18px; color: #ffffff;
+	 position: relative; background-color: #ff6600;  
+	border: 0;
+}
+
+.btn_yellow input[type="button"]{
+	width: auto; height: auto;	
+	font-size: 18px; color: #660000;
+	 position: relative; background-color: #ffcc00;  
+	border: 0;
+}
+.btn_yellow input[type="button"]:hover{
+	color: red;
+}
+.btn_blue input[type="button"]{
+	width: auto; height: auto;	
+	font-size: 16px; color: rgb(255, 255, 255);
+	 position: relative; background-color: #00cccc;  
+	border: 0;
+}
+.btn_blue input[type="button"]:hover{
+	color: #000;
+}
+.btn_orange input[type="button"]{
+	width: 72px; height: 32px; 
+	position: relative; background-color: rgb(255, 145, 61); 
+	font-size: 16px; border: 1px solid rgb(255, 145, 61);
+}
+.btn_green,.btn_yellow{position: absolute;width: 102px; height: 48px;}
+.btn_blue{width: 102px; height: 48px;}
+label,select,button,input[type="button"],input[type="reset"],input[type="submit"],input[type="radio"],input[type="checkbox"]{cursor:pointer;}
+/*隐藏*/
+*{padding:0px;margin:0px;font-weight:bold;}
+.hide{display:none;}
+.border{border:1px solid #eee;}
+.btn_red .selectStyle{color:red;}
+body{font-size:18px;line-height: 36px;}
+select{font-size:18px;height:26px;}
+.p0{left: 450px; top: 7px;}
+.p1{left: 580px; top: 7px;}
+.p2{left: 685px; top: 7px;}
+.p3{left: 600px; top: 70px;}
+.p4{left: 685px; top: 70px;}
+.p5{left: 685px; top: 129px;}
+.height-0{height:36px;}.height-1{height:72px;}.height-2{height:108px;}.height-3{height:144px;}.height-4{height:180px;}
+.width-1{width:100px;}.width-2{width:200px;}.width-3{width:300px;}.width-4{width:400px;}.width-5{width:500px;}.width-6{width:600px;}.width-7{width:700px;}.width-8{width:800px;}
+.width-00{width:50px;}.width-11{width:150px;}.width-22{width:250px;}.width-33{width:350px;}.width-44{width:450px;}.width-55{width:550px;}.width-66{width:650px;}.width-77{width:750px;}
+.left-1{left:100px;}.left-2{left:200px;}.left-3{left:300px;}.left-4{left:400px;}.left-5{left:500px;}.left-6{left:600px;}.left-7{left:700px;}.left-8{left:800px;}
+.left-00{left:50px;}.left-11{left:150px;}.left-22{left:250px;}.left-33{left:350px;}.left-44{left:450px;}.left-55{left:550px;}.left-66{left:650px;}.left-77{left:750px;}
+.top-1{top:100px;}.top-2{top:200px;}.top-3{top:300px;}.top-4{top:400px;}.top-5{top:500px;}.top-6{top:600px;}
+.top-00{top:50px;}.top-11{top:150px;}.top-22{top:250px;}.top-33{top:350px;}.top-44{top:450px;}.top-55{top:550px;}
+span.number{display:inline-block;vertical-align:top;}
+span.content{display:inline-block;}
+.right{background: url(right.png) no-repeat;width:30px;height:20px}
+.wrong{background: url(wrong.png) no-repeat;width:30px;height:20px}
+.prompt{color: rgb(255, 0, 0); text-align: center;}
+span.num{width: 32px; height: 31px;}
+span.num  input{width: 32px; height: 22px;}
+.a{position:relative; top:300px;}
+.a>div,.b>div,.c>div{position:absolute;}
+.a .contain{height:36px;}
+
+.b{position:relative; top:350px;}
+.b .contain{height:72px;}
+.b .prompt{height:36px; top:72px;}
+
+.c{position:relative; top:440px;}
+.c .prompt{height:36px; top:128px;}
