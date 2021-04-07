@@ -1,0 +1,413 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+
+	<title>Parallelogram</title>
+	<meta charset="utf-8">
+	<script type="text/javascript" src="scripts/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" src="scripts/jquery.ui.touch-punch.js"></script>
+	<link rel="stylesheet" type="text/css" href="../commonCss/common.css">
+</head> 
+<style>
+.ansLayout,.anstext{float:left}
+.info img{border-top:1px solid #eee;}
+.ansLayout{width:430px;height:206px;padding:20px 0}
+.anstext{width:305px;height:206px;padding:20px 0px 0px 0px;line-height:24px;}
+.anstext p{padding:10px 0px 0px 0px;}
+.anstext .content{width:253px;}
+.anstext .red{color:red;}
+</style>
+<body>
+<div class="ui border" style="position:relative;width: 800px; height: 600px; margin:0 auto;">
+	<div class="title " style="position: absolute; width: 316px; height: 45px; background-image: url(images/icon.png); background-repeat:no-repeat;"></div>
+	
+<!--画板-->
+<div class="user">
+
+	<div class="canvasPanel " style="position: absolute; width: 454px; height: 224px; left: 0px; top: 57px; text-align: left;">
+		<canvas style="position: absolute; left: 0px; top: 1px;" width="440" height="218" id="cvsbg"></canvas>
+		<canvas style="position: absolute; left: 0px; top: 1px;" width="440" height="218" id="cvsMouse"></canvas>
+		<canvas style="position: absolute; left: 0px; top: 1px;" width="440" height="218" id="cvs"></canvas>
+		<canvas style="position: absolute; left: 0px; top: 1px;" width="440" height="218" id="tip"></canvas>
+	</div>
+	<div class="ansui">
+		<!--题目-->
+			<!--1-->
+			<div  class="a " >
+				<div class="contain">
+					<span class="number">（a）</span>
+					<span class="content width-44">
+						這個平行四邊形的 <span style="color:#00b050">底</span>是
+						<span class="num">
+							<input type="number" value="0" >
+						</span>cm,<span style="color:#e26c09">高</span>是
+						<span class="num">
+							<input type="number" value="0" >
+						</span>cm。
+					</span>
+				</div>
+				<div class="right hide left-5"></div>
+				<div class="wrong hide left-5"></div>
+				<div class="btn_blue left-6">
+					<input type="button"  value="核 對" id="checkA" onclick="check_A_answer(this);">
+				</div>
+			</div>
+			
+			<!--2-->
+			<div class="b hide ">
+				<div class="contain">
+					<span class="number">（b）</span>
+					<span class="content width-44">
+					怎樣計算這個平行四邊形的面積 ? 可先把圖形分割，然後合併成另一個圖形，完成後按「確定」。
+					</span>
+				</div>
+				<div class="prompt hide width-44">
+					你懂得計算這個圖形的面積嗎？
+				</div>
+			
+		<div class="btn_red left-44" style="top: -280px;">
+			<input type="button" value="分 割"  onclick="allowSegment(this)">
+		</div>
+				<div class="btn_red left-44" style="top: -220px;">
+					<input type="button" value="重 設"  onclick="canvasReset(this)">
+				</div>
+				<div class="btn_red left-44 " style=" top: -160px;">
+					<input type="button" value="確 定"  onclick="check_B_answer('connection')">
+				</div>
+				<div class="btn_blue calculate left-55" >
+					<input type="button"  value="計 算"  onclick="check_B_answer('calculate')">
+				</div>
+			</div>
+			
+			<!--3-->
+			<div class="c hide">
+				<div  class="contain ">
+					<span class="number">（c）</span>
+					<span class="content width-55">
+				新圖形的面積是:
+				<span class="num" style="width: 32px; height: 31px; ">
+					<input type="number" value="0" style="width: 32px; height: 22px;">
+				</span>			
+				×
+				<span class="num" style=" width: 32px; height: 31px; ">
+					<input type="number" value="0" style="width: 32px; height: 22px;">
+				</span>			
+				<br>
+				<span style="width:126px;height:20px;display:inline-block;">&nbsp;</span>=
+				<span class="num" style="width: 32px; height: 37px;">
+					<input type="number" value=0 style="width: 32px; height: 22px;">
+				</span>（cm<sup>2</sup>）
+				<br>
+				即平行四邊形的面積是
+				<span class="num" style="width: 32px; height: 31px; ">
+					<input type="number" value="0" style="width: 32px; height: 22px;">
+				</span>
+				cm<sup>2</sup>。
+					</span>
+				</div>
+			
+				<div class="prompt hide width-55">
+				你發現平行四邊形的面積，與它的底和高有甚麼關係嗎？
+				</div>
+			
+				<div class="  wrong hide left-55"></div>
+				<div class="  right hide left-55"></div>
+				<div class="btn_blue left-6" >
+					<input type="button"  value="核 對" onclick="check_C_answer()">
+				</div>
+				<div class="btn_blue left-7">
+					<input type="button"  value="重 設" onclick="resetC()">
+				</div>
+			</div>
+	</div>
+	<div class="btn_green p1">
+		<input type="button"  value="使用說明" onclick="turnToInfo();">
+	</div>
+	<div class="btn_yellow per_button hide p3" >
+		<input type="button"  value="上一題" onclick="perPage(this);">
+	</div>
+    <div class="btn_yellow next_button hide p4">
+		<input type="button"  value="下一題" onclick="nextPage(this);">
+	</div>
+	<div class="btn_green p2 record_button">
+		<input type="button"   value="作答記錄" onclick="recordShow()">
+	</div>
+</div> 
+<!--end user-->
+<!--start userAns-->
+<div class="useAns hide">
+<!-- 	<div class="btn_green" style="position: absolute; width: 102px; height: 48px; left: 455px; top: 57px;">
+		<input type="button"  value="重設" id="instruction">
+	</div> -->
+	<div class="btn_blue" style="position: absolute; width: 102px; height: 48px; left: 440px; top: 57.5714263916015625px;">
+		<input type="button"  value="清 除" onclick="restartHTML(this);">
+	</div>
+	<div class="btn_blue" style="position: absolute; width: 102px; height: 48px; left: 573.5714416503906px; top: 57.5714263916015625px;">
+		<input type="button"  value="返 回" onclick="recordback(this);">
+	</div>
+	<div class="showAns" style="position:absolute;width:760px;height:500px;overflow:auto;top:100px;left:0px ;right:0px;margin-left:auto;margin-right:auto;border:1px solid black">
+		<div class="question00">
+				<div class="ansLayout">
+					<canvas width="440" height="218" id="cvsAns0"></canvas>
+				</div>
+				<div  class="anstext">
+				<p class="hide"><span class="number">（a）</span><span class="content">這個平行四邊形的底是 <span  class='red'>4</span> cm，高是<span  class='red'> 3</span> cm。</span></p>
+				<p class="hide"><span class="number">（b）</span><span class="content">見左圖。</span></p>
+				<p class="hide"><span class="number">（c）</span><span class="content"> 新圖形的面積是:<br><span  class='red'>4 × 3 = 12 </span>（cm<sup>2</sup>）,即平行四邊形的面積是<span  class='red'> 12 </span>cm<sup>2</sup>。</span></p>
+				</div>
+		</div>
+		<div class="question01">
+				<div class="ansLayout hide">
+					<canvas width="440" height="218" id="cvsAns1"></canvas>
+				</div>
+				<div  class="anstext">
+					<p class="hide"><span class="number">（a）</span><span class="content">這個平行四邊形的底是<span  class='red'> 3 </span>cm，高是<span  class='red'> 2 </span>cm。</span></p>
+					<p class="hide"><span class="number">（b）</span><span class="content">見左圖。</span></p>
+					<p class="hide"><span class="number">（c）</span><span class="content"> 新圖形的面積是:<br><span  class='red'>3 × 2 = 6 </span>（cm<sup>2</sup>）,即平行四邊形的面積是 <span  class='red'>6</span> cm<sup>2</sup>。</span></p><br>
+
+				</div>
+		</div>
+		<div class="question02">
+				<div  class="ansLayout hide">
+					<canvas  width="440" height="218" id="cvsAns2"></canvas>
+				</div>
+				<div  class="anstext">
+					<p class="hide"><span class="number">（a）</span><span class="content"> 這個平行四邊形的底是 <span  class='red'>1</span> cm，高是 <span  class='red'>3</span> cm。</p>
+						<p class="hide"><span class="number">（b）</span><span class="content">見左圖。</p>
+					<p class="hide"><span class="number">（c） </span><span class="content"> 新圖形的面積是:<br><span  class='red'>1 × 3 = 3 </span>（cm<sup>2</sup>）,即平行四邊形的面積是<span  class='red'> 3 </span>cm<sup>2</sup>。</p><br>
+
+				</div>
+		</div>
+		<div class="question03">
+				<div  class="ansLayout hide">
+					<canvas  width="440" height="218" id="cvsAns3"></canvas>
+				</div>
+				<div  class="anstext">
+				</div>
+		</div>
+	</div>
+</div>
+<!--end useAns-->
+<!--start intruduction-->
+<div class="info border hide"  style="position:relative ;width:802px;height:auto;background:#fff">
+	<div class="btn_blue" >
+		<input type="button"  value="返 回" onclick="infoBack();">
+	</div>
+	<hr>
+	<img src="images/0.png">
+	<img src="images/1.png">
+	<img src="images/2.png">
+	<img src="images/3.png">
+	<img src="images/4.png">
+	<img src="images/5.png">
+	<hr>
+	<div class="btn_blue"  style="background:#fff;width:800px;">
+		<input type="button"  value="返 回" onclick="infoBack();">
+	</div>
+
+</div>
+<!--end intruduction-->
+<!--按钮-->
+</div>
+	<script src="../commonJs/polygon.js"></script>
+	<script src="../commonJs/utility.js"></script>
+	<script src="../commonJs/data.js"></script>
+	<script src="../commonJs/init.js"></script>
+	<script>	
+	/*初始化 可变参数*/
+		//var g_test=true;
+		var g_test=false;
+		var g_lmtSeg =12;//允许分割次数
+		var g_font_family='"Adobe 繁黑體 Std B", serif';
+		var g_bgData ={
+			text:[
+				{word:"高",x:12+36*6,y:36*4,color:"#e26c09",font:"16px "+g_font_family},//font 必须指定字体和大小
+				{word:"底",x:12+36*7,y:36*6,color:"#00b050",font:"16px "+g_font_family}
+			],
+			bgText:[{word:"1.",x:0,y:20,color:"black",font:"16px "+g_font_family}],
+			pic:[{src:BGiCON.join(""),x:0,y:4+36*4,w:65,h:49,load:false}],
+			grid:{x:38,y:2,w:36,h:36,col:10,row:5,color:"#7f7f7f",border:1},
+			line:[
+				{x:[],y:[],color:"#e26c09",border:2},
+				{x:[],y:[],color:"#00b050",border:2}
+			],
+			turning:[
+				{x:0,y:0,dx:[],dy:[],color:"#e26c09",border:1}
+			]
+		};
+		var g_question =[
+					{
+			a:[4,3],
+			b:[Math.PI/2],
+			c:[4,3,12,12],
+			stepX:[3,2,6,7],
+			stepY:[1,4,4,1],
+			text:[
+				{x:4,y:3,dx:0,dy:-10},
+				{x:4,y:5,dx:0,dy:-10}
+			],
+			line:[
+					{x:[4,4],y:[1,4],dx:[0,0],dy:[0,0],style:"dashed"},
+					{x:[2,6],y:[4,4],dx:[0,0],dy:[0,0]}
+				],
+			turning:[
+				{x:4,y:4,dx:[12,1],dy:[12,-1]}
+				]
+		},
+		{
+			a:[3,2],
+			b:[Math.PI/2],
+			c:[3,2,6,6],
+			stepX:[2,5,8,5],
+			stepY:[2,4,4,2],
+			text:[
+				{x:4,y:3,dx:0,dy:-10},
+				{x:5,y:5,dx:0,dy:-10}
+			],
+			line:[
+					{x:[5,5],y:[2,4],dx:[0,0],dy:[0,0],style:"dashed"},
+					{x:[5,8],y:[4,4],dx:[0,0],dy:[0,0]}
+				],
+			turning:[
+				{x:5,y:4,dx:[12,1],dy:[12,-1]}
+				]
+		},
+		{
+			a:[1,3],
+			b:[Math.PI/2],
+			c:[1,3,3,3],
+			stepX:[6,4,5,7],
+			stepY:[1,4,4,1],
+			text:[
+				{x:4,y:3,dx:0,dy:-10},
+				{x:4,y:5,dx:0,dy:-10}
+			],
+			line:[
+					{x:[4,4],y:[1,4],dx:[0,0],dy:[0,0]},
+					{x:[4,5],y:[4,4],dx:[0,0],dy:[0,0]}
+				],
+			turning:[
+				{x:4,y:4,dx:[12,1],dy:[12,-1]}
+				]
+		},
+		{
+			a:[0,0],
+			b:[Math.PI/2],
+			c:[0,0,0,0],
+			stepX:[6,4,5,7],
+			stepY:[1,4,4,1],
+			text:[
+				{x:4,y:3,dx:0,dy:-10},
+				{x:4,y:5,dx:0,dy:-10}
+			],
+			line:[
+					{x:[4,4],y:[1,4],dx:[0,0],dy:[0,0]},
+					{x:[4,5],y:[4,4],dx:[0,0],dy:[0,0]}
+				],
+			turning:[
+				{x:4,y:4,dx:[12,1],dy:[12,-1]}
+				]
+		}
+		];
+/**  
+	初始化最后一题
+**/
+	function initRandom(idx){
+		var x=10,y=5;
+		for(var i=0;i<1000;i++){
+			g_question[idx].a[0]=getRandom(5);
+			g_question[idx].a[1]=getRandom(3);	
+			if(g_question[idx].a[0]==0){
+				g_question[idx].a[0]=1;
+			}
+			if(g_question[idx].a[1]==0){
+				g_question[idx].a[1]=1;
+			}
+			if(isSameQuestion(g_question[idx].a,idx)){
+				break;
+			}
+		}
+		var dx=g_question[idx].a[0];
+		var dy=g_question[idx].a[1];
+		g_question[idx].c[0]=dx;
+		g_question[idx].c[1]=dy;
+		g_question[idx].c[2]=g_question[idx].c[3]=dy*dx;
+		var str=[];
+		str.push("<p class='hide'><span class='number'>（a）</span><span class='content'>這個平行四邊形的底是 <span  class='red'>",dx,"</span> cm，高是 <span  class='red'>",dy,"</span> cm。</span></p>")
+		str.push("<p class='hide'><span class='number'>（b）</span><span class='content'>見左圖。</span></p>")
+		str.push("<p class='hide'><span class='number'>（c）</span><span class='content'>新圖形的面積是:<br><span  class='red'>",dx," × ",dy," = ",dy*dx," </span>（cm<sup>2</sup>）,即平行四邊形的面積是 <span  class='red'>",dy*dx," </span>cm<sup>2</sup>。</span></p>");
+		var anstextObj=$(".question0"+idx+" .anstext");
+			if(anstextObj.length>0){
+				$(".question0"+idx+" .anstext").html(str.join(""));	
+			}
+
+		
+		var xs=[0,0,0,0];
+		var ys=[0,0,0,0];
+		xs[1]=Math.floor((x-dx)/2);//dian 2(x)	基准点			
+		ys[1]=ys[2]=Math.floor((y+dy)/2);//dian 2(x)
+		for( i=0;i<1000;i++){
+			xs[0]=getRandom(x-dx);
+			if(xs[0]!=xs[1]){
+				break;
+			}
+		}
+		//dian 1(x)
+		ys[3]=ys[0]=ys[1]-dy;//dian 1 4 (y)
+		xs[3]=xs[0]+dx;//dian 4(x)
+		xs[2]=xs[1]+dx;
+		for(i=0;i<4;i++){
+			g_question[idx].stepX[i]=xs[i];
+			g_question[idx].stepY[i]=ys[i];
+		}
+		var baseX,tx1,tx2;
+		if( xs[0] > xs[2] ){
+			baseX = xs[3];
+			tx1 = -1;
+			tx2 = -1;
+		}else{
+			baseX = xs[0];
+			tx1 = 1;
+			if( xs[2] > xs[0] ){
+				tx2 = 1;
+			}else{
+				tx2 = -1;
+			}
+		}
+		g_question[idx].turning[0].x=baseX;//拐角1的x
+		g_question[idx].turning[0].y=ys[1];////拐角1的y
+		g_question[idx].turning[0].dx[0]=12;//拐角x的方向
+		g_question[idx].turning[0].dy[0]=12;//拐角x的方向
+		g_question[idx].turning[0].dx[1]=tx2;//拐角x的方向
+		g_question[idx].turning[0].dy[1]=-1;//拐角y的方向
+
+		g_question[idx].line[0].x[0]=g_question[idx].line[0].x[1]=baseX;//高点x
+		g_question[idx].line[0].y[0]=ys[0];//高点y
+		g_question[idx].line[0].y[1]=ys[1];//高点y
+		g_question[idx].line[1].x[0]=xs[1];//底一个点x
+		g_question[idx].line[1].x[1]=xs[2];//底另一个点x
+		g_question[idx].line[1].y[0]=g_question[idx].line[1].y[1]=ys[1];//底另一个点y
+		
+		g_question[idx].text[0].x=baseX;//文字高
+		g_question[idx].text[0].y=ys[0]+1;
+		g_question[idx].text[1].x=xs[1];//文字底
+		g_question[idx].text[1].y=ys[1]+1;
+	}
+		//var g_test=true;
+		$(document).ready(function(){
+			if(!data_js){
+				throw "data.js 未加载";
+			}
+			if(!polygon_js){
+				throw "canvas.js 未加载";
+			}
+			if(!utility_js){
+				throw "canvas.js 未加载";
+			}
+			initRandom(g_question.length-1);
+			allReset();
+			g_html=$(".user .ansui").html();
+		});
+	</script>
+</body>
+</html>
