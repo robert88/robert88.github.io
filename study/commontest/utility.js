@@ -266,7 +266,7 @@
 		if(g_test||isRight){
 			$("#tip").hide();
 			g_recordData[g_pageIdx].tipShow=false;
-			// $(".b").show();
+			$(".b").show();
 			$(".a .wrong").hide();
 			$(".a .right").show();
 			$(obj).hide();
@@ -373,6 +373,7 @@
 		var temp = {};
 		close_b_prompt()		
 		if(check==="connection"){//确定
+	
 			if(g_p.length>=2){
 				temp=check_B_connection();
 				//console.log(temp.isRight)
