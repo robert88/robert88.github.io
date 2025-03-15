@@ -5,6 +5,7 @@ lp(() => {
     dianCount++;
     console.clear()
     l(dianCount)
-    const random = Math.random()
-    click(186 + 5 * random, 456 + 5 * random);// pk的时候
+    const randomw = Math.random()
+    const randomh = Math.random()
+    click(186 + 10 * randomw, 456 + 10 * randomh);// pk的时候
 }, 500)
