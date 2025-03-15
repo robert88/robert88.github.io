@@ -1,17 +1,10 @@
-console.show()
+require("../lib/common.js")
 setScreenMetrics(720, 1560);
 let dianCount = 0
-let dianTime;
-function loop() {
-    clearTimeout(dianTime)
+lp(() => {
     dianCount++;
     console.clear()
-    console.log(dianCount)
+    l(dianCount)
     const random = Math.random()
     click(186 + 5 * random, 456 + 5 * random);// pk的时候
-    dianTime = setTimeout(() => {
-        loop()
-    }, 200 + 300 * random)
-}
-
-
+}, 500)
