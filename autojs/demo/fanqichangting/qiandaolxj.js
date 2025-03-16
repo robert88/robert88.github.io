@@ -1,18 +1,19 @@
 /**
- * 今日签到
+ * 今日签到领现金
  */
 
 //检查今日签到弹框
 exports.checkIsJinriqiandaoDialog = function () {
     const dialogUiClassName = "com.lynx.tasm.behavior.ui.LynxFlattenUI"
     const textClassName = "com.lynx.tasm.behavior.ui.text.FlattenUIText"
+    const notDialogStr = "当前不是今日签到领现金弹框"
     
     //签到最外面的弹框
     const dialogUi = className(dialogUiClassName).descContains("今日签到").find()
     const dsize = dialogUi.size()
-    l("弹框" + dsize)
+    l("今日签到" + dsize)
     if (!dsize) {
-        l("当前不是今日签到弹框")
+        l("当前不是今日签到领现金弹框")
         return
     }
 
@@ -23,7 +24,7 @@ exports.checkIsJinriqiandaoDialog = function () {
     l("点击领取按钮" + msize)
     l("明日再来" + tmsize)
     if (!msize && !tmsize) {
-        l("当前不是今日签到弹框")
+        l(notDialogStr)
         return
     }
 
@@ -31,7 +32,7 @@ exports.checkIsJinriqiandaoDialog = function () {
     const tstsize = topSubTitle.size()
     l("头部小标题" + tstsize)
     if (!tstsize) {
-        l("当前不是今日签到弹框")
+        l(notDialogStr)
         return
     }
 
@@ -39,7 +40,7 @@ exports.checkIsJinriqiandaoDialog = function () {
     const tpsize = tips.size()
     l("领取按钮下的说明" + tpsize)
     if (!tpsize) {
-        l("当前不是今日签到弹框")
+        l(notDialogStr)
         return
     }
 
@@ -47,7 +48,7 @@ exports.checkIsJinriqiandaoDialog = function () {
     const ttsize = topTips.size()
     l("领取左上角标题" + ttsize)
     if (!ttsize) {
-        l("当前不是今日签到弹框")
+        l(notDialogStr)
         return
     }
 
@@ -55,7 +56,7 @@ exports.checkIsJinriqiandaoDialog = function () {
     const ksize = keyWorkDay.size()
     l("关键字 ‘第’" + ksize)
     if (!ksize) {
-        l("当前不是今日签到弹框")
+        l(notDialogStr)
         return
     }
 
@@ -72,3 +73,6 @@ exports.checkIsJinriqiandaoDialog = function () {
 
 }
 
+exports.toQiandaolxj = function () {
+
+}
