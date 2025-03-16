@@ -22,19 +22,20 @@ exports.checkIsJinriqiandaoDialog = function ($ui, $text) {
     const tmsize = tomorrowButtom.size()
     const tstsize = topSubTitle.size()
     const ttsize = topTips.size()
+    const tpsize = tips.size()
     const ksize = keyWorkDay.size()
     l("弹框" + $ui.size())
     l("弹框" + $text.size())
     l("弹框" + dsize)
     l("点击领取按钮" + msize)
-    l("明日再来" + tmsize.size())
+    l("明日再来" + tmsize)
     l("头部小标题" + tstsize)
-    l("领取按钮下的说明" + tips.size())
+    l("领取按钮下的说明" + tpsize)
     l("领取左上角标题" + ttsize)
     l("关键字 ‘第’" + ksize)
     l("关闭按钮" + closeButtom.size())
 
-    if (dsize && (msize || tmsize) && tstsize && ksize) {
+    if (dsize && (msize || tmsize) && tstsize && ttsize && tpsize && ksize) {
         l("确认为今日签到弹框")
         if (msize) {
             return getMoneyButtom
